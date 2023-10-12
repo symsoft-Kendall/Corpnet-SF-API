@@ -12418,6 +12418,8 @@ paths:
                                 type: string
                               AccountId:
                                 type: string
+                              '':
+                                type: string
                         BrainTreeProfileId:
                           type: string
                         BillingAddress:
@@ -12470,6 +12472,156 @@ paths:
                         BrainTreeProfileId: '49897021653'
                         BillingAddress: null
                         AccountReferralId: '0'
+      security:
+        - OAuth Token: []
+      servers:
+        - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
+        - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
+          description: ''
+  /getuserinfo:
+    get:
+      tags:
+        - Client Info
+      summary: Get User Access Info
+      parameters:
+        - $ref: '#/components/parameters/uid'
+        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/guid'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserId:
+                    type: string
+                  contact:
+                    $ref: '#/components/schemas/Contact'
+                  accountAccesses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account-access'
+                x-examples:
+                  Example 1:
+                    ClientsInfo:
+                      - UID: 5a6ff6f5-9a72-459b-a26d-f1980d8f6407
+                        ShippingAddress: null
+                        PID: null
+                        Name: Kendall Testy Helms
+                        LogoURL: null
+                        Id: 0018D00000Mykg9QAB
+                        Discount: null
+                        Contacts:
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0053h0000030ekPAAQ
+                            Name: Reginald Quaint
+                            Id: 0038D00000I071GQAR
+                            Email: existingacct@test.texas
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: null
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Kendall Testy Helms
+                            Id: 0038D00000Fo4FhQAJ
+                            Email: kendalltesty.h@symsoftsolutions.com
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Peter Party
+                            Id: 0038D00000IAfSzQAL
+                            Email: peterparty@texas.test
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Mundungus Fletcher
+                            Id: 0038D00000J0QwmQAF
+                            Email: dungy.fletch@ww.hp
+                            AccountId: 0018D00000Mykg9QAB
+                        BrainTreeProfileId: '49897021653'
+                        BillingAddress: null
+                        AccountReferralId: '0'
+              examples:
+                Example 1:
+                  value:
+                    ClientInfo:
+                      - UID: string
+                        ShippingAddress: null
+                        PID: null
+                        Name: string
+                        LogoURL: null
+                        Id: string
+                        Discount: null
+                        Contacts:
+                          - UID: null
+                            Title: null
+                            Phone: string
+                            OwnerId: string
+                            Name: string
+                            Id: string
+                            Email: string
+                            AccountId: string
+                        BrainTreeProfileId: string
+                        BillingAddress: null
+                        AccountReferralId: string
+                Example 2:
+                  value:
+                    UserId: string
+                    '':
+                      - Level: string
+                        entityAccess:
+                          - level: string
+                            Entity:
+                              Name: string
+                              Id: string
+                              Type: string
+                              formationDate: string
+                              ein: string
+                              filingnumber: string
+                        account:
+                          Id: string
+                          Name: string
+                          Type: string
+                          formationdate: string
+                          EIN: string
+                          FilingNumber: string
+                          HomeState: string
+                Example 3:
+                  value:
+                    UserId: string
+                    contact:
+                      id: string
+                      FirstName: string
+                      LastName: string
+                      Email: string
+                      Phone: string
+                    accountAccesses:
+                      - accessLevel: string
+                        account:
+                          Id: string
+                          Name: string
+                          Type: string
+                          formationdate: string
+                          EIN: string
+                          FilingNumber: string
+                          HomeState: string
+                        entityAccesses:
+                          - level: string
+                            Entity:
+                              Name: string
+                              Id: string
+                              Type: string
+                              formationDate: string
+                              ein: string
+                              filingnumber: string
       security:
         - OAuth Token: []
       servers:
@@ -18890,5 +19042,67 @@ components:
         password:
           tokenUrl: services/oauth2/token
           scopes: {}
+  schemas:
+    Contact:
+      type: object
+      title: Contact
+      properties:
+        id:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+    Account-access:
+      type: object
+      title: Account-access
+      properties:
+        accessLevel:
+          type: string
+        account:
+          $ref: '#/components/schemas/Account'
+        entityAccesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity-Access'
+    Account:
+      $ref: '#/components/schemas/Entity'
+    Entity:
+      type: object
+      title: Entity
+      description: All core entity data for a single entity
+      properties:
+        Name:
+          type: string
+          description: |
+            Entity__c.Name
+        Id:
+          type: string
+          description: Entity__c.Id
+        formationDate:
+          type: string
+        Type:
+          type: string
+        ein:
+          type: string
+        filingnumber:
+          type: string
+      x-examples:
+        Example 1:
+          Name: String
+          Id: string
+          Type: string
+    Entity-Access:
+      type: object
+      title: Entity-Access
+      properties:
+        level:
+          type: string
+        Entity:
+          $ref: '#/components/schemas/Entity'
 security:
   - OAuth Token: []
