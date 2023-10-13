@@ -18950,5 +18950,6 @@ components:
         password:
           tokenUrl: /services/oauth2/token
           scopes: {}
+      description: ''
 security:
   - OAuth Token: []
