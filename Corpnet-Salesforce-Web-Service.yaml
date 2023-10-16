@@ -8232,7 +8232,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Product
+        - Get Products
   '/getproducts/{ProductIDs}':
     get:
       summary: Get Product(s) by Product Salesforce Id
@@ -12376,8 +12376,6 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-      tags:
-        - Product
       x-stoplight:
         id: 45r1apntkudhg
       operationId: ''
@@ -12503,7 +12501,7 @@ paths:
           description: ''
       description: ''
       tags:
-        - Account
+        - Get Client Info
   /getclientinfo/entities:
     get:
       summary: Get Account's Entities by Account ID
@@ -13136,10 +13134,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Account
-        - Entity
-        - Task
-        - Order
+        - Get Client Info
   /getclientinfo/tasks:
     get:
       summary: Get Account's Tasks by Account ID
@@ -13157,8 +13152,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Account
-        - Task
+        - Get Client Info
   /getclientinfo/orders:
     get:
       summary: Get Account's Orders by Account ID
@@ -13935,8 +13929,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Account
-        - Order
+        - Get Client Info
   /getclientinfo/documents:
     get:
       summary: Get Account's Documents by Account ID
@@ -13954,8 +13947,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Account
-        - Document
+        - Get Client Info
   /getclientinfo/responsibleparties:
     get:
       summary: Get Account's Responsible Parties by Account ID
@@ -14764,10 +14756,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Account
-        - Entity Member
-        - Responsible Party
-        - Affiliated Entity
+        - Get Client Info
   /orders:
     get:
       summary: Get Order by Order ID
@@ -14935,10 +14924,6 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-      tags:
-        - Order
-        - Product
-        - Case
   /entities:
     get:
       summary: Get Entity by Entity ID
@@ -16623,10 +16608,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Entity
-        - Order
-        - Product
-        - Account
+        - Get Entity Info
   /entities/tasks:
     get:
       summary: Get Entity's Tasks by Entity ID
@@ -16644,8 +16626,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Entity
-        - Task
+        - Get Entity Info
   /entities/orders:
     get:
       summary: Get Entity's Orders by Entity ID
@@ -16984,9 +16965,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Entity
-        - Order
-        - Case
+        - Get Entity Info
   /entities/documents:
     get:
       summary: Get Entity's Documents by Entity ID
@@ -17004,8 +16983,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Entity
-        - Document
+        - Get Entity Info
   /entities/taxregistrations:
     get:
       summary: Get Entity's Tax Registrations by Entity ID
@@ -17023,8 +17001,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Entity
-        - Tax Registrations
+        - Get Entity Info
   /entities/entitymembers:
     get:
       summary: Get Entity's Entity Members by Entity ID
@@ -17390,14 +17367,9 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Entity
-        - Entity Member
+        - Get Entity Info
   /quickfind/Contact:
     get:
-      tags:
-        - Contact
-        - Quick Find
-        - API/SQL
       summary: Get QuickFind
       parameters:
         - name: Name
@@ -17420,6 +17392,8 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       description: ''
+      tags:
+        - API Partners / SQL
   /getcoupons:
     get:
       summary: Get All Coupons
@@ -17614,8 +17588,6 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-      tags:
-        - Coupon
   /orderdetails:
     get:
       summary: Get Order Details by SQL GUID (For API Partners)
@@ -17685,14 +17657,11 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-      tags:
-        - Order
-        - API/SQL
       description: ''
+      tags:
+        - API Partners / SQL
   /getpartnerinfo:
     get:
-      tags:
-        - Partner Info
       summary: Get Order Partner by Partner ID
       parameters:
         - name: pid
@@ -18053,9 +18022,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Order
-        - Tax Reg Form Automation
-        - Tax Registrations
+        - Tax Registration Form Automation
   /agencyautofill:
     get:
       summary: Get State Agency Tax Registration Form Auto Fill Instructions by State Account ID
@@ -18901,26 +18868,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       tags:
-        - Tax Reg Form Automation
-        - Tax Registrations
-tags:
-  - name: Account
-  - name: Affiliated Entity
-  - name: API/SQL
-  - name: Case
-  - name: Contact
-  - name: Coupon
-  - name: Document
-  - name: Entity
-  - name: Entity Member
-  - name: Order
-  - name: Order Partner
-  - name: Product
-  - name: Quick Find
-  - name: Responsible Party
-  - name: Task
-  - name: Tax Reg Form Automation
-  - name: Tax Registrations
+        - Tax Registration Form Automation
 components:
   parameters:
     id:
@@ -18953,3 +18901,9 @@ components:
       description: ''
 security:
   - OAuth Token: []
+tags:
+  - name: API Partners / SQL
+  - name: Get Client Info
+  - name: Get Entity Info
+  - name: Get Products
+  - name: Tax Registration Form Automation
