@@ -19042,6 +19042,68 @@ components:
       description: Locate record by SQL GUID
       schema:
         type: string
+  schemas:
+    Contact:
+      type: object
+      title: Contact
+      properties:
+        id:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+        Phone:
+          type: string
+    Account-access:
+      type: object
+      title: Account-access
+      properties:
+        accessLevel:
+          type: string
+        account:
+          $ref: '#/components/schemas/Account'
+        entityAccesses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity-Access'
+    Account:
+      $ref: '#/components/schemas/Entity'
+    Entity:
+      type: object
+      title: Entity
+      description: All core entity data for a single entity
+      properties:
+        Name:
+          type: string
+          description: |
+            Entity__c.Name
+        Id:
+          type: string
+          description: Entity__c.Id
+        formationDate:
+          type: string
+        Type:
+          type: string
+        ein:
+          type: string
+        filingnumber:
+          type: string
+      x-examples:
+        Example 1:
+          Name: String
+          Id: string
+          Type: string
+    Entity-Access:
+      type: object
+      title: Entity-Access
+      properties:
+        level:
+          type: string
+        Entity:
+          $ref: '#/components/schemas/Entity'
   securitySchemes:
     OAuth Token:
       type: oauth2
