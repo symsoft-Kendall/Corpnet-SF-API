@@ -5,23 +5,58 @@ info:
   description: ''
 servers:
   - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
+    description: Build Sandbox
   - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
-    description: ''
+    description: Production
+  - url: 'https://corpnet--fullphase2.sandbox.lightning.force.com/services/apexrest/service'
+    description: Phase 2 Full Sandbox
 paths:
   /:
     post:
       summary: Post Service
-      responses: {}
+      responses:
+        '200':
+          description: OK
       security:
         - OAuth Token: []
       servers:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  actions:
+                    - Ref: ref_ESA
+                      SObject: Entity_State_Account__c
+                      Action: Upsert
+                      UpsertField: Id
+                      Id: a0j8D000001JdHkQAK
+                      Account_Generated__c: '2023-12-09T00:00:00Z'
+              properties:
+                actions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      Ref:
+                        type: string
+                      SObject:
+                        type: string
+                      Action:
+                        type: string
+                      UpsertField:
+                        type: string
+                      '{*SF_PROPERTY_NAME*}':
+                        type: string
+                        x-stoplight:
+                          id: 96bsmxsazgu1a
   /getproducts/all:
     get:
-      tags:
-        - Products
       summary: Get All Products
       responses:
         '200':
@@ -30,147 +65,6 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  ProductFamilyValues:
-                    type: array
-                    items:
-                      type: string
-                  PackageCollections:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        State:
-                          type: string
-                        ServiceCategory:
-                          nullable: true
-                        ProductPackages:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              Timeline:
-                                nullable: true
-                              State:
-                                type: string
-                              ServiceCategory:
-                                nullable: true
-                              ProductOptions:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    SLAdisplayText:
-                                      nullable: true
-                                    ProductNameSubtitle:
-                                      nullable: true
-                                    ProductName:
-                                      type: string
-                                    ProductLimit:
-                                      nullable: true
-                                    ProductId:
-                                      type: string
-                                    ProductFamily:
-                                      type: string
-                                    ProductConstraint:
-                                      nullable: true
-                                    PackageDisplaySelectionSubtitle:
-                                      nullable: true
-                                    PackageDisplaySelection:
-                                      type: string
-                                    OptionalDisplayName:
-                                      type: string
-                                      nullable: true
-                                    NonDiscountable:
-                                      type: boolean
-                                    Id:
-                                      type: string
-                                    FormioId:
-                                      nullable: true
-                                    DisplaySequence:
-                                      type: integer
-                                    Description:
-                                      type: string
-                                      nullable: true
-                                    Dependency:
-                                      nullable: true
-                              ProductLimits:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    Name:
-                                      type: string
-                                    MinOptions:
-                                      type: integer
-                                      nullable: true
-                                    MaxOptions:
-                                      type: integer
-                                      nullable: true
-                                    Id:
-                                      type: string
-                                    FormPageName:
-                                      type: string
-                                      nullable: true
-                                    FormId:
-                                      nullable: true
-                                    DisplaySequence:
-                                      type: integer
-                                      nullable: true
-                                    DisplayHeader:
-                                      type: boolean
-                              ProductFamily:
-                                type: string
-                              ProductConstraints:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    FormPageName:
-                                      type: string
-                                      nullable: true
-                                    FormId:
-                                      nullable: true
-                              PackageCollection:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    FormId:
-                                      type: string
-                              Name:
-                                type: string
-                              Id:
-                                type: string
-                              FormSequences:
-                                type: array
-                                items:
-                                  type: object
-                                  properties:
-                                    Sequence:
-                                      type: integer
-                                    ProductId:
-                                      type: string
-                                    Id:
-                                      type: string
-                                    FormioId:
-                                      type: string
-                              Entity:
-                                type: string
-                              CollectionDisplaySequence:
-                                type: integer
-                        Id:
-                          type: string
-                        GridFeaturedPackage:
-                          type: string
-                        FormId:
-                          type: string
-                        FeaturedTitle:
-                          type: string
-                        Entity:
-                          type: string
-                        DisplayType:
-                          type: string
                 x-examples:
                   Example 1:
                     ProductFamilyValues:
@@ -4156,6 +4050,137 @@ paths:
                         FeaturedTitle: Best Value
                         Entity: LLC
                         DisplayType: Grid
+                properties:
+                  ProductFamilyValues:
+                    type: array
+                    items:
+                      type: string
+                  PackageCollections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        State:
+                          type: string
+                        ServiceCategory:
+                          type: string
+                          nullable: true
+                        ProductPackages:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              Timeline:
+                                type: string
+                                nullable: true
+                              State:
+                                type: string
+                              ServiceCategory:
+                                type: string
+                                nullable: true
+                              ProductOptions:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    SLAdisplayText:
+                                      type: string
+                                      nullable: true
+                                    ProductNameSubtitle:
+                                      type: string
+                                      nullable: true
+                                    ProductName:
+                                      type: string
+                                    ProductLimit:
+                                      type: number
+                                      nullable: true
+                                    ProductId:
+                                      type: string
+                                    ProductFamily:
+                                      type: string
+                                    ProductConstraint:
+                                      type: string
+                                      nullable: true
+                                    PackageDisplaySelectionSubtitle:
+                                      type: string
+                                      nullable: true
+                                    PackageDisplaySelection:
+                                      type: string
+                                    OptionalDisplayName:
+                                      type: string
+                                      nullable: true
+                                    NonDiscountable:
+                                      type: boolean
+                                    Id:
+                                      type: string
+                                    FormioId:
+                                      type: string
+                                      nullable: true
+                                    DisplaySequence:
+                                      type: integer
+                                    Description:
+                                      type: string
+                                      nullable: true
+                                    Dependency:
+                                      type: object
+                                      nullable: true
+                              ProductLimits:
+                                type: array
+                                nullable: true
+                                items: {}
+                              ProductFamily:
+                                type: string
+                              ProductConstraints:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    FormPageName:
+                                      type: string
+                                      nullable: true
+                                    FormId:
+                                      type: string
+                                      nullable: true
+                              PackageCollection:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    FormId:
+                                      type: string
+                              Name:
+                                type: string
+                              Id:
+                                type: string
+                              FormSequences:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    Sequence:
+                                      type: integer
+                                    ProductId:
+                                      type: string
+                                    Id:
+                                      type: string
+                                    FormioId:
+                                      type: string
+                              Entity:
+                                type: string
+                              CollectionDisplaySequence:
+                                type: integer
+                        Id:
+                          type: string
+                        GridFeaturedPackage:
+                          type: string
+                        FormId:
+                          type: string
+                        FeaturedTitle:
+                          type: string
+                        Entity:
+                          type: string
+                        DisplayType:
+                          type: string
               examples:
                 Example 1:
                   value:
@@ -8206,22 +8231,11 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-  '/getproducts/{Salesforce ID 1},...,{Salesforce ID n}':
-    get:
       tags:
-        - Products
+        - Get Products
+  '/getproducts/{ProductIDs}':
+    get:
       summary: Get Product(s) by Product Salesforce Id
-      parameters:
-        - name: Salesforce ID 1
-          in: path
-          description: 'Salesforce case safe object ID, first in sequence of comma separated IDs'
-          schema:
-            type: string
-        - name: Salesforce ID n
-          in: path
-          description: 'Salesforce case safe object ID, last in sequence of comma separated IDs'
-          schema:
-            type: string
       responses:
         '200':
           description: Successful response
@@ -12355,16 +12369,25 @@ paths:
                         FeaturedTitle: Best Value
                         Entity: LLC
                         DisplayType: Grid
+              examples: {}
       security:
         - OAuth Token: []
       servers:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      x-stoplight:
+        id: 45r1apntkudhg
+      operationId: ''
+    parameters:
+      - schema:
+          type: string
+        name: ProductIDs
+        in: path
+        required: true
+        description: Comma separated list of Salesforce Product case safe IDs
   /getclientinfo:
     get:
-      tags:
-        - Client Info
       summary: Get Account by Account ID
       parameters:
         - $ref: '#/components/parameters/uid'
@@ -12630,8 +12653,6 @@ paths:
           description: ''
   /getclientinfo/entities:
     get:
-      tags:
-        - Client Info
       summary: Get Account's Entities by Account ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -13261,10 +13282,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Client Info
   /getclientinfo/tasks:
     get:
-      tags:
-        - Client Info
       summary: Get Account's Tasks by Account ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -13279,10 +13300,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Client Info
   /getclientinfo/orders:
     get:
-      tags:
-        - Client Info
       summary: Get Account's Orders by Account ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -14056,10 +14077,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Client Info
   /getclientinfo/documents:
     get:
-      tags:
-        - Client Info
       summary: Get Account's Documents by Account ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -14074,10 +14095,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Client Info
   /getclientinfo/responsibleparties:
     get:
-      tags:
-        - Client Info
       summary: Get Account's Responsible Parties by Account ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -14883,10 +14904,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Client Info
   /orders:
     get:
-      tags:
-        - Orders
       summary: Get Order by Order ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -15054,8 +15075,6 @@ paths:
           description: ''
   /entities:
     get:
-      tags:
-        - Entities
       summary: Get Entity by Entity ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -16737,10 +16756,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Entity Info
   /entities/tasks:
     get:
-      tags:
-        - Entities
       summary: Get Entity's Tasks by Entity ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -16755,10 +16774,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Entity Info
   /entities/orders:
     get:
-      tags:
-        - Entities
       summary: Get Entity's Orders by Entity ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -17094,10 +17113,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Entity Info
   /entities/documents:
     get:
-      tags:
-        - Entities
       summary: Get Entity's Documents by Entity ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -17112,10 +17131,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Entity Info
   /entities/taxregistrations:
     get:
-      tags:
-        - Entities
       summary: Get Entity's Tax Registrations by Entity ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -17130,10 +17149,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Entity Info
   /entities/entitymembers:
     get:
-      tags:
-        - Entities
       summary: Get Entity's Entity Members by Entity ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -17496,10 +17515,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Get Entity Info
   /quickfind/Contact:
     get:
-      tags:
-        - Quick Find
       summary: Get QuickFind
       parameters:
         - name: Name
@@ -17521,10 +17540,11 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      description: ''
+      tags:
+        - API Partners / SQL
   /getcoupons:
     get:
-      tags:
-        - Coupons
       summary: Get All Coupons
       responses:
         '200':
@@ -17719,8 +17739,6 @@ paths:
           description: ''
   /orderdetails:
     get:
-      tags:
-        - Order Details
       summary: Get Order Details by SQL GUID (For API Partners)
       parameters:
         - $ref: '#/components/parameters/guid'
@@ -17788,10 +17806,11 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      description: ''
+      tags:
+        - API Partners / SQL
   /getpartnerinfo:
     get:
-      tags:
-        - Partner Info
       summary: Get Order Partner by Partner ID
       parameters:
         - name: pid
@@ -17847,8 +17866,6 @@ paths:
           description: ''
   /orderprefilldata:
     get:
-      tags:
-        - Order Prefill Data
       summary: Get State Agency Tax Registration Form Autofill Data by Order ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -18153,10 +18170,10 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
+      tags:
+        - Tax Registration Form Automation
   /agencyautofill:
     get:
-      tags:
-        - Agency Auto Fill
       summary: Get State Agency Tax Registration Form Auto Fill Instructions by State Account ID
       parameters:
         - $ref: '#/components/parameters/id'
@@ -18999,19 +19016,8 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-tags:
-  - name: Auth
-  - name: Products
-  - name: Client Info
-  - name: Orders
-  - name: Entities
-  - name: Rest Service
-  - name: Quick Find
-  - name: Coupons
-  - name: Order Details
-  - name: Partner Info
-  - name: Order Prefill Data
-  - name: Agency Auto Fill
+      tags:
+        - Tax Registration Form Automation
 components:
   parameters:
     id:
@@ -19032,7 +19038,6 @@ components:
       name: guid
       in: query
       description: Locate record by SQL GUID
-      required: false
       schema:
         type: string
   securitySchemes:
@@ -19040,69 +19045,14 @@ components:
       type: oauth2
       flows:
         password:
-          tokenUrl: services/oauth2/token
+          tokenUrl: /services/oauth2/token
           scopes: {}
-  schemas:
-    Contact:
-      type: object
-      title: Contact
-      properties:
-        id:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        Email:
-          type: string
-        Phone:
-          type: string
-    Account-access:
-      type: object
-      title: Account-access
-      properties:
-        accessLevel:
-          type: string
-        account:
-          $ref: '#/components/schemas/Account'
-        entityAccesses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entity-Access'
-    Account:
-      $ref: '#/components/schemas/Entity'
-    Entity:
-      type: object
-      title: Entity
-      description: All core entity data for a single entity
-      properties:
-        Name:
-          type: string
-          description: |
-            Entity__c.Name
-        Id:
-          type: string
-          description: Entity__c.Id
-        formationDate:
-          type: string
-        Type:
-          type: string
-        ein:
-          type: string
-        filingnumber:
-          type: string
-      x-examples:
-        Example 1:
-          Name: String
-          Id: string
-          Type: string
-    Entity-Access:
-      type: object
-      title: Entity-Access
-      properties:
-        level:
-          type: string
-        Entity:
-          $ref: '#/components/schemas/Entity'
+      description: ''
 security:
   - OAuth Token: []
+tags:
+  - name: API Partners / SQL
+  - name: Get Client Info
+  - name: Get Entity Info
+  - name: Get Products
+  - name: Tax Registration Form Automation
