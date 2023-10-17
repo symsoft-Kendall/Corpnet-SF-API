@@ -12379,6 +12379,8 @@ paths:
       x-stoplight:
         id: 45r1apntkudhg
       operationId: ''
+      tags:
+        - Get Products
     parameters:
       - schema:
           type: string
