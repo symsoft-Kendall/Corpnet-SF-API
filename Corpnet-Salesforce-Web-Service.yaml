@@ -54,7 +54,7 @@ paths:
                       '{*SF_PROPERTY_NAME*}':
                         type: string
                         x-stoplight:
-                          id: 96bsmxsazgu1a
+                          id: i9b2dlaol07gb
   /getproducts/all:
     get:
       summary: Get All Products
@@ -12377,7 +12377,7 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       x-stoplight:
-        id: 45r1apntkudhg
+        id: x7dqrvgndiqe1
       operationId: ''
       tags:
         - Get Products
@@ -12571,7 +12571,7 @@ paths:
                   AuthId:
                     type: string
                     x-stoplight:
-                      id: wjclq2vofdf8z
+                      id: sxxh3p2n6bohe
                     description: |-
                       The Auth_Id__c parameter passed with the call should find a User_Identity__c record with a matching Auth_Id__c
                       The Contact__c of that record will be the one returned in the Contact section. As well as returning the Account acccesses related to that contact.
@@ -19033,64 +19033,68 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
-      operationId: get-getaccountinfo
-      x-stoplight:
-        id: 0h1a0b86ne3a5
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                AccountInfo:
-                  $ref: '#/components/schemas/Account'
-                Orders:
-                  type: array
-                  x-stoplight:
-                    id: tzihg3vxy49q9
-                  description: Where Order.AccountId = AccountId
-                  items:
-                    $ref: '#/components/schemas/Order'
-                ComplianceAlerts:
-                  type: array
-                  x-stoplight:
-                    id: i5smsitp080tc
-                  description: Opportunities Where Account.Id = AccountId
-                  items:
-                    $ref: '#/components/schemas/Opportunity'
-                Tasks:
-                  type: array
-                  x-stoplight:
-                    id: wpsbav8izfu3g
-                  description: Request_for_Information__c Where Case.AccountId = AccountId
-                  items:
-                    $ref: '#/components/schemas/Tasks'
-                numberofOrders:
-                  type: string
-                  x-stoplight:
-                    id: 6fe3we59cpfdt
-                  description: Count of all orders realated to the AccountId
-                pendingOrders:
-                  type: string
-                  x-stoplight:
-                    id: n4x96xs7mkz3d
-                  description: |
-                    Count of all orders realated to the AccountId
-                    where status != completed
-                totalCompanies:
-                  type: string
-                  x-stoplight:
-                    id: 84zn81jo0wsxg
-                  description: count of Entities where Account__c = Count of all orders realated to the AccountId
-                totalClients:
-                  type: string
-                  x-stoplight:
-                    id: uuoq5uwolrcbq
-                  description: |-
-                    Partner_Role__c Where Partner_Account__c = AccountId
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  AccountInfo:
+                    $ref: '#/components/schemas/Account'
+                  Orders:
+                    type: array
+                    x-stoplight:
+                      id: w1ttthmhbfm1p
+                    description: Where Order.AccountId = AccountId
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  ComplianceAlerts:
+                    type: array
+                    x-stoplight:
+                      id: gewwad8911tll
+                    description: Opportunities Where Account.Id = AccountId
+                    items:
+                      $ref: '#/components/schemas/Opportunity'
+                  Tasks:
+                    type: array
+                    x-stoplight:
+                      id: hs7d1iw370ns9
+                    description: Request_for_Information__c Where Case.AccountId = AccountId
+                    items:
+                      $ref: '#/components/schemas/Tasks'
+                  numberofOrders:
+                    type: string
+                    x-stoplight:
+                      id: 1wwopo2ykozq6
+                    description: Count of all orders realated to the AccountId
+                  pendingOrders:
+                    type: string
+                    x-stoplight:
+                      id: d5zhsjig21fyl
+                    description: |
+                      Count of all orders realated to the AccountId
+                      where status != completed
+                  totalCompanies:
+                    type: string
+                    x-stoplight:
+                      id: iy740s9070d58
+                    description: count of Entities where Account__c = Count of all orders realated to the AccountId
+                  totalClients:
+                    type: string
+                    x-stoplight:
+                      id: tnb5ufubobhhs
+                    description: |-
+                      Partner_Role__c Where Partner_Account__c = AccountId
 
-                    Type??  
+                      Type??
+                      operationId: get-getaccountinfo
+                      x-stoplight:
+                        id: 5yfcoc6qmiv8h
+      requestBody:
+        content: {}
         description: ''
       parameters:
         - schema:
@@ -19159,7 +19163,7 @@ components:
         Id:
           type: string
           x-stoplight:
-            id: o5nnww6bcrvcl
+            id: ogba8erajapab
           description: Access_Account__c.Id
     Account:
       type: object
@@ -19168,18 +19172,18 @@ components:
         Name:
           type: string
           x-stoplight:
-            id: xq7t5k8l55nk5
+            id: 4ta6ofi9y6rxn
           description: Account.Name
         Id:
           type: string
           x-stoplight:
-            id: ytau4r6kjlue9
+            id: cc33pfikefr2n
           description: |
             Account.Id
         AccountType:
           type: string
           x-stoplight:
-            id: kwe8w2jbn5d1u
+            id: rs4popsbfuc3a
           description: |-
             Partner or Consumer
 
@@ -19225,50 +19229,50 @@ components:
     Order:
       title: OrderBasic
       x-stoplight:
-        id: wck36jr35efgk
+        id: 7i1w6vnydpi0p
       type: object
       description: Basic Order data to be returned in an array.  Supports the dashboard view in GetAccountInfo
       properties:
         id:
           type: string
           x-stoplight:
-            id: mywz2g8uaz30z
+            id: ct2cpojl47o74
         UID:
           type: string
           x-stoplight:
-            id: x46o881103hom
+            id: a8y7361bz9tuc
         OrderNumber:
           type: string
           x-stoplight:
-            id: mcou31yt1kp7v
+            id: 3l9vj6x136s94
         Status:
           type: string
           x-stoplight:
-            id: siykdl60ky24n
+            id: q9xhwml5cnucf
         OrderDate:
           type: string
           x-stoplight:
-            id: 51grd0tom57du
+            id: d050z8fxdf9mp
         Amount:
           type: string
           x-stoplight:
-            id: bftwdlt45fj78
+            id: m0umkxhkd96x2
         ServiceCategory:
           type: string
           x-stoplight:
-            id: ydc6qdk2rxnc8
+            id: pkx2l0hd31lto
         CompanyName:
           type: string
           x-stoplight:
-            id: zvmcaz3vp4sr4
+            id: xc5xpy0xzxxls
         AccountId:
           type: string
           x-stoplight:
-            id: 23sx9o76k6lny
+            id: 6qio8h9ocrf1t
     Opportunity:
       title: Opportunity
       x-stoplight:
-        id: 6pve1aifzs2r3
+        id: co9el1meodz1k
       type: object
       description: |-
         Opportunities form Salesforce are Tasks in the CCC.  potental sales based on upcoming deadlines etc...
@@ -19277,27 +19281,27 @@ components:
         id:
           type: string
           x-stoplight:
-            id: 2jacd9zfyozwe
+            id: qudij844fmgpn
         Name:
           type: string
           x-stoplight:
-            id: kvrls55x8t8s9
+            id: q5wj3viqb1xjr
         ServiceCategory:
           type: string
           x-stoplight:
-            id: im4uujqctdv4b
+            id: 4o91f77boj75r
         CloseDate:
           type: string
           x-stoplight:
-            id: dyjr0cms0jhdm
+            id: 6tdz749zk86xv
         Amount:
           type: string
           x-stoplight:
-            id: ujxbcn6mvo0tr
+            id: 2s2hqf1wuh7qp
     Tasks:
       title: Tasks
       x-stoplight:
-        id: khmqfawee4kdm
+        id: iuomv6knx545m
       type: object
       description: |-
         Query of Request_for_information__c based on the account 
@@ -19306,60 +19310,60 @@ components:
         id:
           type: string
           x-stoplight:
-            id: 2e5qbmrto6db0
+            id: f8n47b5xl6lz7
         Name:
           type: string
           x-stoplight:
-            id: ligb7xladdzmt
+            id: td8qqwqrcri4e
         Order:
           type: string
           x-stoplight:
-            id: 708ahnxn1ewqm
+            id: vgqzjof374ptu
         RequestComment:
           type: string
           x-stoplight:
-            id: dhxtkmn3kd48h
+            id: j8gl81gp8tn5n
         status:
           type: string
           x-stoplight:
-            id: e0bmch3128110
+            id: izaorw4ist3rt
         case:
           type: string
           x-stoplight:
-            id: 6wttsbzokpqd8
+            id: c4hl0y0dckh6x
         CustomerEmail:
           type: string
           x-stoplight:
-            id: v7j3v6ppgzw00
+            id: nsdrgy7e5uu05
     ToDo:
       type: object
       properties:
         RequestComment:
           type: string
           x-stoplight:
-            id: 3dvqci2wy0mfb
+            id: wnxpb4xl5ks3p
           description: Request_for_Information__c.Request__c
         Status:
           type: string
           x-stoplight:
-            id: yp6nuj0xllvj8
+            id: 9i0laqt75gbjv
           description: Request_for_Information__c.Status__c
         Type:
           type: string
           x-stoplight:
-            id: pi7m1sm9tnvr9
+            id: 5slmspdpk2qyf
           description: |
             Request_for_Information__c.Type__c
         OrderId:
           type: string
           x-stoplight:
-            id: pu3x65plgmx07
+            id: gca47rgf8qbze
           description: |
             Request_for_Information__c.Order__c
         CaseId:
           type: string
           x-stoplight:
-            id: e9zsgr5a9xfuz
+            id: 7gr2iuip2v4z2
           description: |
             Request_for_Information__c.Case__c
   securitySchemes:
