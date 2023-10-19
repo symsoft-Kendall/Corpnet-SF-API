@@ -12660,7 +12660,7 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-      operationId: U1
+      operationId: U2
       description: 'This call  will be used connect a specific auth id to a single contact in Salesforce returning all the access information for that contact to view or edit accounts and entities. '
   /getclientinfo/entities:
     get:
