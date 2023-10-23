@@ -206,6 +206,16 @@ paths:
                     description: Request_for_Information__c Where Case.AccountId = AccountId
                     items:
                       $ref: '#/components/schemas/Tasks'
+                  Entities:
+                    type: array
+                    x-stoplight:
+                      id: 9su1aewp7t9wo
+                    description: |-
+                      Entity__c records where Account__c = the AccountId Param
+
+                      AND   Where the Contact has Entity_access__c to the Entity
+                    items:
+                      $ref: '#/components/schemas/Entity'
                   numberofOrders:
                     type: string
                     x-stoplight:
@@ -217,7 +227,7 @@ paths:
                       id: 72ab12gkq9ret
                     description: |
                       Count of all orders realated to the AccountId
-                      where status != completed
+                      where P != completed
                   totalCompanies:
                     type: string
                     x-stoplight:
@@ -243,7 +253,16 @@ paths:
           in: query
           name: AccountId
           description: 'Salesforce Account Id '
+        - schema:
+            type: string
+          in: query
+          name: ContactId
+          description: Salesforce Contact Id
       operationId: U3
+      description: |-
+        Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
+
+        The Contact Id provided is used to determine access level to the Account and Entities returned in the call.
 components:
   parameters:
     id:
@@ -359,6 +378,16 @@ components:
         filingnumber:
           type: string
           description: Entity.Filing_Number__c
+        numberOfOrders:
+          type: string
+          x-stoplight:
+            id: rbw5jce910apy
+          description: count of orders related to this entity
+        numberOfAlerts:
+          type: string
+          x-stoplight:
+            id: qnq5cdggsgdld
+          description: count of compliance alter type opportunities related to this entity
     Entity-Access:
       type: object
       title: Entity-Access
