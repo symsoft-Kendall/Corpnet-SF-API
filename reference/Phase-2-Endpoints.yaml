@@ -11,7 +11,7 @@ servers:
   - url: 'https://corpnet--fullphase2.sandbox.lightning.force.com/services/apexrest/service'
     description: Phase 2 Full Sandbox
 paths:
-  /getuserinfo:
+  /user:
     get:
       tags:
         - Client Info
@@ -170,7 +170,10 @@ paths:
           description: ''
       operationId: U2
       description: 'This call  will be used connect a specific auth id to a single contact in Salesforce returning all the access information for that contact to view or edit accounts and entities. '
-  /getaccountinfo:
+      x-stoplight:
+        id: zi0aw2s5nrz60
+    parameters: []
+  /account:
     get:
       summary: Get Account Info
       tags: []
@@ -263,6 +266,33 @@ paths:
         Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
 
         The Contact Id provided is used to determine access level to the Account and Entities returned in the call.
+      x-stoplight:
+        id: k98ccoe5v1gfx
+    parameters: []
+  /entity:
+    get:
+      summary: GET Entity
+      tags: []
+      responses: {}
+      operationId: get-entity
+      x-stoplight:
+        id: 5asyx5wrvbr2f
+  /taxregistrations:
+    get:
+      summary: GET tax registrations for Entity
+      tags: []
+      responses: {}
+      operationId: get-taxregistrations
+      x-stoplight:
+        id: tbiq21kvngfgf
+  /states:
+    get:
+      summary: GET States info for Entity
+      tags: []
+      responses: {}
+      operationId: get-states
+      x-stoplight:
+        id: ubzd3rw0991x2
 components:
   parameters:
     id:
