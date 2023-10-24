@@ -273,11 +273,26 @@ paths:
     get:
       summary: GET Entity
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity-Expanded'
       operationId: get-entity
       x-stoplight:
         id: 5asyx5wrvbr2f
-  /taxregistrations:
+  /entity/taxregistrations:
+    get:
+      summary: GET Entity
+      tags: []
+      responses: {}
+      operationId: get-entity
+      x-stoplight:
+        id: ck2vm5ocgcba0
+    parameters: []
+  /taxregistration:
     get:
       summary: GET tax registrations for Entity
       tags: []
@@ -285,6 +300,7 @@ paths:
       operationId: get-taxregistrations
       x-stoplight:
         id: tbiq21kvngfgf
+    parameters: []
   /states:
     get:
       summary: GET States info for Entity
@@ -418,6 +434,77 @@ components:
           x-stoplight:
             id: qnq5cdggsgdld
           description: count of compliance alter type opportunities related to this entity
+    Entity-Expanded:
+      type: object
+      x-stoplight:
+        id: 7cl214gekt1el
+      title: Entity Expanded
+      description: All core entity data for a single entity
+      x-examples:
+        Example 1:
+          Name: String
+          Id: string
+          Type: string
+      properties:
+        Name:
+          type: string
+          description: |
+            Entity__c.Name
+        Id:
+          type: string
+          description: Entity__c.Id
+        formationDate:
+          type: string
+          description: Entity__c.Formation_Date__c
+        Type:
+          type: string
+          description: Entity.Entity_Type__c
+        ein:
+          type: string
+          description: Entity__c.EIN__c
+        filingnumber:
+          type: string
+          description: Entity.Filing_Number__c
+        numberOfOrders:
+          type: string
+          description: count of orders related to this entity
+        numberOfAlerts:
+          type: string
+          description: count of compliance alter type opportunities related to this entity
+        fiscalYearEndDate:
+          type: string
+          x-stoplight:
+            id: ubyh9zw1945kw
+        tasks:
+          type: array
+          x-stoplight:
+            id: 8pqv8qiyue7h0
+          items:
+            $ref: '#/components/schemas/Tasks'
+        toDos:
+          type: array
+          x-stoplight:
+            id: fty9rmuid3og8
+          items:
+            $ref: '#/components/schemas/Opportunity'
+        orders:
+          type: array
+          x-stoplight:
+            id: ue4371jqwxo69
+          items:
+            $ref: '#/components/schemas/Order'
+        businessDescription:
+          type: string
+          x-stoplight:
+            id: 18to66rc4ajaq
+        buisnessCategory:
+          type: string
+          x-stoplight:
+            id: ymkqlvd1dh6ug
+        website:
+          type: string
+          x-stoplight:
+            id: ol89xsrfr1msj
     Entity-Access:
       type: object
       title: Entity-Access
@@ -594,6 +681,46 @@ components:
             id: tk3hoacicepjl
           description: |
             Request_for_Information__c.Case__c
+    EntityMembers:
+      title: EntityMembers
+      x-stoplight:
+        id: rgf9nne9bl5wl
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: tba48q87kwb03
+    DBA:
+      title: DBA
+      x-stoplight:
+        id: txpe0zs4nfvjk
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 6qgx9u1xsfsey
+    Locations:
+      title: Locations
+      x-stoplight:
+        id: abn1wzfp303p2
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: llxttrmzkknbq
+    RegisteredAgent:
+      title: RegisteredAgent
+      x-stoplight:
+        id: thd208g4cz6nq
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 3cuco7z0d18vz
   securitySchemes:
     OAuth Token:
       type: oauth2
