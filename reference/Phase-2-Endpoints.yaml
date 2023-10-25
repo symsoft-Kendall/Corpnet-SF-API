@@ -283,7 +283,7 @@ paths:
       operationId: get-entity
       x-stoplight:
         id: 5asyx5wrvbr2f
-  /entity/taxregistrations:
+  /entity/states/taxregistrations:
     get:
       summary: GET Entity
       tags: []
@@ -301,7 +301,7 @@ paths:
       x-stoplight:
         id: tbiq21kvngfgf
     parameters: []
-  /states:
+  /entity/states:
     get:
       summary: GET States info for Entity
       tags: []
@@ -309,6 +309,7 @@ paths:
       operationId: get-states
       x-stoplight:
         id: ubzd3rw0991x2
+    parameters: []
 components:
   parameters:
     id:
@@ -505,6 +506,22 @@ components:
           type: string
           x-stoplight:
             id: ol89xsrfr1msj
+        buisnessStreet:
+          type: string
+          x-stoplight:
+            id: zkqrqv7743zcm
+        buisnessCity:
+          type: string
+          x-stoplight:
+            id: 64kh5g8dz87au
+        buisnessState:
+          type: string
+          x-stoplight:
+            id: cwuwxv7bnk2c5
+        buisnessZip:
+          type: string
+          x-stoplight:
+            id: tz66obbiz6t13
     Entity-Access:
       type: object
       title: Entity-Access
@@ -686,11 +703,70 @@ components:
       x-stoplight:
         id: rgf9nne9bl5wl
       type: object
+      description: Entity_Member__c
       properties:
         id:
           type: string
           x-stoplight:
             id: tba48q87kwb03
+          description: 'Id of Entity_Member__c record '
+        entityId:
+          type: string
+          x-stoplight:
+            id: 30enqobedh70n
+        contactId:
+          type: string
+          x-stoplight:
+            id: bdy0m6yq377q7
+          description: Entity_Member__c.Contact__c
+        entityAccessLevel:
+          type: string
+          x-stoplight:
+            id: keb5l3rbgy2bl
+          description: |-
+            Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact matches the Contact__c and the Entity matches the Entity__c
+
+            If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
+        lastName:
+          type: string
+          x-stoplight:
+            id: 7i65fyms8bv8j
+        firstName:
+          type: string
+          x-stoplight:
+            id: 4ygnahkimkmli
+        addressStreet:
+          type: string
+          x-stoplight:
+            id: d7ptq25zgec4a
+        addressCity:
+          type: string
+          x-stoplight:
+            id: wb5qz6kiunbyb
+        addressState:
+          type: string
+          x-stoplight:
+            id: mh6tjfuamwp9a
+        addressZip:
+          type: string
+          x-stoplight:
+            id: d1ds6wp7zgp5m
+        email:
+          type: string
+          x-stoplight:
+            id: qr3v2vrfqrndg
+        phone:
+          type: string
+          x-stoplight:
+            id: 5nqdmxw8rd28h
+        role:
+          type: string
+          x-stoplight:
+            id: 6doqvq5v2ey8b
+        '':
+          type: string
+          x-stoplight:
+            id: ji4eqgspfps89
     DBA:
       title: DBA
       x-stoplight:
