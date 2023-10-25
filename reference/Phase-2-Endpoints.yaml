@@ -11,17 +11,12 @@ servers:
   - url: 'https://corpnet--fullphase2.sandbox.lightning.force.com/services/apexrest/service'
     description: Phase 2 Full Sandbox
 paths:
-  /user:
+  '/user/':
     get:
       tags:
         - Client Info
       summary: Get User Access Info
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: Auth_Id
-          description: User_Identity__c.Auth_Id__c
+      parameters: []
       responses:
         '200':
           description: Successful response
@@ -89,79 +84,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Account-access'
-              examples:
-                Example 1:
-                  value:
-                    ClientInfo:
-                      - UID: string
-                        ShippingAddress: null
-                        PID: null
-                        Name: string
-                        LogoURL: null
-                        Id: string
-                        Discount: null
-                        Contacts:
-                          - UID: null
-                            Title: null
-                            Phone: string
-                            OwnerId: string
-                            Name: string
-                            Id: string
-                            Email: string
-                            AccountId: string
-                        BrainTreeProfileId: string
-                        BillingAddress: null
-                        AccountReferralId: string
-                Example 2:
-                  value:
-                    UserId: string
-                    '':
-                      - Level: string
-                        entityAccess:
-                          - level: string
-                            Entity:
-                              Name: string
-                              Id: string
-                              Type: string
-                              formationDate: string
-                              ein: string
-                              filingnumber: string
-                        account:
-                          Id: string
-                          Name: string
-                          Type: string
-                          formationdate: string
-                          EIN: string
-                          FilingNumber: string
-                          HomeState: string
-                Example 3:
-                  value:
-                    UserId: string
-                    contact:
-                      id: string
-                      FirstName: string
-                      LastName: string
-                      Email: string
-                      Phone: string
-                    accountAccesses:
-                      - accessLevel: string
-                        account:
-                          Id: string
-                          Name: string
-                          Type: string
-                          formationdate: string
-                          EIN: string
-                          FilingNumber: string
-                          HomeState: string
-                        entityAccesses:
-                          - level: string
-                            Entity:
-                              Name: string
-                              Id: string
-                              Type: string
-                              formationDate: string
-                              ein: string
-                              filingnumber: string
+              examples: {}
       security:
         - OAuth Token: []
       servers:
@@ -253,8 +176,7 @@ paths:
       requestBody:
         content: {}
         description: ''
-      parameters:
-        - $ref: '#/components/parameters/ContactId'
+      parameters: []
       operationId: U3
       description: |-
         Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
@@ -275,13 +197,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Entity-Expanded'
-        '':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
       operationId: get-entity
       x-stoplight:
         id: 5asyx5wrvbr2f
@@ -290,12 +205,12 @@ paths:
       - $ref: '#/components/parameters/EntityId'
   /entity/states/taxregistrations:
     get:
-      summary: GET Entity
+      summary: GET Entity Tax Registrations
       tags: []
       responses:
         '200':
           description: OK
-      operationId: get-entity
+      operationId: get-entity-trs
       x-stoplight:
         id: ck2vm5ocgcba0
     parameters: []
@@ -332,13 +247,13 @@ components:
       description: Locate record by SQL GUID
       schema:
         type: string
-    ContactId:
-      name: UserId
-      in: query
+    User-ID:
+      name: User ID
+      in: path
       required: true
       schema:
         type: string
-      description: UserId is a Contact.Id in Salesforce
+      description: User ID is a  Contact.ID in Salesforce
     AccountId:
       name: AccountId
       in: path
@@ -353,6 +268,12 @@ components:
       schema:
         type: string
       description: Entity__c.id from salesforce
+    user_id:
+      name: User ID
+      in: query
+      required: true
+      schema:
+        type: string    
   schemas:
     Contact:
       type: object
@@ -372,16 +293,8 @@ components:
           description: Contact.LastName
           x-stoplight:
             id: z84f6hrk5ke9f
-        email:
-          type: string
-          description: Contact.Email
-          x-stoplight:
-            id: zx4d2kki56xka
-        phone:
-          type: string
-          description: Contact.Phone
-          x-stoplight:
-            id: gw0sxsm133zbg
+        address:
+          $ref: '#/components/schemas/Address'
     Account-access:
       type: object
       title: Account-access
@@ -406,17 +319,17 @@ components:
       type: object
       description: General Account info for an account
       properties:
-        name:
-          type: string
-          x-stoplight:
-            id: 3h52wyrohukvu
-          description: Account.Name
         id:
           type: string
           x-stoplight:
             id: xo62ntsc6mwgw
           description: |
             Account.Id
+        name:
+          type: string
+          x-stoplight:
+            id: 3h52wyrohukvu
+          description: Account.Name
         type:
           type: string
           x-stoplight:
@@ -435,17 +348,17 @@ components:
           Id: string
           Type: string
       properties:
+        id:
+          type: string
+          description: Entity__c.Id
+          x-stoplight:
+            id: 3kupa02fmq3vt
         name:
           type: string
           description: |
             Entity__c.Name
           x-stoplight:
             id: lu54rdorqsjl6
-        id:
-          type: string
-          description: Entity__c.Id
-          x-stoplight:
-            id: 3kupa02fmq3vt
         formationDate:
           type: string
           description: Entity__c.Formation_Date__c
@@ -502,16 +415,6 @@ components:
       properties:
         entityBasic:
           $ref: '#/components/schemas/Entity'
-        numberOfOrders:
-          type: string
-          description: count of orders related to this entity
-        numberOfAlerts:
-          type: string
-          description: count of compliance alter type opportunities related to this entity
-        fiscalYearEndDate:
-          type: string
-          x-stoplight:
-            id: ubyh9zw1945kw
         tasks:
           type: array
           x-stoplight:
@@ -530,23 +433,21 @@ components:
             id: ue4371jqwxo69
           items:
             $ref: '#/components/schemas/Order'
-        website:
-          type: string
-          x-stoplight:
-            id: ol89xsrfr1msj
         states:
-          type: array
           x-stoplight:
             id: 6nmuashjaxca1
+          type: array
           items:
             $ref: '#/components/schemas/entityStates'
     Entity-Access:
       type: object
       title: Entity-Access
       properties:
-        level:
+        accessLevel:
           type: string
           description: Access_Entity__c.Level__c
+          x-stoplight:
+            id: c1vurnfd7gvp3
         entity:
           $ref: '#/components/schemas/Entity'
     Order:
@@ -716,75 +617,34 @@ components:
             id: tk3hoacicepjl
           description: |
             Request_for_Information__c.Case__c
+      title: ''
     EntityMembers:
-      title: EntityMembers
+      title: Entity Member
       x-stoplight:
         id: rgf9nne9bl5wl
       type: object
-      description: Entity_Member__c
+      description: |-
+        Entity_Member__c
+
+        entity property: Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact   matches the Contact__c and the Entity matches the Entity__c
+
+        If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
       properties:
         id:
           type: string
           x-stoplight:
             id: tba48q87kwb03
           description: 'Id of Entity_Member__c record '
-        entityId:
-          type: string
-          x-stoplight:
-            id: 30enqobedh70n
-        contactId:
-          type: string
-          x-stoplight:
-            id: bdy0m6yq377q7
-          description: Entity_Member__c.Contact__c
-        entityAccessLevel:
-          type: string
-          x-stoplight:
-            id: keb5l3rbgy2bl
-          description: |-
-            Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact matches the Contact__c and the Entity matches the Entity__c
-
-            If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
-        lastName:
-          type: string
-          x-stoplight:
-            id: 7i65fyms8bv8j
-        firstName:
-          type: string
-          x-stoplight:
-            id: 4ygnahkimkmli
-        addressStreet:
-          type: string
-          x-stoplight:
-            id: d7ptq25zgec4a
-        addressCity:
-          type: string
-          x-stoplight:
-            id: wb5qz6kiunbyb
-        addressState:
-          type: string
-          x-stoplight:
-            id: mh6tjfuamwp9a
-        addressZip:
-          type: string
-          x-stoplight:
-            id: d1ds6wp7zgp5m
-        email:
-          type: string
-          x-stoplight:
-            id: qr3v2vrfqrndg
-        phone:
-          type: string
-          x-stoplight:
-            id: 5nqdmxw8rd28h
+        contact:
+          $ref: '#/components/schemas/Contact'
+        entity:
+          $ref: '#/components/schemas/Entity-Access'
         role:
           type: string
           x-stoplight:
             id: 6doqvq5v2ey8b
-        '':
-          type: string
-          x-stoplight:
-            id: ji4eqgspfps89
+        address:
+          $ref: '#/components/schemas/Address'
     DBA:
       title: DBA
       x-stoplight:
@@ -796,7 +656,7 @@ components:
           x-stoplight:
             id: 6qgx9u1xsfsey
     Locations:
-      title: Locations
+      title: Location
       x-stoplight:
         id: abn1wzfp303p2
       type: object
@@ -805,26 +665,6 @@ components:
           type: string
           x-stoplight:
             id: llxttrmzkknbq
-        street:
-          type: string
-          x-stoplight:
-            id: 5fagn7t62q8ab
-        state:
-          type: string
-          x-stoplight:
-            id: x0s4l77y5a8kk
-        stateAbv:
-          type: string
-          x-stoplight:
-            id: 999nsuhvmeep3
-        city:
-          type: string
-          x-stoplight:
-            id: 3jd95p8n3rzel
-        zip:
-          type: string
-          x-stoplight:
-            id: 9apjl2bmahwoe
         name:
           type: string
           x-stoplight:
@@ -833,6 +673,8 @@ components:
           type: string
           x-stoplight:
             id: qkyqfclyxbn8x
+        address:
+          $ref: '#/components/schemas/Address'
     RegisteredAgent:
       title: RegisteredAgent
       x-stoplight:
@@ -844,7 +686,7 @@ components:
           x-stoplight:
             id: 3cuco7z0d18vz
     entityStates:
-      title: entityState
+      title: Entity State
       x-stoplight:
         id: hdvnxd7ugkq61
       type: object
