@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Corpnet Salesforce Web Service
+  title: Phase 2 Endpoints
   description: Providing Client and Partner Data to support the CCC
 servers:
   - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
