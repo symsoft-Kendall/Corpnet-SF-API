@@ -11,7 +11,7 @@ servers:
   - url: 'https://corpnet--fullphase2.sandbox.lightning.force.com/services/apexrest/service'
     description: Phase 2 Full Sandbox
 paths:
-  '/user/':
+  '/user/{UserId}':
     get:
       tags:
         - Client Info
@@ -95,7 +95,8 @@ paths:
       description: 'This call  will be used connect a specific auth id to a single contact in Salesforce returning all the access information for that contact to view or edit accounts and entities. '
       x-stoplight:
         id: zi0aw2s5nrz60
-    parameters: []
+    parameters:
+      - $ref: '#/components/parameters/UserId'
   '/account/{AccountId}':
     get:
       summary: Get Account Info
@@ -176,7 +177,8 @@ paths:
       requestBody:
         content: {}
         description: ''
-      parameters: []
+      parameters:
+        - $ref: '#/components/parameters/user_id'
       operationId: U3
       description: |-
         Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
@@ -201,9 +203,11 @@ paths:
       x-stoplight:
         id: 5asyx5wrvbr2f
       description: This call is used to get data for a comprehensive view of all the data relateing to a single entity.
+      parameters:
+        - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/EntityId'
-  /entity/states/taxregistrations:
+  '/entity/{EntityId}/states/taxregistrations':
     get:
       summary: GET Entity Tax Registrations
       tags: []
@@ -213,8 +217,11 @@ paths:
       operationId: get-entity-trs
       x-stoplight:
         id: ck2vm5ocgcba0
-    parameters: []
-  /entity/states:
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
+  '/entity/{EntityId}/states':
     get:
       summary: GET States info for Entity
       tags: []
@@ -224,7 +231,11 @@ paths:
       operationId: get-states
       x-stoplight:
         id: ubzd3rw0991x2
-    parameters: []
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      description: ''
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
 components:
   parameters:
     id:
@@ -247,13 +258,6 @@ components:
       description: Locate record by SQL GUID
       schema:
         type: string
-    User-ID:
-      name: User ID
-      in: path
-      required: true
-      schema:
-        type: string
-      description: User ID is a  Contact.ID in Salesforce
     AccountId:
       name: AccountId
       in: path
@@ -268,12 +272,20 @@ components:
       schema:
         type: string
       description: Entity__c.id from salesforce
+    UserId:
+      name: UserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: User ID is a Contact.Id in Salesforce
     user_id:
-      name: User ID
+      name: user_id
       in: query
       required: true
       schema:
-        type: string    
+        type: string
+      description: User ID is a Contact.Id in Salesforce
   schemas:
     Contact:
       type: object
