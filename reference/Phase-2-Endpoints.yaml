@@ -13,8 +13,6 @@ servers:
 paths:
   '/user/{UserId}':
     get:
-      tags:
-        - Client Info
       summary: Get User Access Info
       parameters: []
       responses:
@@ -285,7 +283,7 @@ components:
       required: true
       schema:
         type: string
-      description: User ID is a Contact.Id in Salesforce
+      description: User ID is a Contact.Id in Salesforce. This is used to determine the user's access level.
   schemas:
     Contact:
       type: object
