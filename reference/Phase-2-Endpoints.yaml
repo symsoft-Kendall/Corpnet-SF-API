@@ -461,6 +461,24 @@ components:
           x-stoplight:
             id: qnq5cdggsgdld
           description: count of compliance alter type opportunities related to this entity
+        homeState:
+          type: string
+          x-stoplight:
+            id: vjf1zw2ipcvmd
+        businessDescription:
+          type: string
+          x-stoplight:
+            id: 2z1660pzz1p0w
+        buisnessCategory:
+          type: string
+          x-stoplight:
+            id: z4841sx3j5dcu
+        website:
+          type: string
+          x-stoplight:
+            id: o0x66uwkm1b08
+        businessAddress:
+          $ref: '#/components/schemas/Address'
     Entity-Expanded:
       type: object
       x-stoplight:
@@ -473,25 +491,8 @@ components:
           Id: string
           Type: string
       properties:
-        Name:
-          type: string
-          description: |
-            Entity__c.Name
-        Id:
-          type: string
-          description: Entity__c.Id
-        formationDate:
-          type: string
-          description: Entity__c.Formation_Date__c
-        Type:
-          type: string
-          description: Entity.Entity_Type__c
-        ein:
-          type: string
-          description: Entity__c.EIN__c
-        filingnumber:
-          type: string
-          description: Entity.Filing_Number__c
+        entityBasic:
+          $ref: '#/components/schemas/Entity'
         numberOfOrders:
           type: string
           description: count of orders related to this entity
@@ -520,34 +521,16 @@ components:
             id: ue4371jqwxo69
           items:
             $ref: '#/components/schemas/Order'
-        businessDescription:
-          type: string
-          x-stoplight:
-            id: 18to66rc4ajaq
-        buisnessCategory:
-          type: string
-          x-stoplight:
-            id: ymkqlvd1dh6ug
         website:
           type: string
           x-stoplight:
             id: ol89xsrfr1msj
-        buisnessStreet:
-          type: string
+        states:
+          type: array
           x-stoplight:
-            id: zkqrqv7743zcm
-        buisnessCity:
-          type: string
-          x-stoplight:
-            id: 64kh5g8dz87au
-        buisnessState:
-          type: string
-          x-stoplight:
-            id: cwuwxv7bnk2c5
-        buisnessZip:
-          type: string
-          x-stoplight:
-            id: tz66obbiz6t13
+            id: 6nmuashjaxca1
+          items:
+            $ref: '#/components/schemas/entityStates'
     Entity-Access:
       type: object
       title: Entity-Access
@@ -813,6 +796,34 @@ components:
           type: string
           x-stoplight:
             id: llxttrmzkknbq
+        street:
+          type: string
+          x-stoplight:
+            id: 5fagn7t62q8ab
+        state:
+          type: string
+          x-stoplight:
+            id: x0s4l77y5a8kk
+        stateAbv:
+          type: string
+          x-stoplight:
+            id: 999nsuhvmeep3
+        city:
+          type: string
+          x-stoplight:
+            id: 3jd95p8n3rzel
+        zip:
+          type: string
+          x-stoplight:
+            id: 9apjl2bmahwoe
+        name:
+          type: string
+          x-stoplight:
+            id: nzyn5qcqx8wk0
+        type:
+          type: string
+          x-stoplight:
+            id: qkyqfclyxbn8x
     RegisteredAgent:
       title: RegisteredAgent
       x-stoplight:
@@ -823,6 +834,78 @@ components:
           type: string
           x-stoplight:
             id: 3cuco7z0d18vz
+    entityStates:
+      title: entityState
+      x-stoplight:
+        id: hdvnxd7ugkq61
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 2m3dwd2del84w
+        stateName:
+          type: string
+          x-stoplight:
+            id: hk5vq940ulcmh
+        stateAbv:
+          type: string
+          x-stoplight:
+            id: 33ksu22anvgx7
+        beganOperations:
+          type: string
+          x-stoplight:
+            id: i6o79ogiizeov
+        firstPayrollDate:
+          type: string
+          x-stoplight:
+            id: 1kcp2idboeazv
+        foreignQualified:
+          type: string
+          x-stoplight:
+            id: jm7r7ithdzz4v
+        primary:
+          type: boolean
+          x-stoplight:
+            id: 0g66jizi0f3o7
+    Address:
+      title: Address
+      x-stoplight:
+        id: onclvg3d55se1
+      type: object
+      properties:
+        street:
+          type: string
+          x-stoplight:
+            id: 98d76humzm9o6
+        street2:
+          type: string
+          x-stoplight:
+            id: kndr2llu1h67m
+        city:
+          type: string
+          x-stoplight:
+            id: hcr69j8ysch5v
+        state:
+          type: string
+          x-stoplight:
+            id: rei3hbwn8439t
+        zip:
+          type: string
+          x-stoplight:
+            id: ljpcbwgq26qjl
+        country:
+          type: string
+          x-stoplight:
+            id: 46fq2402b9niv
+        phone:
+          type: string
+          x-stoplight:
+            id: fi8yj1rwl2hmy
+        email:
+          type: string
+          x-stoplight:
+            id: 3ubu44k0rgpec
   securitySchemes:
     OAuth Token:
       type: oauth2
