@@ -76,7 +76,7 @@ paths:
                         BillingAddress: null
                         AccountReferralId: '0'
                 properties:
-                  AuthId:
+                  authId:
                     type: string
                     x-stoplight:
                       id: 1xu763dw8d4fm
@@ -186,30 +186,30 @@ paths:
               schema:
                 type: object
                 properties:
-                  AccountInfo:
+                  accountInfo:
                     $ref: '#/components/schemas/Account'
-                  Orders:
+                  orders:
                     type: array
                     x-stoplight:
                       id: 3pskkwix6btk5
                     description: Where Order.AccountId = AccountId
                     items:
                       $ref: '#/components/schemas/Order'
-                  ComplianceAlerts:
+                  complianceAlerts:
                     type: array
                     x-stoplight:
                       id: ehes5qypcijqr
                     description: Opportunities Where Account.Id = AccountId
                     items:
                       $ref: '#/components/schemas/Opportunity'
-                  Tasks:
+                  tasks:
                     type: array
                     x-stoplight:
                       id: gzspcx7gsrkjg
                     description: Request_for_Information__c Where Case.AccountId = AccountId
                     items:
                       $ref: '#/components/schemas/Tasks'
-                  Entities:
+                  entities:
                     type: array
                     x-stoplight:
                       id: 9su1aewp7t9wo
@@ -283,32 +283,28 @@ paths:
       operationId: get-entity
       x-stoplight:
         id: 5asyx5wrvbr2f
-  /entity/taxregistrations:
+  /entity/states/taxregistrations:
     get:
       summary: GET Entity
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-entity
       x-stoplight:
         id: ck2vm5ocgcba0
     parameters: []
-  /taxregistration:
-    get:
-      summary: GET tax registrations for Entity
-      tags: []
-      responses: {}
-      operationId: get-taxregistrations
-      x-stoplight:
-        id: tbiq21kvngfgf
-    parameters: []
-  /states:
+  /entity/states:
     get:
       summary: GET States info for Entity
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-states
       x-stoplight:
         id: ubzd3rw0991x2
+    parameters: []
 components:
   parameters:
     id:
@@ -340,18 +336,26 @@ components:
         id:
           type: string
           description: Id
-        FirstName:
+        firstName:
           type: string
           description: Contact.FirstName
-        LastName:
+          x-stoplight:
+            id: jayomjbtzq97y
+        lastName:
           type: string
           description: Contact.LastName
-        Email:
+          x-stoplight:
+            id: z84f6hrk5ke9f
+        email:
           type: string
           description: Contact.Email
-        Phone:
+          x-stoplight:
+            id: zx4d2kki56xka
+        phone:
           type: string
           description: Contact.Phone
+          x-stoplight:
+            id: gw0sxsm133zbg
     Account-access:
       type: object
       title: Account-access
@@ -367,7 +371,7 @@ components:
           description: Enity Access records accociated with the Access_Account__c record
           items:
             $ref: '#/components/schemas/Entity-Access'
-        Id:
+        id:
           type: string
           x-stoplight:
             id: cpugvoqmvm4lj
@@ -376,18 +380,18 @@ components:
       type: object
       description: General Account info for an account
       properties:
-        Name:
+        name:
           type: string
           x-stoplight:
             id: 3h52wyrohukvu
           description: Account.Name
-        Id:
+        id:
           type: string
           x-stoplight:
             id: xo62ntsc6mwgw
           description: |
             Account.Id
-        AccountType:
+        type:
           type: string
           x-stoplight:
             id: 13lf94p7jzgjb
@@ -405,19 +409,25 @@ components:
           Id: string
           Type: string
       properties:
-        Name:
+        name:
           type: string
           description: |
             Entity__c.Name
-        Id:
+          x-stoplight:
+            id: lu54rdorqsjl6
+        id:
           type: string
           description: Entity__c.Id
+          x-stoplight:
+            id: 3kupa02fmq3vt
         formationDate:
           type: string
           description: Entity__c.Formation_Date__c
-        Type:
+        type:
           type: string
           description: Entity.Entity_Type__c
+          x-stoplight:
+            id: 0a67wadd5nw4y
         ein:
           type: string
           description: Entity__c.EIN__c
@@ -446,19 +456,25 @@ components:
           Id: string
           Type: string
       properties:
-        Name:
+        name:
           type: string
           description: |
             Entity__c.Name
-        Id:
+          x-stoplight:
+            id: 4x9d5c7o6s7w0
+        id:
           type: string
           description: Entity__c.Id
+          x-stoplight:
+            id: 7n6ci4i4aaucz
         formationDate:
           type: string
           description: Entity__c.Formation_Date__c
-        Type:
+        type:
           type: string
           description: Entity.Entity_Type__c
+          x-stoplight:
+            id: ylx6eat7nn2af
         ein:
           type: string
           description: Entity__c.EIN__c
@@ -512,7 +528,7 @@ components:
         level:
           type: string
           description: Access_Entity__c.Level__c
-        Entity:
+        entity:
           $ref: '#/components/schemas/Entity'
     Order:
       title: OrderBasic
@@ -527,42 +543,42 @@ components:
             id: 6zgbamrv42kw1
           description: |
             Order.Id
-        UID:
+        uid:
           type: string
           x-stoplight:
             id: 94kvskkjukb6x
           description: Order.UID__c
-        OrderNumber:
+        orderNumber:
           type: string
           x-stoplight:
             id: tvc0isa4fuqi9
           description: Order.OrderNumber
-        Status:
+        status:
           type: string
           x-stoplight:
             id: fbl74v66trbuz
           description: Order.Order_Phase__c
-        OrderDate:
+        orderDate:
           type: string
           x-stoplight:
             id: 1b4f4ch3lzp5b
           description: Order.EffectiveDate
-        Amount:
+        amount:
           type: string
           x-stoplight:
             id: w4fhwalz3l12z
           description: Order.TotalAmount
-        ServiceCategory:
+        serviceCategory:
           type: string
           x-stoplight:
             id: d00p3oaw164k5
           description: Order.Type
-        CompanyName:
+        companyName:
           type: string
           x-stoplight:
             id: 9nnnrd8xyo6be
           description: Order.Entity_Name__c
-        AccountId:
+        accountId:
           type: string
           x-stoplight:
             id: br5rk1hknc7sy
@@ -581,22 +597,22 @@ components:
           x-stoplight:
             id: ok2hnhhwxm8ze
           description: Opportunity.Id
-        Name:
+        name:
           type: string
           x-stoplight:
             id: gyqadoj1axsdw
           description: Opportunity.Name
-        ServiceCategory:
+        serviceCategory:
           type: string
           x-stoplight:
             id: 4qv2xxes6clwh
           description: "Opportunity.Service_Category__c\t"
-        CloseDate:
+        closeDate:
           type: string
           x-stoplight:
             id: 4xwboxgw82yg2
           description: Opportunity.CloseDate
-        Amount:
+        amount:
           type: string
           x-stoplight:
             id: r4j0ypj3tt2jj
@@ -615,12 +631,12 @@ components:
           x-stoplight:
             id: ieg5eyewy2sy4
           description: Request_for_information__c.Id
-        Name:
+        name:
           type: string
           x-stoplight:
             id: nhii077zzhirb
           description: Request_for_information__c.Name
-        RequestComment:
+        requestComment:
           type: string
           x-stoplight:
             id: hv3wqlbmm7q27
@@ -630,7 +646,7 @@ components:
           x-stoplight:
             id: tocob2rxjq1j2
           description: Request_for_information__c.Status__c
-        Type:
+        type:
           type: string
           x-stoplight:
             id: 31y6k0gs46lj0
@@ -640,12 +656,12 @@ components:
           x-stoplight:
             id: xkvjqueozpfy4
           description: Request_for_information__c.Case__c
-        Order:
+        order:
           type: string
           x-stoplight:
             id: 2z0lizjytmn0j
           description: Request_for_information__c.Order__c
-        CustomerEmail:
+        customerEmail:
           type: string
           x-stoplight:
             id: 2gptgdgq5k6bu
@@ -653,29 +669,29 @@ components:
     ToDo:
       type: object
       properties:
-        RequestComment:
+        requestComment:
           type: string
           x-stoplight:
             id: kpyf3r9leq6ka
           description: Request_for_Information__c.Request__c
-        Status:
+        status:
           type: string
           x-stoplight:
             id: daertm1d3dq1z
           description: Request_for_Information__c.Status__c
-        Type:
+        type:
           type: string
           x-stoplight:
             id: p6ib7oro58i24
           description: |
             Request_for_Information__c.Type__c
-        OrderId:
+        orderId:
           type: string
           x-stoplight:
             id: lh0e1xr3y7z78
           description: |
             Request_for_Information__c.Order__c
-        CaseId:
+        caseId:
           type: string
           x-stoplight:
             id: tk3hoacicepjl
@@ -731,4 +747,4 @@ components:
       description: ''
 security:
   - OAuth Token: []
-tags: null
+tags: []
