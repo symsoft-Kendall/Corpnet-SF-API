@@ -259,12 +259,12 @@ paths:
       description: |-
         Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
 
-        The Contact Id provided is used to determine access level to the Account and Entities returned in the call.
+        The Contact Id (UserId) provided is used to determine access level to the Account and Entities returned in the call.
       x-stoplight:
         id: k98ccoe5v1gfx
     parameters:
       - $ref: '#/components/parameters/AccountId'
-  /entity:
+  '/entity/{EntityId}':
     get:
       summary: GET Entity
       tags: []
@@ -275,9 +275,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Entity-Expanded'
+        '':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
       operationId: get-entity
       x-stoplight:
         id: 5asyx5wrvbr2f
+      description: This call is used to get data for a comprehensive view of all the data relateing to a single entity.
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
   /entity/states/taxregistrations:
     get:
       summary: GET Entity
@@ -341,6 +351,13 @@ components:
       schema:
         type: string
       description: 'Salesforce Account Id '
+    EntityId:
+      name: EntityId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Entity__c.id from salesforce
   schemas:
     Contact:
       type: object
