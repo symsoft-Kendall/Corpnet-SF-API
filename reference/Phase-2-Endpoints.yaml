@@ -276,7 +276,7 @@ components:
       required: true
       schema:
         type: string
-      description: User ID is a Contact.Id in Salesforce
+      description: User ID is a UserIdentity__c.Auth_Id__c in Salesforce
     user_id:
       name: user_id
       in: query
