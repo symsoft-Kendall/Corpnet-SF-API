@@ -173,7 +173,7 @@ paths:
       x-stoplight:
         id: zi0aw2s5nrz60
     parameters: []
-  /account:
+  '/account/{AccountId}':
     get:
       summary: Get Account Info
       tags: []
@@ -192,7 +192,10 @@ paths:
                     type: array
                     x-stoplight:
                       id: 3pskkwix6btk5
-                    description: Where Order.AccountId = AccountId
+                    description: |-
+                      Where Order.AccountId = AccountId
+
+                      20 most recent
                     items:
                       $ref: '#/components/schemas/Order'
                   ComplianceAlerts:
@@ -251,16 +254,7 @@ paths:
         content: {}
         description: ''
       parameters:
-        - schema:
-            type: string
-          in: query
-          name: AccountId
-          description: 'Salesforce Account Id '
-        - schema:
-            type: string
-          in: query
-          name: ContactId
-          description: Salesforce Contact Id
+        - $ref: '#/components/parameters/ContactId'
       operationId: U3
       description: |-
         Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
@@ -268,7 +262,8 @@ paths:
         The Contact Id provided is used to determine access level to the Account and Entities returned in the call.
       x-stoplight:
         id: k98ccoe5v1gfx
-    parameters: []
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
   /entity:
     get:
       summary: GET Entity
@@ -332,6 +327,20 @@ components:
       description: Locate record by SQL GUID
       schema:
         type: string
+    ContactId:
+      name: UserId
+      in: query
+      required: true
+      schema:
+        type: string
+      description: UserId is a Contact.Id in Salesforce
+    AccountId:
+      name: AccountId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: 'Salesforce Account Id '
   schemas:
     Contact:
       type: object
