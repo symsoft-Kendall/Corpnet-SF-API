@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Corpnet Salesforce Web Service
+  title: Phase 2 Endpoints
   description: Providing Client and Partner Data to support the CCC
 servers:
   - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
@@ -11,17 +11,10 @@ servers:
   - url: 'https://corpnet--fullphase2.sandbox.lightning.force.com/services/apexrest/service'
     description: Phase 2 Full Sandbox
 paths:
-  /user:
+  '/user/{UserId}':
     get:
-      tags:
-        - Client Info
       summary: Get User Access Info
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: Auth_Id
-          description: User_Identity__c.Auth_Id__c
+      parameters: []
       responses:
         '200':
           description: Successful response
@@ -76,7 +69,7 @@ paths:
                         BillingAddress: null
                         AccountReferralId: '0'
                 properties:
-                  AuthId:
+                  authId:
                     type: string
                     x-stoplight:
                       id: 1xu763dw8d4fm
@@ -89,79 +82,7 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Account-access'
-              examples:
-                Example 1:
-                  value:
-                    ClientInfo:
-                      - UID: string
-                        ShippingAddress: null
-                        PID: null
-                        Name: string
-                        LogoURL: null
-                        Id: string
-                        Discount: null
-                        Contacts:
-                          - UID: null
-                            Title: null
-                            Phone: string
-                            OwnerId: string
-                            Name: string
-                            Id: string
-                            Email: string
-                            AccountId: string
-                        BrainTreeProfileId: string
-                        BillingAddress: null
-                        AccountReferralId: string
-                Example 2:
-                  value:
-                    UserId: string
-                    '':
-                      - Level: string
-                        entityAccess:
-                          - level: string
-                            Entity:
-                              Name: string
-                              Id: string
-                              Type: string
-                              formationDate: string
-                              ein: string
-                              filingnumber: string
-                        account:
-                          Id: string
-                          Name: string
-                          Type: string
-                          formationdate: string
-                          EIN: string
-                          FilingNumber: string
-                          HomeState: string
-                Example 3:
-                  value:
-                    UserId: string
-                    contact:
-                      id: string
-                      FirstName: string
-                      LastName: string
-                      Email: string
-                      Phone: string
-                    accountAccesses:
-                      - accessLevel: string
-                        account:
-                          Id: string
-                          Name: string
-                          Type: string
-                          formationdate: string
-                          EIN: string
-                          FilingNumber: string
-                          HomeState: string
-                        entityAccesses:
-                          - level: string
-                            Entity:
-                              Name: string
-                              Id: string
-                              Type: string
-                              formationDate: string
-                              ein: string
-                              filingnumber: string
+              examples: {}
       security:
         - OAuth Token: []
       servers:
@@ -172,7 +93,8 @@ paths:
       description: 'This call  will be used connect a specific auth id to a single contact in Salesforce returning all the access information for that contact to view or edit accounts and entities. '
       x-stoplight:
         id: zi0aw2s5nrz60
-    parameters: []
+    parameters:
+      - $ref: '#/components/parameters/UserId'
   '/account/{AccountId}':
     get:
       summary: Get Account Info
@@ -186,9 +108,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  AccountInfo:
+                  accountInfo:
                     $ref: '#/components/schemas/Account'
-                  Orders:
+                  orders:
                     type: array
                     x-stoplight:
                       id: 3pskkwix6btk5
@@ -198,21 +120,21 @@ paths:
                       20 most recent
                     items:
                       $ref: '#/components/schemas/Order'
-                  ComplianceAlerts:
+                  complianceAlerts:
                     type: array
                     x-stoplight:
                       id: ehes5qypcijqr
                     description: Opportunities Where Account.Id = AccountId
                     items:
                       $ref: '#/components/schemas/Opportunity'
-                  Tasks:
+                  tasks:
                     type: array
                     x-stoplight:
                       id: gzspcx7gsrkjg
                     description: Request_for_Information__c Where Case.AccountId = AccountId
                     items:
                       $ref: '#/components/schemas/Tasks'
-                  Entities:
+                  entities:
                     type: array
                     x-stoplight:
                       id: 9su1aewp7t9wo
@@ -254,7 +176,7 @@ paths:
         content: {}
         description: ''
       parameters:
-        - $ref: '#/components/parameters/ContactId'
+        - $ref: '#/components/parameters/user_id'
       operationId: U3
       description: |-
         Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
@@ -275,46 +197,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Entity-Expanded'
-        '':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
       operationId: get-entity
       x-stoplight:
         id: 5asyx5wrvbr2f
       description: This call is used to get data for a comprehensive view of all the data relateing to a single entity.
+      parameters:
+        - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/EntityId'
-  /entity/states/taxregistrations:
+  '/entity/{EntityId}/states/taxregistrations':
     get:
-      summary: GET Entity
+      summary: GET Entity Tax Registrations
       tags: []
-      responses: {}
-      operationId: get-entity
+      responses:
+        '200':
+          description: OK
+      operationId: get-entity-trs
       x-stoplight:
         id: ck2vm5ocgcba0
-    parameters: []
-  /taxregistration:
-    get:
-      summary: GET tax registrations for Entity
-      tags: []
-      responses: {}
-      operationId: get-taxregistrations
-      x-stoplight:
-        id: tbiq21kvngfgf
-    parameters: []
-  /entity/states:
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
+  '/entity/{EntityId}/states':
     get:
       summary: GET States info for Entity
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
       operationId: get-states
       x-stoplight:
         id: ubzd3rw0991x2
-    parameters: []
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      description: ''
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
 components:
   parameters:
     id:
@@ -337,13 +256,6 @@ components:
       description: Locate record by SQL GUID
       schema:
         type: string
-    ContactId:
-      name: UserId
-      in: query
-      required: true
-      schema:
-        type: string
-      description: UserId is a Contact.Id in Salesforce
     AccountId:
       name: AccountId
       in: path
@@ -358,6 +270,20 @@ components:
       schema:
         type: string
       description: Entity__c.id from salesforce
+    UserId:
+      name: UserId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: User ID is a UserIdentity__c.Auth_Id__c in Salesforce
+    user_id:
+      name: user_id
+      in: query
+      required: true
+      schema:
+        type: string
+      description: User ID is a Contact.Id in Salesforce. This is used to determine the user's access level.
   schemas:
     Contact:
       type: object
@@ -367,18 +293,18 @@ components:
         id:
           type: string
           description: Id
-        FirstName:
+        firstName:
           type: string
           description: Contact.FirstName
-        LastName:
+          x-stoplight:
+            id: jayomjbtzq97y
+        lastName:
           type: string
           description: Contact.LastName
-        Email:
-          type: string
-          description: Contact.Email
-        Phone:
-          type: string
-          description: Contact.Phone
+          x-stoplight:
+            id: z84f6hrk5ke9f
+        address:
+          $ref: '#/components/schemas/Address'
     Account-access:
       type: object
       title: Account-access
@@ -394,7 +320,7 @@ components:
           description: Enity Access records accociated with the Access_Account__c record
           items:
             $ref: '#/components/schemas/Entity-Access'
-        Id:
+        id:
           type: string
           x-stoplight:
             id: cpugvoqmvm4lj
@@ -403,18 +329,18 @@ components:
       type: object
       description: General Account info for an account
       properties:
-        Name:
-          type: string
-          x-stoplight:
-            id: 3h52wyrohukvu
-          description: Account.Name
-        Id:
+        id:
           type: string
           x-stoplight:
             id: xo62ntsc6mwgw
           description: |
             Account.Id
-        AccountType:
+        name:
+          type: string
+          x-stoplight:
+            id: 3h52wyrohukvu
+          description: Account.Name
+        type:
           type: string
           x-stoplight:
             id: 13lf94p7jzgjb
@@ -432,19 +358,25 @@ components:
           Id: string
           Type: string
       properties:
-        Name:
+        id:
+          type: string
+          description: Entity__c.Id
+          x-stoplight:
+            id: 3kupa02fmq3vt
+        name:
           type: string
           description: |
             Entity__c.Name
-        Id:
-          type: string
-          description: Entity__c.Id
+          x-stoplight:
+            id: lu54rdorqsjl6
         formationDate:
           type: string
           description: Entity__c.Formation_Date__c
-        Type:
+        type:
           type: string
           description: Entity.Entity_Type__c
+          x-stoplight:
+            id: 0a67wadd5nw4y
         ein:
           type: string
           description: Entity__c.EIN__c
@@ -493,16 +425,6 @@ components:
       properties:
         entityBasic:
           $ref: '#/components/schemas/Entity'
-        numberOfOrders:
-          type: string
-          description: count of orders related to this entity
-        numberOfAlerts:
-          type: string
-          description: count of compliance alter type opportunities related to this entity
-        fiscalYearEndDate:
-          type: string
-          x-stoplight:
-            id: ubyh9zw1945kw
         tasks:
           type: array
           x-stoplight:
@@ -521,24 +443,22 @@ components:
             id: ue4371jqwxo69
           items:
             $ref: '#/components/schemas/Order'
-        website:
-          type: string
-          x-stoplight:
-            id: ol89xsrfr1msj
         states:
-          type: array
           x-stoplight:
             id: 6nmuashjaxca1
+          type: array
           items:
             $ref: '#/components/schemas/entityStates'
     Entity-Access:
       type: object
       title: Entity-Access
       properties:
-        level:
+        accessLevel:
           type: string
           description: Access_Entity__c.Level__c
-        Entity:
+          x-stoplight:
+            id: c1vurnfd7gvp3
+        entity:
           $ref: '#/components/schemas/Entity'
     Order:
       title: OrderBasic
@@ -553,42 +473,42 @@ components:
             id: 6zgbamrv42kw1
           description: |
             Order.Id
-        UID:
+        uid:
           type: string
           x-stoplight:
             id: 94kvskkjukb6x
           description: Order.UID__c
-        OrderNumber:
+        orderNumber:
           type: string
           x-stoplight:
             id: tvc0isa4fuqi9
           description: Order.OrderNumber
-        Status:
+        status:
           type: string
           x-stoplight:
             id: fbl74v66trbuz
           description: Order.Order_Phase__c
-        OrderDate:
+        orderDate:
           type: string
           x-stoplight:
             id: 1b4f4ch3lzp5b
           description: Order.EffectiveDate
-        Amount:
+        amount:
           type: string
           x-stoplight:
             id: w4fhwalz3l12z
           description: Order.TotalAmount
-        ServiceCategory:
+        serviceCategory:
           type: string
           x-stoplight:
             id: d00p3oaw164k5
           description: Order.Type
-        CompanyName:
+        companyName:
           type: string
           x-stoplight:
             id: 9nnnrd8xyo6be
           description: Order.Entity_Name__c
-        AccountId:
+        accountId:
           type: string
           x-stoplight:
             id: br5rk1hknc7sy
@@ -607,22 +527,22 @@ components:
           x-stoplight:
             id: ok2hnhhwxm8ze
           description: Opportunity.Id
-        Name:
+        name:
           type: string
           x-stoplight:
             id: gyqadoj1axsdw
           description: Opportunity.Name
-        ServiceCategory:
+        serviceCategory:
           type: string
           x-stoplight:
             id: 4qv2xxes6clwh
           description: "Opportunity.Service_Category__c\t"
-        CloseDate:
+        closeDate:
           type: string
           x-stoplight:
             id: 4xwboxgw82yg2
           description: Opportunity.CloseDate
-        Amount:
+        amount:
           type: string
           x-stoplight:
             id: r4j0ypj3tt2jj
@@ -641,12 +561,12 @@ components:
           x-stoplight:
             id: ieg5eyewy2sy4
           description: Request_for_information__c.Id
-        Name:
+        name:
           type: string
           x-stoplight:
             id: nhii077zzhirb
           description: Request_for_information__c.Name
-        RequestComment:
+        requestComment:
           type: string
           x-stoplight:
             id: hv3wqlbmm7q27
@@ -656,7 +576,7 @@ components:
           x-stoplight:
             id: tocob2rxjq1j2
           description: Request_for_information__c.Status__c
-        Type:
+        type:
           type: string
           x-stoplight:
             id: 31y6k0gs46lj0
@@ -666,12 +586,12 @@ components:
           x-stoplight:
             id: xkvjqueozpfy4
           description: Request_for_information__c.Case__c
-        Order:
+        order:
           type: string
           x-stoplight:
             id: 2z0lizjytmn0j
           description: Request_for_information__c.Order__c
-        CustomerEmail:
+        customerEmail:
           type: string
           x-stoplight:
             id: 2gptgdgq5k6bu
@@ -679,103 +599,62 @@ components:
     ToDo:
       type: object
       properties:
-        RequestComment:
+        requestComment:
           type: string
           x-stoplight:
             id: kpyf3r9leq6ka
           description: Request_for_Information__c.Request__c
-        Status:
+        status:
           type: string
           x-stoplight:
             id: daertm1d3dq1z
           description: Request_for_Information__c.Status__c
-        Type:
+        type:
           type: string
           x-stoplight:
             id: p6ib7oro58i24
           description: |
             Request_for_Information__c.Type__c
-        OrderId:
+        orderId:
           type: string
           x-stoplight:
             id: lh0e1xr3y7z78
           description: |
             Request_for_Information__c.Order__c
-        CaseId:
+        caseId:
           type: string
           x-stoplight:
             id: tk3hoacicepjl
           description: |
             Request_for_Information__c.Case__c
+      title: ''
     EntityMembers:
-      title: EntityMembers
+      title: Entity Member
       x-stoplight:
         id: rgf9nne9bl5wl
       type: object
-      description: Entity_Member__c
+      description: |-
+        Entity_Member__c
+
+        entity property: Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact   matches the Contact__c and the Entity matches the Entity__c
+
+        If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
       properties:
         id:
           type: string
           x-stoplight:
             id: tba48q87kwb03
           description: 'Id of Entity_Member__c record '
-        entityId:
-          type: string
-          x-stoplight:
-            id: 30enqobedh70n
-        contactId:
-          type: string
-          x-stoplight:
-            id: bdy0m6yq377q7
-          description: Entity_Member__c.Contact__c
-        entityAccessLevel:
-          type: string
-          x-stoplight:
-            id: keb5l3rbgy2bl
-          description: |-
-            Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact matches the Contact__c and the Entity matches the Entity__c
-
-            If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
-        lastName:
-          type: string
-          x-stoplight:
-            id: 7i65fyms8bv8j
-        firstName:
-          type: string
-          x-stoplight:
-            id: 4ygnahkimkmli
-        addressStreet:
-          type: string
-          x-stoplight:
-            id: d7ptq25zgec4a
-        addressCity:
-          type: string
-          x-stoplight:
-            id: wb5qz6kiunbyb
-        addressState:
-          type: string
-          x-stoplight:
-            id: mh6tjfuamwp9a
-        addressZip:
-          type: string
-          x-stoplight:
-            id: d1ds6wp7zgp5m
-        email:
-          type: string
-          x-stoplight:
-            id: qr3v2vrfqrndg
-        phone:
-          type: string
-          x-stoplight:
-            id: 5nqdmxw8rd28h
+        contact:
+          $ref: '#/components/schemas/Contact'
+        entity:
+          $ref: '#/components/schemas/Entity-Access'
         role:
           type: string
           x-stoplight:
             id: 6doqvq5v2ey8b
-        '':
-          type: string
-          x-stoplight:
-            id: ji4eqgspfps89
+        address:
+          $ref: '#/components/schemas/Address'
     DBA:
       title: DBA
       x-stoplight:
@@ -787,7 +666,7 @@ components:
           x-stoplight:
             id: 6qgx9u1xsfsey
     Locations:
-      title: Locations
+      title: Location
       x-stoplight:
         id: abn1wzfp303p2
       type: object
@@ -796,26 +675,6 @@ components:
           type: string
           x-stoplight:
             id: llxttrmzkknbq
-        street:
-          type: string
-          x-stoplight:
-            id: 5fagn7t62q8ab
-        state:
-          type: string
-          x-stoplight:
-            id: x0s4l77y5a8kk
-        stateAbv:
-          type: string
-          x-stoplight:
-            id: 999nsuhvmeep3
-        city:
-          type: string
-          x-stoplight:
-            id: 3jd95p8n3rzel
-        zip:
-          type: string
-          x-stoplight:
-            id: 9apjl2bmahwoe
         name:
           type: string
           x-stoplight:
@@ -824,6 +683,8 @@ components:
           type: string
           x-stoplight:
             id: qkyqfclyxbn8x
+        address:
+          $ref: '#/components/schemas/Address'
     RegisteredAgent:
       title: RegisteredAgent
       x-stoplight:
@@ -835,7 +696,7 @@ components:
           x-stoplight:
             id: 3cuco7z0d18vz
     entityStates:
-      title: entityState
+      title: Entity State
       x-stoplight:
         id: hdvnxd7ugkq61
       type: object
@@ -916,4 +777,4 @@ components:
       description: ''
 security:
   - OAuth Token: []
-tags: null
+tags: []
