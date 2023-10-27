@@ -729,6 +729,32 @@ components:
           type: boolean
           x-stoplight:
             id: 0g66jizi0f3o7
+        locations:
+          type: array
+          x-stoplight:
+            id: rsgbp62udzuzd
+          items:
+            $ref: '#/components/schemas/Locations'
+        dba:
+          type: array
+          x-stoplight:
+            id: z2m3meqbwgy6y
+          items:
+            $ref: '#/components/schemas/DBA'
+        entityMembers:
+          type: array
+          x-stoplight:
+            id: vwnqw818i5lvn
+          items:
+            $ref: '#/components/schemas/EntityMembers'
+        registeredAgent:
+          $ref: '#/components/schemas/RegisteredAgent'
+        businessLicenses:
+          type: array
+          x-stoplight:
+            id: qtec7upkwou83
+          items:
+            $ref: '#/components/schemas/Business-Licenses'
     Address:
       title: Address
       x-stoplight:
@@ -767,6 +793,16 @@ components:
           type: string
           x-stoplight:
             id: 3ubu44k0rgpec
+    Business-Licenses:
+      title: Business-Licenses
+      x-stoplight:
+        id: x1tkak6uo4w04
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: ydlznqe5gxh5e
   securitySchemes:
     OAuth Token:
       type: oauth2
