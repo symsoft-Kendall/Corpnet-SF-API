@@ -397,18 +397,22 @@ components:
           type: string
           x-stoplight:
             id: vjf1zw2ipcvmd
+          description: Entity__c.Home_State__c
         businessDescription:
           type: string
           x-stoplight:
             id: 2z1660pzz1p0w
+          description: Entity.Business_Description__c
         buisnessCategory:
           type: string
           x-stoplight:
             id: z4841sx3j5dcu
+          description: Entity__c.Business_Category__c
         website:
           type: string
           x-stoplight:
             id: o0x66uwkm1b08
+          description: Entity__c.Website_URL__c
         businessAddress:
           $ref: '#/components/schemas/Address'
     Entity-Expanded:
@@ -416,7 +420,7 @@ components:
       x-stoplight:
         id: 7cl214gekt1el
       title: Entity Expanded
-      description: All core entity data for a single entity
+      description: 'All core entity data for a single entity.  Id =  {EntityId} provided as Param '
       x-examples:
         Example 1:
           Name: String
@@ -425,28 +429,25 @@ components:
       properties:
         entityBasic:
           $ref: '#/components/schemas/Entity'
-        tasks:
-          type: array
-          x-stoplight:
-            id: 8pqv8qiyue7h0
-          items:
-            $ref: '#/components/schemas/Tasks'
         toDos:
           type: array
           x-stoplight:
             id: fty9rmuid3og8
+          description: 'Request for Information Records Where Entity= entity id provided.  {EntityId}'
           items:
             $ref: '#/components/schemas/Opportunity'
         orders:
           type: array
           x-stoplight:
             id: ue4371jqwxo69
+          description: 'Order Records where Entity__c = {EntityId}'
           items:
             $ref: '#/components/schemas/Order'
         states:
           x-stoplight:
             id: 6nmuashjaxca1
           type: array
+          description: 'Entity_State__c Records where Entity__c = {EntityId}'
           items:
             $ref: '#/components/schemas/entityStates'
     Entity-Access:
