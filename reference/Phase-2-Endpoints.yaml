@@ -142,6 +142,16 @@ paths:
                       Entity__c records where Account__c = the AccountId Param
 
                       AND   Where the Contact has Entity_access__c to the Entity
+
+                      For businessAddress
+                      Entity__c.Business_Address_1__c
+                      Entity__c.Business_Address_2__c
+                      Entity__c.City__c
+                      Entity__c.State__c
+                      Entity__c.Zip_Code__c
+                      Entity__c.Country__c
+                      Entity__c.County__c
+                      Ignore Phone & Email
                     items:
                       $ref: '#/components/schemas/Entity'
                   numberofOrders:
