@@ -192,6 +192,8 @@ paths:
         Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
 
         The Contact Id (UserId) provided is used to determine access level to the Account and Entities returned in the call.
+
+        User Access Flow diagram - https://www.figma.com/file/F0GJB0XB7dLJkwTV5QNCG5/Corpnet-CCC---Determining-User-Access-to-Accounts-and-Related-Entities?type=whiteboard&node-id=0%3A1&t=rYcp9ulNsdte3Z94-1
       x-stoplight:
         id: k98ccoe5v1gfx
     parameters:
@@ -669,8 +671,6 @@ components:
           description: 'Id of Entity_Member__c record '
         contact:
           $ref: '#/components/schemas/Contact'
-        entity:
-          $ref: '#/components/schemas/Entity-Access'
         role:
           type: string
           x-stoplight:
