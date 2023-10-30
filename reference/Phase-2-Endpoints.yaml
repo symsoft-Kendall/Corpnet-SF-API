@@ -351,7 +351,18 @@ components:
     Entity:
       type: object
       title: Entity
-      description: All core entity data for a single entity
+      description: |-
+        All core entity data for a single entity
+
+        For businessAddress
+        Entity__c.Business_Address_1__c
+        Entity__c.Business_Address_2__c
+        Entity__c.City__c
+        Entity__c.State__c
+        Entity__c.Zip_Code__c
+        Entity__c.Country__c
+        Entity__c.County__c
+        Ignore Phone & Email
       x-examples:
         Example 1:
           Name: String
