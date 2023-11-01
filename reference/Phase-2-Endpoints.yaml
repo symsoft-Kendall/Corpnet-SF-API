@@ -444,7 +444,18 @@ components:
       x-stoplight:
         id: 7cl214gekt1el
       title: Entity Expanded
-      description: 'All core entity data for a single entity.  Id =  {EntityId} provided as Param '
+      description: |-
+        All core entity data for a single entity.  Id =  {EntityId} provided as Param 
+
+        for entity buisness address  
+        Entity__c.Business_Address_1__c
+        Entity__c.Business_Address_2__c
+        Entity__c.City__c
+        Entity__c.State__c
+        Entity__c.Zip_Code__c
+        Entity__c.Country__c
+        Entity__c.County__c
+        Ignore Phone & Email
       x-examples:
         Example 1:
           Name: String
@@ -538,6 +549,18 @@ components:
           x-stoplight:
             id: br5rk1hknc7sy
           description: Order.AccountId
+        completionDate:
+          type: string
+          x-stoplight:
+            id: xgyxo3dj60cjv
+          description: Order.Completion_Date__c
+        filingStates:
+          type: array
+          x-stoplight:
+            id: 3bp6dsxll3gvh
+          description: array of Order_Filing_State__c records where Order__c = id of this Order_Filing_State__c
+          items:
+            $ref: '#/components/schemas/Filing-State'
     Opportunity:
       title: Opportunity
       x-stoplight:
@@ -826,6 +849,72 @@ components:
           type: string
           x-stoplight:
             id: ydlznqe5gxh5e
+    Filing-State:
+      title: Filing-State
+      x-stoplight:
+        id: 6toryaojblma2
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: okozsxiejfhfp
+    Order-Expanded:
+      title: Order-Expanded
+      x-stoplight:
+        id: 3h7v60sxyou1z
+      type: object
+      properties:
+        basicOrderInfo:
+          $ref: '#/components/schemas/Order'
+        Cases:
+          type: array
+          x-stoplight:
+            id: p8nzpop8ijorh
+          items:
+            $ref: '#/components/schemas/Case'
+    Case:
+      title: Case
+      x-stoplight:
+        id: r01lg8b83dc7u
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 1ap3ynygszp89
+          description: Case.Id
+        caseNumber:
+          type: string
+          x-stoplight:
+            id: qmgrtavr023ln
+          description: Case.CaseNumber
+        phase:
+          type: string
+          x-stoplight:
+            id: bu6kbjlxbrv2v
+          description: Case.Status
+        status:
+          type: string
+          x-stoplight:
+            id: 5n80u4flaobxk
+          description: Case.Sub_Status__c
+        openDateTime:
+          type: string
+          x-stoplight:
+            id: jswg1csofx8xj
+          description: Case.CreatedDate
+        closeDateTime:
+          type: string
+          x-stoplight:
+            id: zqgghkmgargnj
+          description: Case.ClosedDate
+        serviceCategory:
+          type: string
+          x-stoplight:
+            id: bv36edfq0djkd
+          description: Case.Type
+      description: ''
   securitySchemes:
     OAuth Token:
       type: oauth2
