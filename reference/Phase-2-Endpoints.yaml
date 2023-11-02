@@ -914,7 +914,11 @@ components:
           x-stoplight:
             id: bv36edfq0djkd
           description: Case.Type
-      description: ''
+        entityId:
+          type: string
+          x-stoplight:
+            id: 5fixyktwlbowg
+          description: Case.Entity__c.Id
   securitySchemes:
     OAuth Token:
       type: oauth2
