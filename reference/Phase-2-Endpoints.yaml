@@ -165,7 +165,7 @@ paths:
                       id: 72ab12gkq9ret
                     description: |
                       Count of all orders realated to the AccountId
-                      where P != completed
+                      where Order_Phase__c != completed
                   totalCompanies:
                     type: integer
                     x-stoplight:
@@ -247,6 +247,22 @@ paths:
       description: ''
     parameters:
       - $ref: '#/components/parameters/EntityId'
+  /glossary/entitytype:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-glossary-entitytype
+      x-stoplight:
+        id: e4d49zpuwopio
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  $ref: '#/components/schemas/GlossaryEntityType'
 components:
   parameters:
     id:
@@ -919,6 +935,37 @@ components:
           x-stoplight:
             id: 5fixyktwlbowg
           description: Case.Entity__c.Id
+    GlossaryEntityType:
+      title: GlossaryEntityType
+      x-stoplight:
+        id: qzr7d7vszvdbm
+      type: object
+      properties:
+        entityTypeName:
+          type: string
+          x-stoplight:
+            id: fdtmvx3wd54zv
+          description: GlossaryEntityType.Names   i.e.LLC
+        abv:
+          type: string
+          x-stoplight:
+            id: o9h5ulvqpqdfg
+        Roles:
+          type: array
+          x-stoplight:
+            id: 20qxodceg1btv
+          items:
+            $ref: '#/components/schemas/Role'
+    Role:
+      title: Role
+      x-stoplight:
+        id: 2d320cwlixp01
+      type: object
+      properties:
+        Name:
+          type: string
+          x-stoplight:
+            id: q7isz9ikljf0z
   securitySchemes:
     OAuth Token:
       type: oauth2
