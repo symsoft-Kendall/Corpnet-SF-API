@@ -504,6 +504,12 @@ components:
           description: 'Entity_State__c Records where Entity__c = {EntityId}'
           items:
             $ref: '#/components/schemas/entityStates'
+        entityMembers:
+          type: array
+          x-stoplight:
+            id: 9fl3bnkq4r9na
+          items:
+            $ref: '#/components/schemas/EntityMembers'
     Entity-Access:
       type: object
       title: Entity-Access
@@ -614,6 +620,11 @@ components:
           x-stoplight:
             id: r4j0ypj3tt2jj
           description: Opportunity.Amount
+        description:
+          type: string
+          x-stoplight:
+            id: uh3z6y2xgvzu8
+          description: Opportunity.Description
     Tasks:
       title: Tasks
       x-stoplight:
@@ -730,6 +741,17 @@ components:
           type: string
           x-stoplight:
             id: 6qgx9u1xsfsey
+          description: Entity_DBA__c.Id
+        name:
+          type: string
+          x-stoplight:
+            id: ecfz3dm3i6c3l
+          description: Entity_DBA__c.Name
+        filingDate:
+          type: string
+          x-stoplight:
+            id: kgxttcextostx
+          description: Entity_DBA__c.File_Date__c
     Locations:
       title: Location
       x-stoplight:
@@ -770,48 +792,56 @@ components:
           type: string
           x-stoplight:
             id: 2m3dwd2del84w
+          description: Entity_State__c.Id
         stateName:
           type: string
           x-stoplight:
             id: hk5vq940ulcmh
+          description: Entity_State__c.State__c
         stateAbv:
           type: string
           x-stoplight:
             id: 33ksu22anvgx7
+          description: Entity_State__c.State__c
         beganOperations:
           type: string
           x-stoplight:
             id: i6o79ogiizeov
+          description: Entity_State__c.Began_Operations__c
         firstPayrollDate:
           type: string
           x-stoplight:
             id: 1kcp2idboeazv
+          description: Entity_State__c.First_Payroll_Date__c
         foreignQualified:
           type: string
           x-stoplight:
             id: jm7r7ithdzz4v
+          description: Entity_State__c.Foreign_Qualified__c
         primary:
           type: boolean
           x-stoplight:
             id: 0g66jizi0f3o7
+          description: Entity_State__c.Is_Primary__c
+        primary - copy:
+          type: boolean
+          x-stoplight:
+            id: qrcr6mf5s1p66
+          description: Entity_State__c.Is_Primary__c
         locations:
           type: array
           x-stoplight:
             id: rsgbp62udzuzd
+          description: Location__c records related to Entity_state__c
           items:
             $ref: '#/components/schemas/Locations'
         dba:
           type: array
           x-stoplight:
             id: z2m3meqbwgy6y
+          description: Entity_DBA__c recoreds where Entity_State__c is related to this entity Entity_State__c
           items:
             $ref: '#/components/schemas/DBA'
-        entityMembers:
-          type: array
-          x-stoplight:
-            id: vwnqw818i5lvn
-          items:
-            $ref: '#/components/schemas/EntityMembers'
         registeredAgent:
           $ref: '#/components/schemas/RegisteredAgent'
         businessLicenses:
