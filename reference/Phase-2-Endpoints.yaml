@@ -807,6 +807,11 @@ components:
           x-stoplight:
             id: u20j7v53a3bq7
           description: Registered_Agent__c.Entity_State__c.id
+        fullName:
+          type: string
+          x-stoplight:
+            id: tmx4em6q9ks17
+          description: Registered_Agent__c.Name
         agentAddress:
           $ref: '#/components/schemas/Address'
     entityStates:
