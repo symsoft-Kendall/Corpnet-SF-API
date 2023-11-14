@@ -920,11 +920,28 @@ components:
       x-stoplight:
         id: x1tkak6uo4w04
       type: object
+      description: Business_License__c.
       properties:
         id:
           type: string
           x-stoplight:
             id: ydlznqe5gxh5e
+          description: Business_License__c.Id
+        licensesAgency:
+          type: string
+          x-stoplight:
+            id: jkbfxc970fn7n
+          description: Business_License__c.Licenses_Agency__c
+        licensesNumber:
+          type: string
+          x-stoplight:
+            id: iql2ra4tutkqe
+          description: Business_License__c.Licenses_Number__c
+        expirationDate:
+          type: string
+          x-stoplight:
+            id: gsrmg0le12of4
+          description: Business_License__c.Expiration_Date__c
     Filing-State:
       title: Filing-State
       x-stoplight:
