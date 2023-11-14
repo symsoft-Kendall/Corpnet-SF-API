@@ -508,6 +508,7 @@ components:
           type: array
           x-stoplight:
             id: 9fl3bnkq4r9na
+          description: All entity members related to this entity.
           items:
             $ref: '#/components/schemas/EntityMembers'
     Entity-Access:
@@ -786,11 +787,28 @@ components:
       x-stoplight:
         id: thd208g4cz6nq
       type: object
+      description: |-
+        Registered_Agent__c
+
+        Address mapping    Registered_Agent__c.
+        Street1__c
+        Street2__c
+        Agent_City__c
+        Agent_State__c
+        Agent_Zip__c
       properties:
         id:
           type: string
           x-stoplight:
             id: 3cuco7z0d18vz
+          description: Registered_Agent__c.id
+        entityState:
+          type: string
+          x-stoplight:
+            id: u20j7v53a3bq7
+          description: Registered_Agent__c.Entity_State__c.id
+        agentAddress:
+          $ref: '#/components/schemas/Address'
     entityStates:
       title: Entity State
       x-stoplight:
@@ -831,11 +849,6 @@ components:
           type: boolean
           x-stoplight:
             id: 0g66jizi0f3o7
-          description: Entity_State__c.Is_Primary__c
-        primary - copy:
-          type: boolean
-          x-stoplight:
-            id: qrcr6mf5s1p66
           description: Entity_State__c.Is_Primary__c
         locations:
           type: array
