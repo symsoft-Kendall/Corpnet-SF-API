@@ -912,11 +912,22 @@ components:
       x-stoplight:
         id: 6toryaojblma2
       type: object
+      description: Order_Filing_State__c.
       properties:
         id:
           type: string
           x-stoplight:
             id: okozsxiejfhfp
+        state:
+          type: string
+          x-stoplight:
+            id: ewaf8uqbwdxir
+          description: Order_Filing_State__c.Filing_State__c
+        entityStateId:
+          type: string
+          x-stoplight:
+            id: gyxmjejoctm9c
+          description: Order_Filing_State__c.Entity_State__c.Id
     Order-Expanded:
       title: Order-Expanded
       x-stoplight:
