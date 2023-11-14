@@ -712,11 +712,19 @@ components:
         id: rgf9nne9bl5wl
       type: object
       description: |-
-        Entity_Member__c
+        Entity_Member__c.
 
         entity property: Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact   matches the Contact__c and the Entity matches the Entity__c
 
         If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
+
+        memberAddress Mapping Entity_Member__c.
+        Member_Address_1__c
+        Member_Address_2__c
+        Member_City__c
+        Member_State__c
+        Member_Zip_Code__c
+        Member_Country__c
       properties:
         id:
           type: string
@@ -729,7 +737,8 @@ components:
           type: string
           x-stoplight:
             id: 6doqvq5v2ey8b
-        address:
+          description: Entity_member__c.Role__c
+        memberAddress:
           $ref: '#/components/schemas/Address'
     DBA:
       title: DBA
@@ -999,6 +1008,68 @@ components:
           type: string
           x-stoplight:
             id: q7isz9ikljf0z
+    taxRegistration:
+      title: taxRegistration
+      x-stoplight:
+        id: 4woee8nh4p31l
+      type: object
+      description: Entity_State_Account__c.
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: j021rbgnsehu1
+          description: Entity_State_Account__c.id
+        agencyName:
+          type: string
+          x-stoplight:
+            id: 8s22z636hyg0f
+          description: Entity_State_Account__c.State_Account__c.Name
+        entityId:
+          type: string
+          x-stoplight:
+            id: 0q348q9vp7zw7
+          description: Entity_State_Account__c.Entity__c
+        firstSecurityQuestion:
+          type: string
+          x-stoplight:
+            id: prg6zbny4a5ll
+          description: Entity_State_Account__c.First_Security_Question__c
+        secondSecurityQuestion:
+          type: string
+          x-stoplight:
+            id: fs0di9tucgbqj
+          description: Entity_State_Account__c.Second_Security_Question__c
+        thirdSecurityQuestion:
+          type: string
+          x-stoplight:
+            id: 3gcxo4kprxo7j
+          description: Entity_State_Account__c.Third_Security_Question__c
+        forthSecurityQuestion:
+          type: string
+          x-stoplight:
+            id: rg95p5wdqfwog
+          description: Entity_State_Account__c.Fourth_Security_Question__c
+        firstSecurityAnswer:
+          type: string
+          x-stoplight:
+            id: yvo8hiw7638xo
+          description: Entity_State_Account__c.First_Security_Answer__c
+        secondSecurityAnswer:
+          type: string
+          x-stoplight:
+            id: 2gd2mjoxwvv1w
+          description: Entity_State_Account__c.Second_Security_Answer__c
+        thirdSecurityAnswer:
+          type: string
+          x-stoplight:
+            id: dzcqm0v1wxqmk
+          description: Entity_State_Account__c.Third_Security_Answer__c
+        forthSecurityAnswer:
+          type: string
+          x-stoplight:
+            id: 9sf45la9wr93y
+          description: Entity_State_Account__c.Fourth_Security_Answer__c
   securitySchemes:
     OAuth Token:
       type: oauth2
