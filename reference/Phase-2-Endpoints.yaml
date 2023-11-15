@@ -228,6 +228,22 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+                    x-stoplight:
+                      id: 3puvbk287y3dy
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
       operationId: get-entity-trs
       x-stoplight:
         id: ck2vm5ocgcba0
@@ -511,6 +527,13 @@ components:
           description: All entity members related to this entity.
           items:
             $ref: '#/components/schemas/EntityMembers'
+        taxRegistration:
+          type: array
+          x-stoplight:
+            id: znmannvyc81hx
+          description: Entity_State_Account__c records related to this Entity  via Entity__c lookup field
+          items:
+            $ref: '#/components/schemas/taxRegistration'
     Entity-Access:
       type: object
       title: Entity-Access
@@ -1015,6 +1038,14 @@ components:
           type: string
           x-stoplight:
             id: 8odw2246jqivd
+          description: Case.State__c
+        tasks:
+          type: array
+          x-stoplight:
+            id: hag6carqyqtek
+          description: Request_for_information__c records realted to this Case.
+          items:
+            $ref: '#/components/schemas/Tasks'
     GlossaryEntityType:
       title: GlossaryEntityType
       x-stoplight:
