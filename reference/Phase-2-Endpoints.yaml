@@ -675,16 +675,16 @@ components:
           x-stoplight:
             id: 31y6k0gs46lj0
           description: Request_for_information__c.Type__c
-        case:
+        caseId:
           type: string
           x-stoplight:
             id: xkvjqueozpfy4
-          description: Request_for_information__c.Case__c
+          description: Request_for_information__c.Case__c.Id
         orderId:
           type: string
           x-stoplight:
             id: 2z0lizjytmn0j
-          description: Request_for_information__c.Order__c
+          description: Request_for_information__c.Order__c.Id
         customerEmail:
           type: string
           x-stoplight:
