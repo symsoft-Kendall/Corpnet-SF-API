@@ -1139,6 +1139,26 @@ components:
           x-stoplight:
             id: 9sf45la9wr93y
           description: Entity_State_Account__c.Fourth_Security_Answer__c
+        username:
+          type: string
+          x-stoplight:
+            id: chp0ndsynh0ro
+        password:
+          type: string
+          x-stoplight:
+            id: yszz1cpj5fi2c
+        pin:
+          type: string
+          x-stoplight:
+            id: vs9096jqs04ur
+        type:
+          type: string
+          x-stoplight:
+            id: wed4rfzcjvoz7
+        typeCode:
+          type: string
+          x-stoplight:
+            id: 9k5psl4mqqlcq
   securitySchemes:
     OAuth Token:
       type: oauth2
