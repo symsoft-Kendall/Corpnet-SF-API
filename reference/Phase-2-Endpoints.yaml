@@ -228,6 +228,22 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+                    x-stoplight:
+                      id: 3puvbk287y3dy
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
       operationId: get-entity-trs
       x-stoplight:
         id: ck2vm5ocgcba0
@@ -483,7 +499,7 @@ components:
       properties:
         entityBasic:
           $ref: '#/components/schemas/Entity'
-        toDos:
+        complianceAlerts:
           type: array
           x-stoplight:
             id: fty9rmuid3og8
@@ -511,6 +527,13 @@ components:
           description: All entity members related to this entity.
           items:
             $ref: '#/components/schemas/EntityMembers'
+        taxRegistration:
+          type: array
+          x-stoplight:
+            id: znmannvyc81hx
+          description: Entity_State_Account__c records related to this Entity  via Entity__c lookup field
+          items:
+            $ref: '#/components/schemas/taxRegistration'
     Entity-Access:
       type: object
       title: Entity-Access
@@ -626,6 +649,21 @@ components:
           x-stoplight:
             id: uh3z6y2xgvzu8
           description: Opportunity.Description
+        status:
+          type: string
+          x-stoplight:
+            id: rra3u3ju0oky2
+          description: Opportunity.StageName
+        companyName:
+          type: string
+          x-stoplight:
+            id: 0z46zl39s26sa
+          description: Opportunity.Entity__c.Name
+        serviceState:
+          type: string
+          x-stoplight:
+            id: sy1i09gykqsbg
+          description: Opportunity.State__c
     Tasks:
       title: Tasks
       x-stoplight:
@@ -660,53 +698,26 @@ components:
           x-stoplight:
             id: 31y6k0gs46lj0
           description: Request_for_information__c.Type__c
-        case:
+        caseId:
           type: string
           x-stoplight:
             id: xkvjqueozpfy4
-          description: Request_for_information__c.Case__c
-        order:
+          description: Request_for_information__c.Case__c.Id
+        orderId:
           type: string
           x-stoplight:
             id: 2z0lizjytmn0j
-          description: Request_for_information__c.Order__c
+          description: Request_for_information__c.Order__c.Id
         customerEmail:
           type: string
           x-stoplight:
             id: 2gptgdgq5k6bu
           description: Request_for_information__c.Customer_Email__c
-    ToDo:
-      type: object
-      properties:
-        requestComment:
+        entityId:
           type: string
           x-stoplight:
-            id: kpyf3r9leq6ka
-          description: Request_for_Information__c.Request__c
-        status:
-          type: string
-          x-stoplight:
-            id: daertm1d3dq1z
-          description: Request_for_Information__c.Status__c
-        type:
-          type: string
-          x-stoplight:
-            id: p6ib7oro58i24
-          description: |
-            Request_for_Information__c.Type__c
-        orderId:
-          type: string
-          x-stoplight:
-            id: lh0e1xr3y7z78
-          description: |
-            Request_for_Information__c.Order__c
-        caseId:
-          type: string
-          x-stoplight:
-            id: tk3hoacicepjl
-          description: |
-            Request_for_Information__c.Case__c
-      title: ''
+            id: mzwh8vwtbs4fq
+          description: Request_for_information__c.Case__c.Entity__c.id
     EntityMembers:
       title: Entity Member
       x-stoplight:
@@ -1023,6 +1034,18 @@ components:
           x-stoplight:
             id: 5fixyktwlbowg
           description: Case.Entity__c.Id
+        filingState:
+          type: string
+          x-stoplight:
+            id: 8odw2246jqivd
+          description: Case.State__c
+        tasks:
+          type: array
+          x-stoplight:
+            id: hag6carqyqtek
+          description: Request_for_information__c records realted to this Case.
+          items:
+            $ref: '#/components/schemas/Tasks'
     GlossaryEntityType:
       title: GlossaryEntityType
       x-stoplight:
@@ -1116,6 +1139,26 @@ components:
           x-stoplight:
             id: 9sf45la9wr93y
           description: Entity_State_Account__c.Fourth_Security_Answer__c
+        username:
+          type: string
+          x-stoplight:
+            id: chp0ndsynh0ro
+        password:
+          type: string
+          x-stoplight:
+            id: yszz1cpj5fi2c
+        pin:
+          type: string
+          x-stoplight:
+            id: vs9096jqs04ur
+        type:
+          type: string
+          x-stoplight:
+            id: wed4rfzcjvoz7
+        typeCode:
+          type: string
+          x-stoplight:
+            id: 9k5psl4mqqlcq
   securitySchemes:
     OAuth Token:
       type: oauth2
