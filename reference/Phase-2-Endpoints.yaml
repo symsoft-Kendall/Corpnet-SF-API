@@ -483,7 +483,7 @@ components:
       properties:
         entityBasic:
           $ref: '#/components/schemas/Entity'
-        toDos:
+        complianceAlerts:
           type: array
           x-stoplight:
             id: fty9rmuid3og8
@@ -626,6 +626,21 @@ components:
           x-stoplight:
             id: uh3z6y2xgvzu8
           description: Opportunity.Description
+        status:
+          type: string
+          x-stoplight:
+            id: rra3u3ju0oky2
+          description: Opportunity.StageName
+        companyName:
+          type: string
+          x-stoplight:
+            id: 0z46zl39s26sa
+          description: Opportunity.Entity__c.Name
+        serviceState:
+          type: string
+          x-stoplight:
+            id: sy1i09gykqsbg
+          description: Opportunity.State__c
     Tasks:
       title: Tasks
       x-stoplight:
@@ -706,7 +721,6 @@ components:
             id: tk3hoacicepjl
           description: |
             Request_for_Information__c.Case__c
-      title: ''
     EntityMembers:
       title: Entity Member
       x-stoplight:
