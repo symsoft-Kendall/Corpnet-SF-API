@@ -690,37 +690,11 @@ components:
           x-stoplight:
             id: 2gptgdgq5k6bu
           description: Request_for_information__c.Customer_Email__c
-    ToDo:
-      type: object
-      properties:
-        requestComment:
+        entityId:
           type: string
           x-stoplight:
-            id: kpyf3r9leq6ka
-          description: Request_for_Information__c.Request__c
-        status:
-          type: string
-          x-stoplight:
-            id: daertm1d3dq1z
-          description: Request_for_Information__c.Status__c
-        type:
-          type: string
-          x-stoplight:
-            id: p6ib7oro58i24
-          description: |
-            Request_for_Information__c.Type__c
-        orderId:
-          type: string
-          x-stoplight:
-            id: lh0e1xr3y7z78
-          description: |
-            Request_for_Information__c.Order__c
-        caseId:
-          type: string
-          x-stoplight:
-            id: tk3hoacicepjl
-          description: |
-            Request_for_Information__c.Case__c
+            id: mzwh8vwtbs4fq
+          description: Request_for_information__c.Case__c.Entity__c.id
     EntityMembers:
       title: Entity Member
       x-stoplight:
@@ -1037,6 +1011,10 @@ components:
           x-stoplight:
             id: 5fixyktwlbowg
           description: Case.Entity__c.Id
+        filingState:
+          type: string
+          x-stoplight:
+            id: 8odw2246jqivd
     GlossaryEntityType:
       title: GlossaryEntityType
       x-stoplight:
