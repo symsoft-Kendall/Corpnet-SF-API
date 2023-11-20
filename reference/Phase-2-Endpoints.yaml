@@ -443,15 +443,20 @@ components:
           type: string
           description: Entity.Filing_Number__c
         numberOfOrders:
-          type: string
+          type: integer
           x-stoplight:
             id: rbw5jce910apy
           description: count of orders related to this entity
         numberOfAlerts:
-          type: string
+          type: integer
           x-stoplight:
             id: qnq5cdggsgdld
           description: count of compliance alter type opportunities related to this entity
+        numberOfLocations:
+          type: integer
+          x-stoplight:
+            id: ceru9kalwxev8
+          description: count of locations related to this entity
         homeState:
           type: string
           x-stoplight:
@@ -578,8 +583,13 @@ components:
           x-stoplight:
             id: 1b4f4ch3lzp5b
           description: Order.EffectiveDate
-        amount:
+        completionDate:
           type: string
+          x-stoplight:
+            id: xgyxo3dj60cjv
+          description: Order.Completion_Date__c
+        amount:
+          type: number
           x-stoplight:
             id: w4fhwalz3l12z
           description: Order.TotalAmount
@@ -598,11 +608,6 @@ components:
           x-stoplight:
             id: br5rk1hknc7sy
           description: Order.AccountId
-        completionDate:
-          type: string
-          x-stoplight:
-            id: xgyxo3dj60cjv
-          description: Order.Completion_Date__c
         filingStates:
           type: array
           x-stoplight:
@@ -640,7 +645,7 @@ components:
             id: 4xwboxgw82yg2
           description: Opportunity.CloseDate
         amount:
-          type: string
+          type: number
           x-stoplight:
             id: r4j0ypj3tt2jj
           description: Opportunity.Amount
