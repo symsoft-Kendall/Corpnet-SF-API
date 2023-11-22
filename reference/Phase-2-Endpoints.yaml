@@ -1153,67 +1153,67 @@ components:
           type: string
           x-stoplight:
             id: chp0ndsynh0ro
-          description: Username__c
+          description: Entity_State_Account__c.Username__c
         password:
           type: string
           x-stoplight:
             id: yszz1cpj5fi2c
-          description: .password__c
-        password - copy:
-          type: string
-          x-stoplight:
-            id: ohktnwx7jlt4q
-          description: .password__c
+          description: Entity_State_Account__c.password__c
         pin:
           type: string
           x-stoplight:
             id: vs9096jqs04ur
-          description: PIN_Number__c
+          description: Entity_State_Account__c.PIN_Number__c
         type:
           type: string
           x-stoplight:
             id: wed4rfzcjvoz7
-          description: Type__c
+          description: Entity_State_Account__c.Type__c
         typeCode:
           type: string
           x-stoplight:
             id: 9k5psl4mqqlcq
-          description: Type_Code__c
+          description: Entity_State_Account__c.Type_Code__c
         stateAccountNumber:
           type: string
           x-stoplight:
             id: l5shy7ayplxro
-          description: State_Account_Number__c
+          description: Entity_State_Account__c.State_Account_Number__c
         rateType:
           type: string
           x-stoplight:
             id: g6hj6sg1ppos3
-          description: Rate_Type__c
+          description: Entity_State_Account__c.Rate_Type__c
         rate:
           type: string
           x-stoplight:
             id: xta5sfqnr7y6y
-          description: Rate__c
+          description: Entity_State_Account__c.Rate__c
         stateAgencyUrl:
           type: string
           x-stoplight:
             id: zyg8a70j6xctc
-          description: State_Agency_URL__c
+          description: Entity_State_Account__c.State_Agency_URL__c
         depositFrequency:
           type: string
           x-stoplight:
             id: vx719kdhger1y
-          description: Deposit_Frequency__c
+          description: Entity_State_Account__c.Deposit_Frequency__c
         customerFacingLink:
           type: string
           x-stoplight:
             id: y5ywl69mkykl7
-          description: Customer_Facing_Link__c
+          description: Entity_State_Account__c.Customer_Facing_Link__c
         notes:
           type: string
           x-stoplight:
             id: s9kmcx0wds1wk
-          description: notes__c
+          description: Entity_State_Account__c.notes__c
+        accountNumberFormat:
+          type: string
+          x-stoplight:
+            id: cqo8sujwnetl0
+          description: Entity_State_Account__c.Account_Number_Format__c
   securitySchemes:
     OAuth Token:
       type: oauth2
