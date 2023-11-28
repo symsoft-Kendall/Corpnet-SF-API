@@ -221,7 +221,7 @@ paths:
         - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/EntityId'
-  '/glossary/entitytype/{type}':
+  '/glossary/entitytype/{stateA2}':
     get:
       summary: GET entityType glossary
       tags: []
@@ -235,10 +235,23 @@ paths:
             schema:
               type: object
               properties:
-                '':
-                  $ref: '#/components/schemas/GlossaryEntityType'
+                StateName:
+                  type: string
+                  x-stoplight:
+                    id: wn6srku4dcuxw
+                entityTypes:
+                  x-stoplight:
+                    id: b74h5n8sbsg55
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/GlossaryEntityType'
     parameters:
-      - $ref: '#/components/parameters/entityType'
+      - schema:
+          type: string
+        name: stateA2
+        in: path
+        required: true
+        description: 'Alpha 2 State Abbreviation '
   '/entity/{EntityId}/glossary':
     parameters:
       - $ref: '#/components/parameters/EntityId'
@@ -1034,32 +1047,112 @@ components:
       x-stoplight:
         id: qzr7d7vszvdbm
       type: object
+      description: Entity_Type_Requirement__c
       properties:
+        stateName:
+          type: string
+          x-stoplight:
+            id: 78ys9d2s37gwu
         entityTypeName:
           type: string
           x-stoplight:
             id: fdtmvx3wd54zv
-          description: GlossaryEntityType.Names   i.e.LLC
+          description: Entity_Type_Requirement__c.Names   i.e.limited liablity corporation
         abv:
           type: string
           x-stoplight:
             id: o9h5ulvqpqdfg
+          description: Entity_Type_Requirement__c.abv__c    i.e.LLC
+        ownershipType:
+          type: string
+          x-stoplight:
+            id: lsfnkkhg2ebsv
+          description: Entity_Type_Requirement__c.Ownership_type__c
         Roles:
           type: array
           x-stoplight:
             id: 20qxodceg1btv
+          description: EntityTypeRole__c records related to this Entity_Type_Requirement__c record
           items:
             $ref: '#/components/schemas/Role'
+        formationProperties:
+          type: object
+          x-stoplight:
+            id: b64wsd23dqzxq
+          properties:
+            clientMustBeOrganizer:
+              type: string
+              x-stoplight:
+                id: dub75qwdm1r52
+            regAgentSigRequired:
+              type: string
+              x-stoplight:
+                id: yjml2n3h5dihq
+            orignalSigRequirement:
+              type: string
+              x-stoplight:
+                id: zspqq1bq98ikm
+            memberInfoRequired:
+              type: string
+              x-stoplight:
+                id: q1wguue4fa89c
+            officeInfoRequest:
+              type: string
+              x-stoplight:
+                id: w1fg99szqhvxa
+            physicalAddressRequirement:
+              type: string
+              x-stoplight:
+                id: oxfgdcc3h6nn2
+            addressDetails:
+              type: string
+              x-stoplight:
+                id: evcmg0zg6ros7
+            delayedFilings:
+              type: string
+              x-stoplight:
+                id: 3dxj1lx9xmd29
+            filingNotes:
+              type: string
+              x-stoplight:
+                id: xu3etdp009yj9
+            requiredWords:
+              type: string
+              x-stoplight:
+                id: r8svvldgsiw6u
+            prohibitedWords:
+              type: string
+              x-stoplight:
+                id: 94ap8h6anbqat
+            porhibitedWordsNotes:
+              type: string
+              x-stoplight:
+                id: travh94h6c5vv
+            dbaConflicts:
+              type: string
+              x-stoplight:
+                id: z86hemoyl4t39
+            dbaCancellation:
+              type: string
+              x-stoplight:
+                id: pc7h6jbc28kg8
     Role:
       title: Role
       x-stoplight:
         id: 2d320cwlixp01
       type: object
       properties:
-        Name:
+        name:
           type: string
           x-stoplight:
             id: q7isz9ikljf0z
+          description: EntityTypeRole__c.Name
+        group:
+          type: string
+          x-stoplight:
+            id: kbn0gz5volb26
+          description: EntityTypeRole__c.group__c
+      description: EntityTypeRole__c
     taxRegistration:
       title: taxRegistration
       x-stoplight:
