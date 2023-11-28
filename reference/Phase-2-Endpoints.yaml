@@ -221,9 +221,9 @@ paths:
         - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/EntityId'
-  /glossary/entitytype:
+  '/glossary/entitytype/{type}':
     get:
-      summary: Your GET endpoint
+      summary: GET entityType glossary
       tags: []
       responses: {}
       operationId: get-glossary-entitytype
@@ -237,6 +237,22 @@ paths:
               properties:
                 '':
                   $ref: '#/components/schemas/GlossaryEntityType'
+    parameters:
+      - $ref: '#/components/parameters/entityType'
+  '/entity/{EntityId}/glossary':
+    parameters:
+      - $ref: '#/components/parameters/EntityId'
+    get:
+      summary: GET entity glossary
+      tags: []
+      responses: {}
+      operationId: get-entity-EntityId-glossary
+      x-stoplight:
+        id: 0sdoo9rtkicx3
+      parameters:
+        - schema:
+            type: string
+          in: query
 components:
   parameters:
     id:
@@ -287,6 +303,13 @@ components:
       schema:
         type: string
       description: User ID is a Contact.Id in Salesforce. This is used to determine the user's access level.
+    entityType:
+      name: entityType
+      in: path
+      schema:
+        type: string
+      required: true
+      description: 'LLC, SCORP, CCORP, ...'
   schemas:
     Contact:
       type: object
