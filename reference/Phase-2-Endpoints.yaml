@@ -1055,10 +1055,6 @@ components:
       type: object
       description: Entity_Type_Requirement__c
       properties:
-        stateName:
-          type: string
-          x-stoplight:
-            id: 78ys9d2s37gwu
         entityTypeName:
           type: string
           x-stoplight:
