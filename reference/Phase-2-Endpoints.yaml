@@ -258,7 +258,13 @@ paths:
     get:
       summary: GET entity glossary
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlossaryEntityType'
       operationId: get-entity-EntityId-glossary
       x-stoplight:
         id: 0sdoo9rtkicx3
