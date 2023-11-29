@@ -353,6 +353,20 @@ components:
             id: z84f6hrk5ke9f
         address:
           $ref: '#/components/schemas/Address'
+      x-examples:
+        Example 1:
+          id: string
+          firstName: string
+          lastName: string
+          address:
+            street: string
+            street2: string
+            city: string
+            state: string
+            zip: string
+            country: string
+            phone: string
+            email: string
     Account-access:
       type: object
       title: Account-access

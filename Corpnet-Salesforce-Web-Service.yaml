@@ -17729,22 +17729,113 @@ paths:
             application/json:
               schema:
                 type: object
+                x-examples:
+                  Example 1:
+                    PartnerGranteeAccount:
+                      Zip: '80202'
+                      State: CO
+                      City: Denver
+                      Street: 1201 16th St. Suite 350
+                      GranteeAccountNumber: '140202401'
+                      GranteeName: Gusto
+                    AffiliatedEntities: []
+                    Members:
+                      - IsSignatory: true
+                        IsResponsibleParty: true
+                        IsTaxRegContact: false
+                        PercentOwnership: 100
+                        Title: CEO
+                        Zip: '75093'
+                        State_FullName: Texas
+                        State_A2: TX
+                        City: Plano
+                        Street2: null
+                        Street1: 2701 Enid Dr
+                        Phone: '4692898645'
+                        Email: jj@redriveracademy.org
+                        SSN: 412-61-9340
+                        LastName: Wilson
+                        MiddleInit: null
+                        FirstName: Joshua
+                        EntityMemberId: a0U3h000006SyEhEAK
+                    EntityStateAccounts:
+                      - StateAccountId: a0m3h00000Fl7zrAAB
+                        FourthSecurityAnswer: null
+                        FourthSecurityQuestion: null
+                        ThirdSecurityAnswer: null
+                        ThirdSecurityQuestion: null
+                        SecondSecurityAnswer: null
+                        SecondSecurityQuestion: null
+                        FirstSecurityAnswer: null
+                        FirstSecurityQuestion: null
+                        ExistingAccount: false
+                        PIN: null
+                        Password: null
+                        Username: null
+                        EntityStateAccountId: a0V3h00000LLBheEAH
+                    EntityState:
+                      NumberOfEmployees: 2
+                      First1500Date: '2023-09-15'
+                      FirstPayrollDate: '2023-08-01'
+                      FirstHireDate: '2023-08-01'
+                      State: Texas
+                      EntityStateId: a0X3h0000069IJSEA2
+                    Entity:
+                      BusinessDescription: Baseball club
+                      BusinessCategory: Agriculture
+                      FilingNumber: null
+                      FormationDate: '2023-04-06'
+                      HomeState_A2: TX
+                      HomeState: Texas
+                      EIN: 92-3555749
+                      Type: C-Corporation
+                      Name: 'Red River Academy, Inc'
+                      EntityId: a0E3h0000099q50EAA
+                    OrderContact:
+                      Email: jj@redriveracademy.org
+                      LastName: Wilson
+                      MiddleInitial: null
+                      FirstName: JJ
+                      ContactId: 0033h00001LCLkiAAH
+                    Order:
+                      MailingAddress:
+                        IsPayrollRecordsLocation: true
+                        Zip: '75034'
+                        State_A2: TX
+                        State_FullName: Texas
+                        City: Frisco
+                        Street1: 4160 Gridiron Rd
+                        Name: JJ Wilson
+                      OrderId: 8013h000003csw5AAA
+                    Locations:
+                      - IsPayRollRecordsLocation: false
+                        Zip: '75034'
+                        State_FullName: Texas
+                        State_A2: TX
+                        City: Frisco
+                        Street2: Apt 166
+                        Street1: 4160 Gridiron Rd
+                        Name: 'Red River Academy, Inc - Business'
+                        LocationId: 1313h000000mwwDAAQ
+                      - IsPayRollRecordsLocation: false
+                        Zip: '75034'
+                        State_FullName: Texas
+                        State_A2: TX
+                        City: Frisco
+                        Street2: Apt 166
+                        Street1: 4160 Gridiron Rd
+                        Name: 'Red River Academy, Inc - Mailing'
+                        LocationId: 1313h000000mwwGAAQ
                 properties:
                   PartnerGranteeAccount:
                     type: object
                     properties:
-                      Zip:
-                        type: string
-                      State:
-                        type: string
-                      City:
-                        type: string
-                      Street:
-                        type: string
                       GranteeAccountNumber:
                         type: string
                       GranteeName:
                         type: string
+                      GranteeAddress:
+                        $ref: '#/components/schemas/Address'
                   AffiliatedEntities:
                     type: array
                     items:
@@ -17764,32 +17855,12 @@ paths:
                           type: integer
                         Title:
                           type: string
-                        Zip:
-                          type: string
-                        State_FullName:
-                          type: string
-                        State_A2:
-                          type: string
-                        City:
-                          type: string
-                        Street2:
-                          nullable: true
-                        Street1:
-                          type: string
-                        Phone:
-                          type: string
-                        Email:
-                          type: string
-                        SSN:
-                          type: string
-                        LastName:
-                          type: string
-                        MiddleInit:
-                          nullable: true
-                        FirstName:
-                          type: string
                         EntityMemberId:
                           type: string
+                        memberContact:
+                          $ref: '#/components/schemas/Contact'
+                        memberAddress:
+                          $ref: '#/components/schemas/Address'
                   EntityStateAccounts:
                     type: array
                     items:
@@ -17919,103 +17990,17 @@ paths:
                           type: string
                         LocationId:
                           type: string
-                x-examples:
-                  Example 1:
-                    PartnerGranteeAccount:
-                      Zip: '80202'
-                      State: CO
-                      City: Denver
-                      Street: 1201 16th St. Suite 350
-                      GranteeAccountNumber: '140202401'
-                      GranteeName: Gusto
-                    AffiliatedEntities: []
-                    Members:
-                      - IsSignatory: true
-                        IsResponsibleParty: true
-                        IsTaxRegContact: false
-                        PercentOwnership: 100
-                        Title: CEO
-                        Zip: '75093'
-                        State_FullName: Texas
-                        State_A2: TX
-                        City: Plano
-                        Street2: null
-                        Street1: 2701 Enid Dr
-                        Phone: '4692898645'
-                        Email: jj@redriveracademy.org
-                        SSN: 412-61-9340
-                        LastName: Wilson
-                        MiddleInit: null
-                        FirstName: Joshua
-                        EntityMemberId: a0U3h000006SyEhEAK
-                    EntityStateAccounts:
-                      - StateAccountId: a0m3h00000Fl7zrAAB
-                        FourthSecurityAnswer: null
-                        FourthSecurityQuestion: null
-                        ThirdSecurityAnswer: null
-                        ThirdSecurityQuestion: null
-                        SecondSecurityAnswer: null
-                        SecondSecurityQuestion: null
-                        FirstSecurityAnswer: null
-                        FirstSecurityQuestion: null
-                        ExistingAccount: false
-                        PIN: null
-                        Password: null
-                        Username: null
-                        EntityStateAccountId: a0V3h00000LLBheEAH
-                    EntityState:
-                      NumberOfEmployees: 2
-                      First1500Date: '2023-09-15'
-                      FirstPayrollDate: '2023-08-01'
-                      FirstHireDate: '2023-08-01'
-                      State: Texas
-                      EntityStateId: a0X3h0000069IJSEA2
-                    Entity:
-                      BusinessDescription: Baseball club
-                      BusinessCategory: Agriculture
-                      FilingNumber: null
-                      FormationDate: '2023-04-06'
-                      HomeState_A2: TX
-                      HomeState: Texas
-                      EIN: 92-3555749
-                      Type: C-Corporation
-                      Name: 'Red River Academy, Inc'
-                      EntityId: a0E3h0000099q50EAA
-                    OrderContact:
-                      Email: jj@redriveracademy.org
-                      LastName: Wilson
-                      MiddleInitial: null
-                      FirstName: JJ
-                      ContactId: 0033h00001LCLkiAAH
-                    Order:
-                      MailingAddress:
-                        IsPayrollRecordsLocation: true
-                        Zip: '75034'
-                        State_A2: TX
-                        State_FullName: Texas
-                        City: Frisco
-                        Street1: 4160 Gridiron Rd
-                        Name: JJ Wilson
-                      OrderId: 8013h000003csw5AAA
-                    Locations:
-                      - IsPayRollRecordsLocation: false
-                        Zip: '75034'
-                        State_FullName: Texas
-                        State_A2: TX
-                        City: Frisco
-                        Street2: Apt 166
-                        Street1: 4160 Gridiron Rd
-                        Name: 'Red River Academy, Inc - Business'
-                        LocationId: 1313h000000mwwDAAQ
-                      - IsPayRollRecordsLocation: false
-                        Zip: '75034'
-                        State_FullName: Texas
-                        State_A2: TX
-                        City: Frisco
-                        Street2: Apt 166
-                        Street1: 4160 Gridiron Rd
-                        Name: 'Red River Academy, Inc - Mailing'
-                        LocationId: 1313h000000mwwGAAQ
+                  customDictionary:
+                    type: object
+                    x-stoplight:
+                      id: nxlzoo6wt80or
+                    description: |
+                      Entity_State_Data_Point__c records related to the Entity_State__c from above
+                      key value pairs  Name:value__c,
+
+                      one key value pair for each Entity_State_Data_Point__c record
+                  agentContactInfo:
+                    $ref: '#/components/schemas/Contact'
       security:
         - OAuth Token: []
       servers:
@@ -18900,6 +18885,74 @@ components:
           tokenUrl: /services/oauth2/token
           scopes: {}
       description: ''
+  schemas:
+    Contact:
+      type: object
+      x-examples:
+        Example 1:
+          id: string
+          firstName: string
+          lastName: string
+          address:
+            street: string
+            street2: string
+            city: string
+            state: string
+            zip: string
+            country: string
+            phone: string
+            email: string
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleInitial:
+          type: string
+          x-stoplight:
+            id: zs53fl4p73bu4
+        SSN:
+          type: string
+          x-stoplight:
+            id: fvnpnem6n4zaj
+        contactAddress:
+          $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      x-examples:
+        Example 1:
+          street: string
+          street2: string
+          city: string
+          state: string
+          zip: string
+          country: string
+          phone: string
+          email: string
+      description: standard address format
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        stateAlpha2:
+          type: string
+          x-stoplight:
+            id: ssybs4turczez
+        zip:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
 security:
   - OAuth Token: []
 tags:
