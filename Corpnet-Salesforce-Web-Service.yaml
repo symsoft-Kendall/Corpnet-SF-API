@@ -17932,6 +17932,10 @@ paths:
                         type: string
                       EntityId:
                         type: string
+                      NAICS:
+                        type: string
+                        x-stoplight:
+                          id: mr6eq1pes5f93
                   OrderContact:
                     $ref: '#/components/schemas/Contact'
                   Order:
