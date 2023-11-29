@@ -17933,63 +17933,18 @@ paths:
                       EntityId:
                         type: string
                   OrderContact:
-                    type: object
-                    properties:
-                      Email:
-                        type: string
-                      LastName:
-                        type: string
-                      MiddleInitial:
-                        nullable: true
-                      FirstName:
-                        type: string
-                      ContactId:
-                        type: string
+                    $ref: '#/components/schemas/Contact'
                   Order:
                     type: object
                     properties:
                       MailingAddress:
-                        type: object
-                        properties:
-                          IsPayrollRecordsLocation:
-                            type: boolean
-                          Zip:
-                            type: string
-                          State_A2:
-                            type: string
-                          State_FullName:
-                            type: string
-                          City:
-                            type: string
-                          Street1:
-                            type: string
-                          Name:
-                            type: string
+                        $ref: '#/components/schemas/Location'
                       OrderId:
                         type: string
                   Locations:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        IsPayRollRecordsLocation:
-                          type: boolean
-                        Zip:
-                          type: string
-                        State_FullName:
-                          type: string
-                        State_A2:
-                          type: string
-                        City:
-                          type: string
-                        Street2:
-                          type: string
-                        Street1:
-                          type: string
-                        Name:
-                          type: string
-                        LocationId:
-                          type: string
+                      $ref: '#/components/schemas/Location'
                   customDictionary:
                     type: object
                     x-stoplight:
@@ -18953,6 +18908,30 @@ components:
           type: string
         email:
           type: string
+    Location:
+      title: Location
+      x-stoplight:
+        id: ninbodng6pjpl
+      type: object
+      properties:
+        locationId:
+          type: string
+          x-stoplight:
+            id: khku9zsas0ssw
+        name:
+          type: string
+          x-stoplight:
+            id: tubm005w8u0oj
+        isPayrollRecordsLocation:
+          type: string
+          x-stoplight:
+            id: uckvzr9n915hh
+        type:
+          type: string
+          x-stoplight:
+            id: j6xthznmk3ovf
+        locationAddress:
+          $ref: '#/components/schemas/Address'
 security:
   - OAuth Token: []
 tags:
