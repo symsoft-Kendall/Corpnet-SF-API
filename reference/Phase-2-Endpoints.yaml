@@ -272,6 +272,16 @@ paths:
         - schema:
             type: string
           in: query
+  /glossary/stateaccounts:
+    get:
+      summary: GET stateAccount glossary
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-glossary-stateaccounts
+      x-stoplight:
+        id: 0w4z2dbu7nlhm
 components:
   parameters:
     id:
