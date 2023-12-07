@@ -624,6 +624,12 @@ components:
           x-stoplight:
             id: sy1i09gykqsbg
           description: Opportunity.State__c
+        companyId:
+          type: string
+          x-stoplight:
+            id: znn3z6fpjrudh
+          description: |
+            Opportunity.Entity__c.Id
     Tasks:
       title: Tasks
       x-stoplight:
