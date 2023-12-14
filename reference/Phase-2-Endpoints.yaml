@@ -494,6 +494,14 @@ components:
           description: Entity_State_Account__c records related to this Entity  via Entity__c lookup field
           items:
             $ref: '#/components/schemas/taxRegistration'
+        tasks:
+          type: array
+          x-stoplight:
+            id: hq2hy7qwpbcho
+          description: |
+            Tasks related to thie Entity__c
+          items:
+            $ref: '#/components/schemas/Tasks'
     Entity-Access:
       type: object
       title: Entity-Access
@@ -805,7 +813,7 @@ components:
           type: string
           x-stoplight:
             id: 33ksu22anvgx7
-          description: Entity_State__c.State__c
+          description: Entity_State__c.State_Abv__c
         beganOperations:
           type: string
           x-stoplight:
