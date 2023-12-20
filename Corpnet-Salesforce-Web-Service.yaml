@@ -4141,6 +4141,12 @@ paths:
                                     FormId:
                                       type: string
                                       nullable: true
+                                    dependency:
+                                      type: string
+                                      x-stoplight:
+                                        id: hce61zlnk71by
+                                      description: |
+                                        Id of a product_option__c to which this
                               PackageCollection:
                                 type: array
                                 items:
@@ -4169,6 +4175,17 @@ paths:
                                 type: string
                               CollectionDisplaySequence:
                                 type: integer
+                              displayName:
+                                type: string
+                                x-stoplight:
+                                  id: 31hvpkhlx8zg1
+                                description: |
+                                  product2.Display_Name__c
+                              customName:
+                                type: string
+                                x-stoplight:
+                                  id: 3v5wzokm2gnxk
+                                description: product2.Custom_Name__c  (boolean)
                         Id:
                           type: string
                         GridFeaturedPackage:
