@@ -4169,6 +4169,17 @@ paths:
                                 type: string
                               CollectionDisplaySequence:
                                 type: integer
+                              CustomName:
+                                type: string
+                                x-stoplight:
+                                  id: xx6jc8qjn1s5a
+                                description: Product.Custom_Name__c
+                              DisplayName:
+                                type: string
+                                x-stoplight:
+                                  id: dqq6xsmg3bski
+                                description: |
+                                  Product.Display_Name__c
                         Id:
                           type: string
                         GridFeaturedPackage:

@@ -237,6 +237,32 @@ paths:
               properties:
                 '':
                   $ref: '#/components/schemas/GlossaryEntityType'
+  '/order/{OrderId}':
+    parameters:
+      - schema:
+          type: string
+        name: OrderId
+        in: path
+        required: true
+    get:
+      summary: GET Order
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order-Expanded'
+      operationId: get-order-OrderId
+      x-stoplight:
+        id: 49eqnuq5os721
+      description: |-
+        Get all details and related data for a single order with the order.Id as the parameter for identifing the order.  UserId (Contact.id) will be passed to determine access to the order. 
+        userid is required and will throw an access error if not provided. 
+        Access to the order will be determined by the existence of Entity Access for the Contact to the Entity related to the specifc order. 
+      parameters:
+        - $ref: '#/components/parameters/user_id'
 components:
   parameters:
     id:
@@ -571,6 +597,12 @@ components:
           x-stoplight:
             id: br5rk1hknc7sy
           description: Order.AccountId
+        entityType:
+          type: string
+          x-stoplight:
+            id: t9bgdlh16eql4
+          description: |
+            Order.entity__r.Entity_Type__c
         filingStates:
           type: array
           x-stoplight:
@@ -932,6 +964,7 @@ components:
           type: string
           x-stoplight:
             id: okozsxiejfhfp
+          description: Order_Filing_State__c.Id
         state:
           type: string
           x-stoplight:
@@ -1007,6 +1040,11 @@ components:
           x-stoplight:
             id: 8odw2246jqivd
           description: Case.State__c
+        deliveryMethod:
+          type: string
+          x-stoplight:
+            id: bg4iyub83mf2p
+          description: Case.Delivery_Method__c
         tasks:
           type: array
           x-stoplight:
