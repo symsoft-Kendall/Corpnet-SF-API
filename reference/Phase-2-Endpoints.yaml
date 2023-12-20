@@ -983,6 +983,11 @@ components:
       properties:
         basicOrderInfo:
           $ref: '#/components/schemas/Order'
+        orderSummary:
+          type: string
+          x-stoplight:
+            id: 5xy0w752ft64d
+          description: Order.HTML_TEST__c
         Cases:
           type: array
           x-stoplight:
@@ -990,11 +995,21 @@ components:
           description: 'Cases related to this order   '
           items:
             $ref: '#/components/schemas/Case'
-        orderSummary:
-          type: string
+        products:
+          type: array
           x-stoplight:
-            id: 5xy0w752ft64d
-          description: Order.HTML_TEST__c
+            id: qbfxqe9vi0vy6
+          description: OrderItems related to this order
+          items:
+            $ref: '#/components/schemas/product'
+        tansactions:
+          type: array
+          x-stoplight:
+            id: n3sue0nkfti9e
+          description: |
+            Transaction_Detail__c related to this order
+          items:
+            $ref: '#/components/schemas/transaction'
     Case:
       title: Case
       x-stoplight:
@@ -1221,6 +1236,90 @@ components:
           x-stoplight:
             id: cqo8sujwnetl0
           description: Entity_State_Account__c.Account_Number_Format__c
+    product:
+      title: product
+      x-stoplight:
+        id: 7ht63yemt3u2b
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: z70vdxjlcgmjh
+        price:
+          type: string
+          x-stoplight:
+            id: t328dmkmihw5e
+        productName:
+          type: string
+          x-stoplight:
+            id: wh904l6wr2338
+        listPrice:
+          type: string
+          x-stoplight:
+            id: jbgf6vuyz9wav
+        UnitePrice:
+          type: string
+          x-stoplight:
+            id: e9o4fqvu732h4
+        dicountAmount:
+          type: string
+          x-stoplight:
+            id: 9pqkrkkgvrzkm
+        quantity:
+          type: string
+          x-stoplight:
+            id: b3bmwlf7pj5lp
+        state:
+          type: string
+          x-stoplight:
+            id: pxoorhsat66tw
+      description: OrderItem
+    transaction:
+      title: transaction
+      x-stoplight:
+        id: xzfipwqw0exfj
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 4rq8w5zilqrhn
+        amount:
+          type: string
+          x-stoplight:
+            id: 7kkvbpm3dozun
+        processor:
+          type: string
+          x-stoplight:
+            id: fo61s3xifog60
+        discountAmount:
+          type: string
+          x-stoplight:
+            id: uodpacihc12zm
+        cardLastFour:
+          type: string
+          x-stoplight:
+            id: t8c7adg951zlw
+        paymentStatus:
+          type: string
+          x-stoplight:
+            id: ggmbdwm9e10zt
+        refundStatus:
+          type: string
+          x-stoplight:
+            id: 1vmsq0xxnesdg
+        createdDate:
+          type: string
+          x-stoplight:
+            id: 20l53bwvyd7ll
+        transactionId:
+          type: string
+          x-stoplight:
+            id: iy9bqu68jexjp
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+      description: Transaction_Detail__c
   securitySchemes:
     OAuth Token:
       type: oauth2
