@@ -987,8 +987,14 @@ components:
           type: array
           x-stoplight:
             id: p8nzpop8ijorh
+          description: 'Cases related to this order   '
           items:
             $ref: '#/components/schemas/Case'
+        orderSummary:
+          type: string
+          x-stoplight:
+            id: 5xy0w752ft64d
+          description: Order.HTML_TEST__c
     Case:
       title: Case
       x-stoplight:
