@@ -494,6 +494,13 @@ components:
           description: Entity_State_Account__c records related to this Entity  via Entity__c lookup field
           items:
             $ref: '#/components/schemas/taxRegistration'
+        tasks:
+          type: array
+          x-stoplight:
+            id: 4y9l52hy5m4gm
+          description: Request for Information realted to this entity.
+          items:
+            $ref: '#/components/schemas/Tasks'
     Entity-Access:
       type: object
       title: Entity-Access
@@ -1169,6 +1176,38 @@ components:
           x-stoplight:
             id: cqo8sujwnetl0
           description: Entity_State_Account__c.Account_Number_Format__c
+        stateName:
+          type: string
+          x-stoplight:
+            id: pb828juf5ldh7
+        registrationProgress:
+          type: string
+          x-stoplight:
+            id: lfl9ktw9dllp5
+        stateProgress:
+          type: string
+          x-stoplight:
+            id: og8z51whtklca
+        agencyType:
+          type: string
+          x-stoplight:
+            id: ph9o7c4h6ea29
+        deliveryMethod:
+          type: string
+          x-stoplight:
+            id: rrihzd9ez7ksq
+        fetcher:
+          type: string
+          x-stoplight:
+            id: dgbtf5qc5jrl7
+        dateSubmittedToState:
+          type: string
+          x-stoplight:
+            id: jlerbr1sc4bm4
+        recordConfirmationCode:
+          type: string
+          x-stoplight:
+            id: 8yl2h56bt8mv5
   securitySchemes:
     OAuth Token:
       type: oauth2
