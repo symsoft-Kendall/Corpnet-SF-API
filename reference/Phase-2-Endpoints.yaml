@@ -1288,46 +1288,63 @@ components:
       x-stoplight:
         id: xzfipwqw0exfj
       type: object
+      description: |-
+        Transaction_Detail__c
+
+        billingAddress Mapping
+        street:  Transaction_Detail__c.Address_1__c
+        street2: Transaction_Detail__c.Address_2__c 
+        city:    Transaction_Detail__c.City__c
+        state:   Transaction_Detail__c.State__c
+        zip:     Transaction_Detail__c.Zip_Code__c
       properties:
         id:
           type: string
           x-stoplight:
             id: 4rq8w5zilqrhn
+          description: Transaction_Detail__c.id
         amount:
           type: string
           x-stoplight:
             id: 7kkvbpm3dozun
+          description: Transaction_Detail__c.Amount__c
         processor:
           type: string
           x-stoplight:
             id: fo61s3xifog60
+          description: Transaction_Detail__c.Payment_Processor__c
         discountAmount:
           type: string
           x-stoplight:
             id: uodpacihc12zm
+          description: Transaction_Detail__c.Discount_Amount__c
         cardLastFour:
           type: string
           x-stoplight:
             id: t8c7adg951zlw
+          description: Transaction_Detail__c.Card_Last_4__c
         paymentStatus:
           type: string
           x-stoplight:
             id: ggmbdwm9e10zt
+          description: Transaction_Detail__c.Status__c
         refundStatus:
           type: string
           x-stoplight:
             id: 1vmsq0xxnesdg
+          description: Transaction_Detail__c.Refund_Status__c
         createdDate:
           type: string
           x-stoplight:
             id: 20l53bwvyd7ll
+          description: Transaction_Detail__c.CreatedDate
         transactionId:
           type: string
           x-stoplight:
             id: iy9bqu68jexjp
+          description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
-      description: Transaction_Detail__c
   securitySchemes:
     OAuth Token:
       type: oauth2
