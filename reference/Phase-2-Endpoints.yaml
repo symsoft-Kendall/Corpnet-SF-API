@@ -1241,40 +1241,48 @@ components:
       x-stoplight:
         id: 7ht63yemt3u2b
       type: object
+      description: OrderItem
       properties:
         id:
           type: string
           x-stoplight:
             id: z70vdxjlcgmjh
+          description: OrderItem.Id
         price:
           type: string
           x-stoplight:
             id: t328dmkmihw5e
+          description: OrderItem.TotalPrice
         productName:
           type: string
           x-stoplight:
             id: wh904l6wr2338
+          description: OrderItem.Product_Name__c
         listPrice:
           type: string
           x-stoplight:
             id: jbgf6vuyz9wav
+          description: OrderItem.ListPrice
         UnitePrice:
           type: string
           x-stoplight:
             id: e9o4fqvu732h4
+          description: OrderItem.UnitPrice
         dicountAmount:
           type: string
           x-stoplight:
             id: 9pqkrkkgvrzkm
+          description: OrderItem.Discount_Amount__c
         quantity:
           type: string
           x-stoplight:
             id: b3bmwlf7pj5lp
+          description: OrderItem.Quantity
         state:
           type: string
           x-stoplight:
             id: pxoorhsat66tw
-      description: OrderItem
+          description: OrderItem.Product_State__c
     transaction:
       title: transaction
       x-stoplight:
