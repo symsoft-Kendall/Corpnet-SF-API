@@ -450,7 +450,7 @@ components:
           type: string
           x-stoplight:
             id: fvr6ys3fvrbv9
-          description: |+
+          description: |
             query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
 
             if Access_Account__c.Level__c is Partial Access query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param   
@@ -463,7 +463,6 @@ components:
             If not found return "Read"
 
             If found Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
-
     Entity-Expanded:
       type: object
       x-stoplight:
@@ -543,6 +542,14 @@ components:
             id: c1vurnfd7gvp3
         entity:
           $ref: '#/components/schemas/Entity'
+        states:
+          type: string
+          x-stoplight:
+            id: a26d8oc19t1cc
+          description: |-
+            Access_Entity__c.State__c
+
+            multiselect ; delimited
     Order:
       title: OrderBasic
       x-stoplight:
