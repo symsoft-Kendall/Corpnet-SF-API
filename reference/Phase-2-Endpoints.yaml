@@ -366,6 +366,18 @@ components:
         Entity__c.Country__c
         Entity__c.County__c
         Ignore Phone & Email
+
+        Access Definition:  Based on user_id param  (if null 403 restricted access) 
+        user_id is a Salesforce contact id.  
+
+        query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
+
+        if Access_Account__c.Level__c is Primary Admin, Delegated Admin, All Data Read or All Data Write return this record in the call.
+
+        if Access_Account__c.Level__c is Partial Access query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param   
+
+        if found return record data
+        if not found do not return record data or exclude from list 
       x-examples:
         Example 1:
           Name: String
@@ -434,6 +446,16 @@ components:
           description: Entity__c.Website_URL__c
         businessAddress:
           $ref: '#/components/schemas/Address'
+        accessLevel:
+          type: string
+          x-stoplight:
+            id: fvr6ys3fvrbv9
+          description: |+
+            query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
+
+            if Access_Account__c.Level__c is Primary Admin, Delegated Admin, All Data Write return "Write" as accesslevel
+
+
     Entity-Expanded:
       type: object
       x-stoplight:
