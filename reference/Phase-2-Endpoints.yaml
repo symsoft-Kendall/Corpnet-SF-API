@@ -453,8 +453,16 @@ components:
           description: |+
             query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
 
-            if Access_Account__c.Level__c is Primary Admin, Delegated Admin, All Data Write return "Write" as accesslevel
+            if Access_Account__c.Level__c is Partial Access query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param   
 
+            Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
+
+
+            if Access_Account__c.Level__c is "All Data Read" query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param 
+
+            If not found return "Read"
+
+            If found Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
 
     Entity-Expanded:
       type: object
