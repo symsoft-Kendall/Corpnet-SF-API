@@ -17840,6 +17840,25 @@ paths:
                     type: array
                     items:
                       type: object
+                      properties:
+                        AffiliatedEntityId:
+                          type: string
+                          x-stoplight:
+                            id: oxajg1iudbj36
+                        Name:
+                          type: string
+                          x-stoplight:
+                            id: kbynz7s7gl8f2
+                        EIN:
+                          type: string
+                          x-stoplight:
+                            id: f4sw2zs6ddqcj
+                        PercentOwnership:
+                          type: number
+                          x-stoplight:
+                            id: tyrr2c5vrp41y
+                        AffiliatedEntityAddress:
+                          $ref: '#/components/schemas/Address'
                   Members:
                     type: array
                     items:
