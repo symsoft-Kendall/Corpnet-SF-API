@@ -570,7 +570,7 @@ components:
       description: |-
         Basic Order data to be returned in an array.  Supports the dashboard view in GetAccountInfo
 
-        Order data should only be returned if the user id has access to the 
+        Order record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the order is nested under.
       properties:
         id:
           type: string
@@ -638,6 +638,9 @@ components:
       description: |-
         Opportunities form Salesforce are Tasks in the CCC.  potental sales based on upcoming deadlines etc...
         Get Opportunites WHERE "type__c" = "Compliance Alert"
+
+        Access definition
+        Opportinity record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the opportunity is nested under.
       properties:
         id:
           type: string
@@ -692,6 +695,9 @@ components:
       description: |-
         Query of Request_for_information__c based on the account 
         GET Request_for_information__c WHERE Status != Completed
+
+        Access definition
+        Task access is based on user access to the Case this task is related to. 
       properties:
         id:
           type: string
@@ -1066,6 +1072,9 @@ components:
           description: Request_for_information__c records realted to this Case.
           items:
             $ref: '#/components/schemas/Tasks'
+      description: |
+        Access definition:
+        Case record should only be returned if the user id has access to the Order that the Case is nested under. They also need access to the State the for the Entity (based on Access_Entity__c.State multiselect list) that the filing state of the case is in. 
     GlossaryEntityType:
       title: GlossaryEntityType
       x-stoplight:
