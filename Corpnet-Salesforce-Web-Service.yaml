@@ -18897,6 +18897,10 @@ components:
           type: string
           x-stoplight:
             id: fvnpnem6n4zaj
+        birthdate:
+          type: string
+          x-stoplight:
+            id: vwkx430de08eu
         contactAddress:
           $ref: '#/components/schemas/Address'
     Address:
