@@ -17724,7 +17724,11 @@ paths:
         - $ref: '#/components/parameters/uid'
       responses:
         '200':
-          description: Successful response
+          description: |-
+            Successful response
+
+            agentContactInfo
+            Include the FirstName, LastName, Email, Phone of the case Owner 
           content:
             application/json:
               schema:
@@ -17979,6 +17983,18 @@ paths:
                       key value pairs  Name:value__c,
 
                       one key value pair for each Entity_State_Data_Point__c record
+                    properties:
+                      KeyValuePairs:
+                        type: string
+                        x-stoplight:
+                          id: hbmz3vgk60yl0
+                        description: |+
+                          JSON Object 
+                          IE {
+                            "definedKey1": "enteredValue1",
+                            "definedKey2": "enteredValue2"
+                          }
+
                   agentContactInfo:
                     $ref: '#/components/schemas/Contact'
       security:
