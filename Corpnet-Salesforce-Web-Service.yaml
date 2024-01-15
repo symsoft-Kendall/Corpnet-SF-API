@@ -17729,6 +17729,8 @@ paths:
 
             agentContactInfo
             Include the FirstName, LastName, Email, Phone of the case Owner 
+
+            Some values in the address and location sections may be null.
           content:
             application/json:
               schema:
@@ -17988,13 +17990,18 @@ paths:
                         type: string
                         x-stoplight:
                           id: hbmz3vgk60yl0
-                        description: |+
+                        description: |
                           JSON Object 
                           IE {
                             "definedKey1": "enteredValue1",
                             "definedKey2": "enteredValue2"
                           }
 
+                          Salesfore mapping Example {
+                          "Entity_State_Data_Point__c1.Name": "Entity_State_Data_Point__c1.Value__c",
+                          "Entity_State_Data_Point__c2.Name": "Entity_State_Data_Point__c2.Value__c"
+
+                          }
                   agentContactInfo:
                     $ref: '#/components/schemas/Contact'
       security:
