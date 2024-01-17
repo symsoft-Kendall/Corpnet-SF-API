@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Corpnet Salesforce Web Service
-  description: ''
+  title: Phase 1 Endpoints
+  description: Providing Client and Partner Data to support the CCC
 servers:
   - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
     description: Build Sandbox
@@ -54,7 +54,7 @@ paths:
                       '{*SF_PROPERTY_NAME*}':
                         type: string
                         x-stoplight:
-                          id: 96bsmxsazgu1a
+                          id: 15bk8u7c7pes7
   /getproducts/all:
     get:
       summary: Get All Products
@@ -4169,6 +4169,17 @@ paths:
                                 type: string
                               CollectionDisplaySequence:
                                 type: integer
+                              CustomName:
+                                type: string
+                                x-stoplight:
+                                  id: xx6jc8qjn1s5a
+                                description: Product.Custom_Name__c
+                              DisplayName:
+                                type: string
+                                x-stoplight:
+                                  id: dqq6xsmg3bski
+                                description: |
+                                  Product.Display_Name__c
                         Id:
                           type: string
                         GridFeaturedPackage:
@@ -12377,8 +12388,10 @@ paths:
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
       x-stoplight:
-        id: 45r1apntkudhg
+        id: 5wtl5dj67zb8s
       operationId: ''
+      tags:
+        - Get Products
     parameters:
       - schema:
           type: string
@@ -12441,6 +12454,8 @@ paths:
                                 type: string
                               AccountId:
                                 type: string
+                              '':
+                                type: string
                         BrainTreeProfileId:
                           type: string
                         BillingAddress:
@@ -12499,9 +12514,6 @@ paths:
         - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
         - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
           description: ''
-      description: ''
-      tags:
-        - Get Client Info
   /getclientinfo/entities:
     get:
       summary: Get Account's Entities by Account ID
