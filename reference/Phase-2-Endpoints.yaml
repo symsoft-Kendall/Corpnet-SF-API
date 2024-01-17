@@ -497,9 +497,8 @@ components:
         tasks:
           type: array
           x-stoplight:
-            id: hq2hy7qwpbcho
-          description: |
-            Tasks related to thie Entity__c
+            id: 4y9l52hy5m4gm
+          description: Request for Information realted to this entity.
           items:
             $ref: '#/components/schemas/Tasks'
     Entity-Access:
@@ -1137,6 +1136,11 @@ components:
           x-stoplight:
             id: 9k5psl4mqqlcq
           description: Entity_State_Account__c.Type_Code__c
+        rate:
+          type: string
+          x-stoplight:
+            id: xta5sfqnr7y6y
+          description: Entity_State_Account__c.Rate__c
         stateAccountNumber:
           type: string
           x-stoplight:
@@ -1147,11 +1151,6 @@ components:
           x-stoplight:
             id: g6hj6sg1ppos3
           description: Entity_State_Account__c.Rate_Type__c
-        rate:
-          type: string
-          x-stoplight:
-            id: xta5sfqnr7y6y
-          description: Entity_State_Account__c.Rate__c
         stateAgencyUrl:
           type: string
           x-stoplight:
@@ -1177,6 +1176,47 @@ components:
           x-stoplight:
             id: cqo8sujwnetl0
           description: Entity_State_Account__c.Account_Number_Format__c
+        stateName:
+          type: string
+          x-stoplight:
+            id: pb828juf5ldh7
+          description: Entity_State_Account__c.State_Name__c
+        registrationProgress:
+          type: string
+          x-stoplight:
+            id: lfl9ktw9dllp5
+          description: Entity_State_Account__c.Registration_Progress__c   case phase of case used to register this entity state Entity_State_Account__c
+        stateProgress:
+          type: string
+          x-stoplight:
+            id: og8z51whtklca
+          description: |
+            Entity_State_Account__c.Entity_State__c.Progress__c
+        deliveryMethod:
+          type: string
+          x-stoplight:
+            id: rrihzd9ez7ksq
+          description: Entity_State_Account__c.Entity_State_Account__r.Delivery_Method__c
+        agencyType:
+          type: string
+          x-stoplight:
+            id: ph9o7c4h6ea29
+          description: Entity_State_Account__c.
+        fetcher:
+          type: string
+          x-stoplight:
+            id: dgbtf5qc5jrl7
+          description: Entity_State_Account__c.Entity_State_Account__r.Fetcher__c
+        dateSubmittedToState:
+          type: string
+          x-stoplight:
+            id: jlerbr1sc4bm4
+          description: Entity_State_account__c.Date_Submitted_To_State__c
+        recordConfirmationCode:
+          type: string
+          x-stoplight:
+            id: 8yl2h56bt8mv5
+          description: Entity_State_account__c.Confirmation_Code__c
   securitySchemes:
     OAuth Token:
       type: oauth2
