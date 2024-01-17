@@ -104,7 +104,8 @@ paths:
       tags: []
       responses:
         '200':
-          description: OK
+          description: |
+            OK
           headers: {}
           content:
             application/json:
@@ -186,6 +187,23 @@ paths:
                       x-stoplight:
                         id: 5yfcoc6qmiv8h
                     nullable: true
+                  accountAccesses:
+                    type: array
+                    x-stoplight:
+                      id: zi9i4omo40ysi
+                    description: |
+                      This returns a list of the users who have access to this account. 
+                      Access Definition
+                      if the user has an admin (primary or delegated) level access to this parent account return all Access_Account__c records.
+                    items:
+                      x-stoplight:
+                        id: 9iwzcdmq0a43o
+                      type: object
+                      properties:
+                        accessAccount:
+                          $ref: '#/components/schemas/Account-access'
+                        userContact:
+                          $ref: '#/components/schemas/Contact'
       requestBody:
         content: {}
         description: ''
@@ -311,7 +329,8 @@ components:
     Account-access:
       type: object
       title: Account-access
-      description: Display these fields when returning Account_Access__c records.
+      description: |
+        Display these fields when returning Account_Access__c records.
       properties:
         accessLevel:
           type: string
@@ -357,6 +376,10 @@ components:
             Partner or Consumer
 
             RecordtypeName  Partner  Else Consumer
+        '':
+          type: string
+          x-stoplight:
+            id: kg51hv7xhmph6
     Entity:
       type: object
       title: Entity
@@ -553,6 +576,7 @@ components:
     Entity-Access:
       type: object
       title: Entity-Access
+      description: These are returned as a nested object under Account-access model.
       properties:
         accessLevel:
           type: string
@@ -561,15 +585,6 @@ components:
             id: c1vurnfd7gvp3
         entity:
           $ref: '#/components/schemas/Entity'
-        states:
-          type: string
-          x-stoplight:
-            id: a26d8oc19t1cc
-          description: |-
-            Access_Entity__c.State__c
-
-            multiselect ; delimited
-      description: These are returned as a nested object under Account-access model.
     Order:
       title: OrderBasic
       x-stoplight:
