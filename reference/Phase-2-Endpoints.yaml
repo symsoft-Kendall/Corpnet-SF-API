@@ -330,7 +330,13 @@ components:
           description: Access_Account__c.Id
     Account:
       type: object
-      description: General Account info for an account
+      description: |-
+        General Account info for an account
+
+        Access Definition:
+        query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
+
+        They should only see the account if they have an access record related to it for the Contact where their Customer_Account__c is related to. 
       properties:
         id:
           type: string
@@ -375,6 +381,7 @@ components:
         if Access_Account__c.Level__c is Primary Admin, Delegated Admin, All Data Read or All Data Write return this record in the call.
 
         if Access_Account__c.Level__c is Partial Access query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param   
+
 
         if found return record data
         if not found do not return record data or exclude from list 
@@ -562,6 +569,7 @@ components:
             Access_Entity__c.State__c
 
             multiselect ; delimited
+      description: These are returned as a nested object under Account-access model.
     Order:
       title: OrderBasic
       x-stoplight:
@@ -752,9 +760,8 @@ components:
       description: |-
         Entity_Member__c.
 
-        entity property: Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact   matches the Contact__c and the Entity matches the Entity__c
-
-        If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
+        Access definition
+        Entity_Member__c records should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the Entity_Member__c is related to in the Entity__r field.
 
         memberAddress Mapping Entity_Member__c.
         Member_Address_1__c
@@ -914,6 +921,9 @@ components:
             id: qtec7upkwou83
           items:
             $ref: '#/components/schemas/Business-Licenses'
+      description: |-
+        Access definition
+        Entity_State__c records should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the Entity_State__c is related to in the Entity__r field.
     Address:
       title: Address
       x-stoplight:
@@ -984,7 +994,11 @@ components:
       x-stoplight:
         id: 6toryaojblma2
       type: object
-      description: Order_Filing_State__c.
+      description: |-
+        Order_Filing_State__c.
+
+        Access definition
+        Order_Filing_State__c records should only be returned if the user id has access to the Order  that the Order_Filing_State__c is related to in the Order__r field.
       properties:
         id:
           type: string
@@ -1074,7 +1088,7 @@ components:
             $ref: '#/components/schemas/Tasks'
       description: |
         Access definition:
-        Case record should only be returned if the user id has access to the Order that the Case is nested under. They also need access to the State the for the Entity (based on Access_Entity__c.State multiselect list) that the filing state of the case is in. 
+        Case record should only be returned if the user id has access to the Order that the Case is related to via the Order__r field. 
     GlossaryEntityType:
       title: GlossaryEntityType
       x-stoplight:
@@ -1111,7 +1125,11 @@ components:
       x-stoplight:
         id: 4woee8nh4p31l
       type: object
-      description: Entity_State_Account__c.
+      description: |-
+        Entity_State_Account__c.
+
+
+        Entity_State_Account__c records should only be returned if the user id has access to the Entity  that the Entity_State_Account__c is related to in the Entity__r field.
       properties:
         id:
           type: string
