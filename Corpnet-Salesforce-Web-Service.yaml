@@ -17985,23 +17985,37 @@ paths:
                       key value pairs  Name:value__c,
 
                       one key value pair for each Entity_State_Data_Point__c record
+
+                      JSON Object 
+                      customDictionary {
+                        "definedKey1": "enteredValue1",
+                        "definedKey2": "enteredValue2"
+                      }
+
+                      Salesfore mapping Example {
+                      "Entity_State_Data_Point__c1.Name": "Entity_State_Data_Point__c1.Value__c",
+                      "Entity_State_Data_Point__c2.Name": "Entity_State_Data_Point__c2.Value__c"
+
+                      }
                     properties:
-                      KeyValuePairs:
+                      definedKey1:
                         type: string
                         x-stoplight:
-                          id: hbmz3vgk60yl0
-                        description: |
-                          JSON Object 
-                          IE {
-                            "definedKey1": "enteredValue1",
-                            "definedKey2": "enteredValue2"
-                          }
+                          id: qvjkuv4yfe8vl
+                        description: |-
+                          "definedKey1":"enteredValue1"
 
-                          Salesfore mapping Example {
-                          "Entity_State_Data_Point__c1.Name": "Entity_State_Data_Point__c1.Value__c",
-                          "Entity_State_Data_Point__c2.Name": "Entity_State_Data_Point__c2.Value__c"
+                          IE   "LristName":"Bloch"
+                        example: enteredValue1
+                      definedKey2:
+                        type: string
+                        x-stoplight:
+                          id: x1qg22y40iptk
+                        example: enteredValue2
+                        description: |-
+                          "definedKey2":"enteredValue2"
 
-                          }
+                          IE   "FristName":"Dave"
                   agentContactInfo:
                     $ref: '#/components/schemas/Contact'
       security:
