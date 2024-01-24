@@ -4324,8 +4324,22 @@ paths:
                                     nullable: true
                                   Timeline:
                                     nullable: true
-                                  Name:
+                                  name:
                                     type: string
+                                    x-stoplight:
+                                      id: 6gktxprkaykip
+                                  subtitle:
+                                    type: string
+                                    x-stoplight:
+                                      id: fywmxoyfo3vye
+                                  displayName:
+                                    type: string
+                                    x-stoplight:
+                                      id: bh7tb9f97zr12
+                                  customName:
+                                    type: boolean
+                                    x-stoplight:
+                                      id: 3moicdduwdopp
                                   CollectionDisplaySequence:
                                     type: integer
                                   ProductOptions:
