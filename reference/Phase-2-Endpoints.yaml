@@ -4353,8 +4353,6 @@ paths:
                                           nullable: true
                                         ProductName:
                                           type: string
-                                        ProductLimit:
-                                          nullable: true
                                         ProductId:
                                           type: string
                                         ProductFamily:
