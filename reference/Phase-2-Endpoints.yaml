@@ -4408,6 +4408,10 @@ paths:
                                           nullable: true
                                         DisplayHeader:
                                           type: boolean
+                                        FormioId:
+                                          type: string
+                                          x-stoplight:
+                                            id: 34s72co9hves0
                                   FormSequences:
                                     type: array
                                     items:

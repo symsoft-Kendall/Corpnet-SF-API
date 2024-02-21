@@ -8244,7 +8244,7 @@ paths:
           description: ''
       tags:
         - Get Products
-  /getproducts/all - copy:
+  /getproducts/all2:
     get:
       summary: Get All Products
       responses:
@@ -12254,6 +12254,18 @@ paths:
                         ServiceCategory:
                           type: string
                           nullable: true
+                        Id:
+                          type: string
+                        GridFeaturedPackage:
+                          type: string
+                        FormId:
+                          type: string
+                        FeaturedTitle:
+                          type: string
+                        DisplayType:
+                          type: string
+                        Entity:
+                          type: string
                         ProductPackages:
                           type: array
                           items:
@@ -12267,6 +12279,8 @@ paths:
                               ServiceCategory:
                                 type: string
                                 nullable: true
+                              ProductFamily:
+                                type: string
                               ProductOptions:
                                 type: array
                                 items:
@@ -12317,8 +12331,6 @@ paths:
                                 type: array
                                 nullable: true
                                 items: {}
-                              ProductFamily:
-                                type: string
                               ProductConstraints:
                                 type: array
                                 items:
@@ -12365,18 +12377,10 @@ paths:
                                 type: string
                                 description: |
                                   Product.Display_Name__c
-                        Id:
-                          type: string
-                        GridFeaturedPackage:
-                          type: string
-                        FormId:
-                          type: string
-                        FeaturedTitle:
-                          type: string
-                        Entity:
-                          type: string
-                        DisplayType:
-                          type: string
+                              '':
+                                type: string
+                                x-stoplight:
+                                  id: iaygcfc2cjf24
               examples:
                 Example 1:
                   value:
@@ -16431,6 +16435,7 @@ paths:
         - Get Products
       x-stoplight:
         id: xh2yrblvuto0g
+    parameters: []
   '/getproducts/{ProductIDs}':
     get:
       summary: Get Product(s) by Product Salesforce Id
