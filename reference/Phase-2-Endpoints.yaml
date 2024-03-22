@@ -263,6 +263,155 @@ paths:
         Access to the order will be determined by the existence of Entity Access for the Contact to the Entity related to the specifc order. 
       parameters:
         - $ref: '#/components/parameters/user_id'
+  /products/packageCollections:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    x-stoplight:
+                      id: tki8iwm8enyqb
+                    properties:
+                      packageCollections:
+                        type: array
+                        x-stoplight:
+                          id: si0z4nnptlas5
+                        items:
+                          $ref: '#/components/schemas/ProductPackageCollection'
+                  - $ref: '#/components/schemas/PaginatedResponse'
+              examples:
+                Example 1:
+                  value:
+                    packageCollections:
+                      - id: string
+                        state: string
+                        serviceCategory: string
+                        entityType: string
+                        featuredPackageId: string
+                        featuredTitle: string
+                        preQuoteFormId: string
+                        postQuoteFormId: string
+                        displayType: string
+                    page: 0
+                    totalPages: 0
+                    pageLength: 0
+      operationId: get-products-packageCollections
+      x-stoplight:
+        id: ez5tu53q5k1q9
+  /products/packages:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    x-stoplight:
+                      id: eilfjfwr1rzqi
+                    properties:
+                      packages:
+                        type: array
+                        x-stoplight:
+                          id: uzxptu7wjwpuj
+                        items:
+                          $ref: '#/components/schemas/ProductPackage'
+                  - $ref: '#/components/schemas/PaginatedResponse'
+              examples:
+                Example 1:
+                  value:
+                    packages:
+                      - id: string
+                        packageCollectionId: string
+                        name: string
+                        displayName: string
+                        displaySequence: 0
+                        state: string
+                        productFamily: string
+                        timeline: string
+                        productConstraints:
+                          - id: string
+                            name: string
+                            displayHeader: string
+                            displaySequence: 0
+                            minOptions: 0
+                            maxOptions: 0
+                            dependencyId: string
+                            formId: string
+                            formPageName: string
+                        formSequences:
+                          - formId: string
+                            displaySequence: 0
+                    page: 0
+                    totalPages: 0
+                    pageLength: 0
+      operationId: get-products-packages
+      x-stoplight:
+        id: zzfscwbw3sjkc
+  /products/productOptions:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      productOptions:
+                        type: array
+                        x-stoplight:
+                          id: 64m21nlfcnzp2
+                        items:
+                          $ref: '#/components/schemas/ProductOption'
+                  - $ref: '#/components/schemas/PaginatedResponse'
+              examples:
+                Example 1:
+                  value:
+                    productOptions:
+                      - id: string
+                        packageId: string
+                        productId: string
+                        name: string
+                        displayName: string
+                        subtitle: string
+                        slaDisplayText: string
+                        selectionType: string
+                        selectionDisplayText: string
+                        description: string
+                        displaySequence: 0
+                        discountable: true
+                        productLimit: 0
+                        formioId: string
+                        productFamily: string
+                        productConstraintId: string
+                        dependency:
+                          productOptionId: string
+                          productId: string
+                    page: 0
+                    totalPages: 0
+                    pageLength: 0
+      operationId: get-products-productOptions
+      x-stoplight:
+        id: kfacoqvfg76hs
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: pageLength
+          description: Number of items in the productOptions array. Default 50.
 components:
   parameters:
     id:
@@ -1355,6 +1504,213 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    ProductPackageCollection:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          type: string
+        serviceCategory:
+          type: string
+        entityType:
+          type: string
+        featuredPackageId:
+          type: string
+        featuredTitle:
+          type: string
+        preQuoteFormId:
+          type: string
+        postQuoteFormId:
+          type: string
+        displayType:
+          type: string
+      x-examples:
+        Example 1:
+          id: string
+          state: string
+          serviceCategory: string
+          entityType: string
+          featuredPackageId: string
+          featuredTitle: string
+          preQuoteFormId: string
+          postQuoteFormId: string
+          displayType: string
+      title: ''
+      description: ''
+    ProductPackage:
+      type: object
+      x-examples:
+        Example 1:
+          id: string
+          name: string
+          displayName: string
+          displaySequence: 1
+          state: string
+          productFamily: string
+          timeline: string
+          productConstraints:
+            - id: string
+              name: string
+              displayHeader: string
+              displaySequence: 1
+              minOptions: 1
+              maxOptions: 1
+              dependencyId: string
+              formId: string
+              formPageName: string
+          formSequences:
+            - formId: string
+              displaySequence: 1
+      properties:
+        id:
+          type: string
+        packageCollectionId:
+          type: string
+          x-stoplight:
+            id: eue5e61dxwv5k
+        name:
+          type: string
+        displayName:
+          type: string
+        displaySequence:
+          type: integer
+        state:
+          type: string
+        productFamily:
+          type: string
+        timeline:
+          type: string
+        productConstraints:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductConstraint'
+        formSequences:
+          type: array
+          items:
+            type: object
+            properties:
+              formId:
+                type: string
+              displaySequence:
+                type: integer
+    ProductOption:
+      type: object
+      x-examples:
+        Example 1:
+          id: string
+          packageId: string
+          productId: string
+          name: string
+          displayName: string
+          subtitle: string
+          slaDisplayText: string
+          selectionType: string
+          selectionDisplayText: string
+          description: string
+          displaySequence: 1
+          discountable: true
+          productLimit: 1
+          formioId: string
+          productFamily: string
+          productConstraintId: string
+          dependency:
+            productOptionId: string
+            productId: string
+      properties:
+        id:
+          type: string
+        packageId:
+          type: string
+        productId:
+          type: string
+        name:
+          type: string
+        displayName:
+          type: string
+        subtitle:
+          type: string
+        slaDisplayText:
+          type: string
+        selectionType:
+          type: string
+        selectionDisplayText:
+          type: string
+        description:
+          type: string
+        displaySequence:
+          type: integer
+        discountable:
+          type: boolean
+        productLimit:
+          type: integer
+        formioId:
+          type: string
+        productFamily:
+          type: string
+        productConstraintId:
+          type: string
+        dependency:
+          type: object
+          nullable: true
+          properties:
+            productOptionId:
+              type: string
+            productId:
+              type: string
+    ProductConstraint:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        displayHeader:
+          type: string
+        displaySequence:
+          type: integer
+        minOptions:
+          type: integer
+        maxOptions:
+          type: integer
+        dependencyId:
+          type: string
+        formId:
+          type: string
+        formPageName:
+          type: string
+      x-examples:
+        Example 1:
+          id: string
+          name: string
+          displayHeader: string
+          displaySequence: 1
+          minOptions: 1
+          maxOptions: 1
+          dependencyId: string
+          formId: string
+          formPageName: string
+    PaginatedResponse:
+      title: PaginatedResponse
+      x-stoplight:
+        id: todsnyfq8mwvr
+      type: object
+      properties:
+        page:
+          type: integer
+          x-stoplight:
+            id: 8xj38ubshg41v
+          description: 'Pagination: Current page'
+        totalPages:
+          type: integer
+          x-stoplight:
+            id: m6vcb8a16xvwx
+          description: 'Pagination: Total number of pages at selected page length'
+        pageLength:
+          type: integer
+          x-stoplight:
+            id: okipw8zvb8j28
+          description: "Pagination: number of records in response\r\n"
   securitySchemes:
     OAuth Token:
       type: oauth2
