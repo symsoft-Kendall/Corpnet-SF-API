@@ -304,6 +304,9 @@ paths:
       operationId: get-products-packageCollections
       x-stoplight:
         id: ez5tu53q5k1q9
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageLength'
   /products/packages:
     get:
       summary: Your GET endpoint
@@ -326,37 +329,12 @@ paths:
                         items:
                           $ref: '#/components/schemas/ProductPackage'
                   - $ref: '#/components/schemas/PaginatedResponse'
-              examples:
-                Example 1:
-                  value:
-                    packages:
-                      - id: string
-                        packageCollectionId: string
-                        name: string
-                        displayName: string
-                        displaySequence: 0
-                        state: string
-                        productFamily: string
-                        timeline: string
-                        productConstraints:
-                          - id: string
-                            name: string
-                            displayHeader: string
-                            displaySequence: 0
-                            minOptions: 0
-                            maxOptions: 0
-                            dependencyId: string
-                            formId: string
-                            formPageName: string
-                        formSequences:
-                          - formId: string
-                            displaySequence: 0
-                    page: 0
-                    totalPages: 0
-                    pageLength: 0
       operationId: get-products-packages
       x-stoplight:
         id: zzfscwbw3sjkc
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageLength'
   /products/productOptions:
     get:
       summary: Your GET endpoint
@@ -407,11 +385,8 @@ paths:
       x-stoplight:
         id: kfacoqvfg76hs
       parameters:
-        - schema:
-            type: integer
-          in: query
-          name: pageLength
-          description: Number of items in the productOptions array. Default 50.
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageLength'
 components:
   parameters:
     id:
@@ -462,6 +437,20 @@ components:
       schema:
         type: string
       description: User ID is a Contact.Id in Salesforce. This is used to determine the user's access level.
+    page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: 'Pagination: Page number to return in the response. Default 1.'
+    pageLength:
+      name: pageLength
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: 'Pagination: Length of page to include in the response. Default 50.'
   schemas:
     Contact:
       type: object
