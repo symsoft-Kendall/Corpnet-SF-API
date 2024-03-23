@@ -223,7 +223,7 @@ paths:
       - $ref: '#/components/parameters/EntityId'
   /glossary/entitytype:
     get:
-      summary: Your GET endpoint
+      summary: GET Entity Type Glossary
       tags: []
       responses: {}
       operationId: get-glossary-entitytype
@@ -265,7 +265,7 @@ paths:
         - $ref: '#/components/parameters/user_id'
   /products/packageCollections:
     get:
-      summary: Your GET endpoint
+      summary: GET Product Package Collections
       tags: []
       responses:
         '200':
@@ -309,7 +309,7 @@ paths:
         - $ref: '#/components/parameters/pageLength'
   /products/packages:
     get:
-      summary: Your GET endpoint
+      summary: Get Product Packages
       tags: []
       responses:
         '200':
@@ -337,7 +337,7 @@ paths:
         - $ref: '#/components/parameters/pageLength'
   /products/productOptions:
     get:
-      summary: Your GET endpoint
+      summary: GET Product Options
       tags: []
       responses:
         '200':
