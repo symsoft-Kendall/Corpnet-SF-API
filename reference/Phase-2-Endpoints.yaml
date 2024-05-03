@@ -104,7 +104,8 @@ paths:
       tags: []
       responses:
         '200':
-          description: OK
+          description: |
+            OK
           headers: {}
           content:
             application/json:
@@ -186,6 +187,23 @@ paths:
                       x-stoplight:
                         id: 5yfcoc6qmiv8h
                     nullable: true
+                  accountAccesses:
+                    type: array
+                    x-stoplight:
+                      id: zi9i4omo40ysi
+                    description: |
+                      This returns a list of the users who have access to this account. 
+                      Access Definition
+                      if the user has an admin (primary or delegated) level access to this parent account return all Access_Account__c records.
+                    items:
+                      x-stoplight:
+                        id: 9iwzcdmq0a43o
+                      type: object
+                      properties:
+                        accessAccount:
+                          $ref: '#/components/schemas/Account-access'
+                        userContact:
+                          $ref: '#/components/schemas/Contact'
       requestBody:
         content: {}
         description: ''
@@ -337,7 +355,8 @@ components:
     Account-access:
       type: object
       title: Account-access
-      description: Display these fields when returning Account_Access__c records.
+      description: |
+        Display these fields when returning Account_Access__c records.
       properties:
         accessLevel:
           type: string
@@ -356,7 +375,13 @@ components:
           description: Access_Account__c.Id
     Account:
       type: object
-      description: General Account info for an account
+      description: |-
+        General Account info for an account
+
+        Access Definition:
+        query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
+
+        They should only see the account if they have an access record related to it for the Contact where their Customer_Account__c is related to. 
       properties:
         id:
           type: string
@@ -377,6 +402,10 @@ components:
             Partner or Consumer
 
             RecordtypeName  Partner  Else Consumer
+        '':
+          type: string
+          x-stoplight:
+            id: kg51hv7xhmph6
     Entity:
       type: object
       title: Entity
@@ -392,6 +421,19 @@ components:
         Entity__c.Country__c
         Entity__c.County__c
         Ignore Phone & Email
+
+        Access Definition:  Based on user_id param  (if null 403 restricted access) 
+        user_id is a Salesforce contact id.  
+
+        query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
+
+        if Access_Account__c.Level__c is Primary Admin, Delegated Admin, All Data Read or All Data Write return this record in the call.
+
+        if Access_Account__c.Level__c is Partial Access query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param   
+
+
+        if found return record data
+        if not found do not return record data or exclude from list 
       x-examples:
         Example 1:
           Name: String
@@ -460,6 +502,23 @@ components:
           description: Entity__c.Website_URL__c
         businessAddress:
           $ref: '#/components/schemas/Address'
+        accessLevel:
+          type: string
+          x-stoplight:
+            id: fvr6ys3fvrbv9
+          description: |
+            query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
+
+            if Access_Account__c.Level__c is Partial Access query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param   
+
+            Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
+
+
+            if Access_Account__c.Level__c is "All Data Read" query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param 
+
+            If not found return "Read"
+
+            If found Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
     Entity-Expanded:
       type: object
       x-stoplight:
@@ -477,6 +536,18 @@ components:
         Entity__c.Country__c
         Entity__c.County__c
         Ignore Phone & Email
+
+        Access Definition:  Based on user_id param  (if null 403 restricted access) 
+        user_id is a Salesforce contact id.  
+
+        query for Access_Account__c record where contact__c = user id and Account__c = entity__c.Customer_Account__c.id
+
+        if Access_Account__c.Level__c is Primary Admin, Delegated Admin, All Data Read or All Data Write return this record in the call.
+
+        if Access_Account__c.Level__c is Partial Access query for Access_Entity__c where Access_Account__c = id of account access found and Entity__c = EntityId param   
+
+        if found return record data
+        if not found do not return record data or exclude from list 
       x-examples:
         Example 1:
           Name: String
@@ -530,6 +601,7 @@ components:
     Entity-Access:
       type: object
       title: Entity-Access
+      description: These are returned as a nested object under Account-access model.
       properties:
         accessLevel:
           type: string
@@ -543,7 +615,10 @@ components:
       x-stoplight:
         id: 1cwt2xny02c6f
       type: object
-      description: Basic Order data to be returned in an array.  Supports the dashboard view in GetAccountInfo
+      description: |-
+        Basic Order data to be returned in an array.  Supports the dashboard view in GetAccountInfo
+
+        Order record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the order is nested under.
       properties:
         id:
           type: string
@@ -617,6 +692,9 @@ components:
       description: |-
         Opportunities form Salesforce are Tasks in the CCC.  potental sales based on upcoming deadlines etc...
         Get Opportunites WHERE "type__c" = "Compliance Alert"
+
+        Access definition
+        Opportinity record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the opportunity is nested under.
       properties:
         id:
           type: string
@@ -677,6 +755,9 @@ components:
       description: |-
         Query of Request_for_information__c based on the account 
         GET Request_for_information__c WHERE Status != Completed
+
+        Access definition
+        Task access is based on user access to the Case this task is related to. 
       properties:
         id:
           type: string
@@ -731,9 +812,8 @@ components:
       description: |-
         Entity_Member__c.
 
-        entity property: Access level to this entity is determined first by an the Level__c on the Access_Entity__c where the Contact   matches the Contact__c and the Entity matches the Entity__c
-
-        If no record exists we look for Access_Account__c for the account that entity belongs to and use the Level__c of access on that record
+        Access definition
+        Entity_Member__c records should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the Entity_Member__c is related to in the Entity__r field.
 
         memberAddress Mapping Entity_Member__c.
         Member_Address_1__c
@@ -893,6 +973,9 @@ components:
             id: qtec7upkwou83
           items:
             $ref: '#/components/schemas/Business-Licenses'
+      description: |-
+        Access definition
+        Entity_State__c records should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the Entity_State__c is related to in the Entity__r field.
     Address:
       title: Address
       x-stoplight:
@@ -963,7 +1046,11 @@ components:
       x-stoplight:
         id: 6toryaojblma2
       type: object
-      description: Order_Filing_State__c.
+      description: |-
+        Order_Filing_State__c.
+
+        Access definition
+        Order_Filing_State__c records should only be returned if the user id has access to the Order  that the Order_Filing_State__c is related to in the Order__r field.
       properties:
         id:
           type: string
@@ -1078,6 +1165,9 @@ components:
           description: Request_for_information__c records realted to this Case.
           items:
             $ref: '#/components/schemas/Tasks'
+      description: |
+        Access definition:
+        Case record should only be returned if the user id has access to the Order that the Case is related to via the Order__r field. 
     GlossaryEntityType:
       title: GlossaryEntityType
       x-stoplight:
@@ -1114,7 +1204,11 @@ components:
       x-stoplight:
         id: 4woee8nh4p31l
       type: object
-      description: Entity_State_Account__c.
+      description: |-
+        Entity_State_Account__c.
+
+
+        Entity_State_Account__c records should only be returned if the user id has access to the Entity  that the Entity_State_Account__c is related to in the Entity__r field.
       properties:
         id:
           type: string
