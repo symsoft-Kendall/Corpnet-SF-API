@@ -416,10 +416,11 @@ components:
             Partner or Consumer
 
             RecordtypeName  Partner  Else Consumer
-        '':
+        pricebookId:
           type: string
           x-stoplight:
-            id: kg51hv7xhmph6
+            id: rg2c34ggojudd
+          description: Account.Price_Book__c
     Entity:
       type: object
       title: Entity
