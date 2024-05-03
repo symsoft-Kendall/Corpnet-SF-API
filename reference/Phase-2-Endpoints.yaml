@@ -829,29 +829,35 @@ components:
 
         Access definition
         Entity_Member__c records should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the Entity_Member__c is related to in the Entity__r field.
-
-        memberAddress Mapping Entity_Member__c.
-        Member_Address_1__c
-        Member_Address_2__c
-        Member_City__c
-        Member_State__c
-        Member_Zip_Code__c
-        Member_Country__c
       properties:
         id:
           type: string
           x-stoplight:
             id: tba48q87kwb03
           description: 'Id of Entity_Member__c record '
-        contact:
-          $ref: '#/components/schemas/Contact'
+        entityId:
+          type: string
+          x-stoplight:
+            id: q3f3z3epvxqoy
+          description: Entity_Member__c.Entity__c.Id
         role:
           type: string
           x-stoplight:
             id: 6doqvq5v2ey8b
           description: Entity_member__c.Role__c
+        ownershipPercentage:
+          type: number
+          x-stoplight:
+            id: 02z2f0int4uv6
+          description: Entity_Member__c.Ownership_Percentage__c
+        contact:
+          allOf:
+            - $ref: '#/components/schemas/Contact'
+          description: Entity_Member__c.Contact__c
         memberAddress:
-          $ref: '#/components/schemas/Address'
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          description: "Entity_Member__c\r\n    .Member_Address_1__c\r\n    .Member_Address_2__c\r\n    .Member_City__c\r\n    .Member_State__c\r\n    .Member_Zip_Code__c\r\n    .Member_Country__c\r\n    .Email__c\r\n    .Phone__c"
     DBA:
       title: DBA
       x-stoplight:
@@ -1464,6 +1470,39 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    EntityAffiliation:
+      title: EntityAffiliation
+      x-stoplight:
+        id: xk8js3aged1sb
+      type: object
+      description: Entity_Affiliation__c
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 7dwvyudg9y57o
+          description: Entity_Affiliation__c.Id
+        affiliatedEntity:
+          type: string
+          x-stoplight:
+            id: us8vif3ccu9dz
+          description: Entity_Affiliation__c.Affiliated_Entity__c.Id
+        ownershipPercentage:
+          type: number
+          x-stoplight:
+            id: e1l8km3ips37h
+        entity:
+          x-stoplight:
+            id: 2w3amerm3i6dc
+          description: Entity_Affiliation__c.Entity__c
+          allOf:
+            - $ref: '#/components/schemas/Entity'
+        address:
+          x-stoplight:
+            id: 7m991jkb7zjkf
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          description: "Entity_Affiliation__c\r\n    .Street_1__c\r\n    .Street_2__c\r\n    .City__c\r\n    .State__c\r\n    .Zip__c\r\n    .Email__c\r\n    .Phone__c"
   securitySchemes:
     OAuth Token:
       type: oauth2
