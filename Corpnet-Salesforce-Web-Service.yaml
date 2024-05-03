@@ -4141,6 +4141,12 @@ paths:
                                     FormId:
                                       type: string
                                       nullable: true
+                                    dependency:
+                                      type: string
+                                      x-stoplight:
+                                        id: hce61zlnk71by
+                                      description: |
+                                        Id of a product_option__c to which this
                               PackageCollection:
                                 type: array
                                 items:
@@ -4169,17 +4175,17 @@ paths:
                                 type: string
                               CollectionDisplaySequence:
                                 type: integer
-                              CustomName:
+                              displayName:
                                 type: string
                                 x-stoplight:
-                                  id: xx6jc8qjn1s5a
-                                description: Product.Custom_Name__c
-                              DisplayName:
-                                type: string
-                                x-stoplight:
-                                  id: dqq6xsmg3bski
+                                  id: 31hvpkhlx8zg1
                                 description: |
-                                  Product.Display_Name__c
+                                  product2.Display_Name__c
+                              customName:
+                                type: string
+                                x-stoplight:
+                                  id: 3v5wzokm2gnxk
+                                description: product2.Custom_Name__c  (boolean)
                         Id:
                           type: string
                         GridFeaturedPackage:
@@ -17735,201 +17741,17 @@ paths:
         - $ref: '#/components/parameters/uid'
       responses:
         '200':
-          description: Successful response
+          description: |-
+            Successful response
+
+            agentContactInfo
+            Include the FirstName, LastName, Email, Phone of the case Owner 
+
+            Some values in the address and location sections may be null.
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  PartnerGranteeAccount:
-                    type: object
-                    properties:
-                      Zip:
-                        type: string
-                      State:
-                        type: string
-                      City:
-                        type: string
-                      Street:
-                        type: string
-                      GranteeAccountNumber:
-                        type: string
-                      GranteeName:
-                        type: string
-                  AffiliatedEntities:
-                    type: array
-                    items:
-                      type: object
-                  Members:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        IsSignatory:
-                          type: boolean
-                        IsResponsibleParty:
-                          type: boolean
-                        IsTaxRegContact:
-                          type: boolean
-                        PercentOwnership:
-                          type: integer
-                        Title:
-                          type: string
-                        Zip:
-                          type: string
-                        State_FullName:
-                          type: string
-                        State_A2:
-                          type: string
-                        City:
-                          type: string
-                        Street2:
-                          nullable: true
-                        Street1:
-                          type: string
-                        Phone:
-                          type: string
-                        Email:
-                          type: string
-                        SSN:
-                          type: string
-                        LastName:
-                          type: string
-                        MiddleInit:
-                          nullable: true
-                        FirstName:
-                          type: string
-                        EntityMemberId:
-                          type: string
-                  EntityStateAccounts:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        StateAccountId:
-                          type: string
-                        FourthSecurityAnswer:
-                          nullable: true
-                        FourthSecurityQuestion:
-                          nullable: true
-                        ThirdSecurityAnswer:
-                          nullable: true
-                        ThirdSecurityQuestion:
-                          nullable: true
-                        SecondSecurityAnswer:
-                          nullable: true
-                        SecondSecurityQuestion:
-                          nullable: true
-                        FirstSecurityAnswer:
-                          nullable: true
-                        FirstSecurityQuestion:
-                          nullable: true
-                        ExistingAccount:
-                          type: boolean
-                        PIN:
-                          nullable: true
-                        Password:
-                          nullable: true
-                        Username:
-                          nullable: true
-                        EntityStateAccountId:
-                          type: string
-                  EntityState:
-                    type: object
-                    properties:
-                      NumberOfEmployees:
-                        type: integer
-                      First1500Date:
-                        type: string
-                      FirstPayrollDate:
-                        type: string
-                      FirstHireDate:
-                        type: string
-                      State:
-                        type: string
-                      EntityStateId:
-                        type: string
-                  Entity:
-                    type: object
-                    properties:
-                      BusinessDescription:
-                        type: string
-                      BusinessCategory:
-                        type: string
-                      FilingNumber:
-                        nullable: true
-                      FormationDate:
-                        type: string
-                      HomeState_A2:
-                        type: string
-                      HomeState:
-                        type: string
-                      EIN:
-                        type: string
-                      Type:
-                        type: string
-                      Name:
-                        type: string
-                      EntityId:
-                        type: string
-                  OrderContact:
-                    type: object
-                    properties:
-                      Email:
-                        type: string
-                      LastName:
-                        type: string
-                      MiddleInitial:
-                        nullable: true
-                      FirstName:
-                        type: string
-                      ContactId:
-                        type: string
-                  Order:
-                    type: object
-                    properties:
-                      MailingAddress:
-                        type: object
-                        properties:
-                          IsPayrollRecordsLocation:
-                            type: boolean
-                          Zip:
-                            type: string
-                          State_A2:
-                            type: string
-                          State_FullName:
-                            type: string
-                          City:
-                            type: string
-                          Street1:
-                            type: string
-                          Name:
-                            type: string
-                      OrderId:
-                        type: string
-                  Locations:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        IsPayRollRecordsLocation:
-                          type: boolean
-                        Zip:
-                          type: string
-                        State_FullName:
-                          type: string
-                        State_A2:
-                          type: string
-                        City:
-                          type: string
-                        Street2:
-                          type: string
-                        Street1:
-                          type: string
-                        Name:
-                          type: string
-                        LocationId:
-                          type: string
                 x-examples:
                   Example 1:
                     PartnerGranteeAccount:
@@ -18027,6 +17849,192 @@ paths:
                         Street1: 4160 Gridiron Rd
                         Name: 'Red River Academy, Inc - Mailing'
                         LocationId: 1313h000000mwwGAAQ
+                properties:
+                  PartnerGranteeAccount:
+                    type: object
+                    properties:
+                      GranteeAccountNumber:
+                        type: string
+                      GranteeName:
+                        type: string
+                      GranteeAddress:
+                        $ref: '#/components/schemas/Address'
+                  AffiliatedEntities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        AffiliatedEntityId:
+                          type: string
+                          x-stoplight:
+                            id: oxajg1iudbj36
+                        Name:
+                          type: string
+                          x-stoplight:
+                            id: kbynz7s7gl8f2
+                        EIN:
+                          type: string
+                          x-stoplight:
+                            id: f4sw2zs6ddqcj
+                        PercentOwnership:
+                          type: number
+                          x-stoplight:
+                            id: tyrr2c5vrp41y
+                        AffiliatedEntityAddress:
+                          $ref: '#/components/schemas/Address'
+                  Members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        IsSignatory:
+                          type: boolean
+                        IsResponsibleParty:
+                          type: boolean
+                        IsTaxRegContact:
+                          type: boolean
+                        PercentOwnership:
+                          type: integer
+                        Title:
+                          type: string
+                        EntityMemberId:
+                          type: string
+                        memberContact:
+                          $ref: '#/components/schemas/Contact'
+                        memberAddress:
+                          $ref: '#/components/schemas/Address'
+                  EntityStateAccounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        StateAccountId:
+                          type: string
+                        FourthSecurityAnswer:
+                          nullable: true
+                        FourthSecurityQuestion:
+                          nullable: true
+                        ThirdSecurityAnswer:
+                          nullable: true
+                        ThirdSecurityQuestion:
+                          nullable: true
+                        SecondSecurityAnswer:
+                          nullable: true
+                        SecondSecurityQuestion:
+                          nullable: true
+                        FirstSecurityAnswer:
+                          nullable: true
+                        FirstSecurityQuestion:
+                          nullable: true
+                        ExistingAccount:
+                          type: boolean
+                        PIN:
+                          nullable: true
+                        Password:
+                          nullable: true
+                        Username:
+                          nullable: true
+                        EntityStateAccountId:
+                          type: string
+                  EntityState:
+                    type: object
+                    properties:
+                      NumberOfEmployees:
+                        type: integer
+                      First1500Date:
+                        type: string
+                      FirstPayrollDate:
+                        type: string
+                      FirstHireDate:
+                        type: string
+                      State:
+                        type: string
+                      EntityStateId:
+                        type: string
+                  Entity:
+                    type: object
+                    properties:
+                      BusinessDescription:
+                        type: string
+                      BusinessCategory:
+                        type: string
+                      FilingNumber:
+                        nullable: true
+                      FormationDate:
+                        type: string
+                      HomeState_A2:
+                        type: string
+                      HomeState:
+                        type: string
+                      EIN:
+                        type: string
+                      Type:
+                        type: string
+                      Name:
+                        type: string
+                      EntityId:
+                        type: string
+                      NAICS:
+                        type: string
+                        x-stoplight:
+                          id: mr6eq1pes5f93
+                        description: |
+                          Entity__c.NAICS_code__c
+                  OrderContact:
+                    $ref: '#/components/schemas/Contact'
+                  Order:
+                    type: object
+                    properties:
+                      MailingAddress:
+                        $ref: '#/components/schemas/Location'
+                      OrderId:
+                        type: string
+                  Locations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Location'
+                  customDictionary:
+                    type: object
+                    x-stoplight:
+                      id: nxlzoo6wt80or
+                    description: |
+                      Entity_State_Data_Point__c records related to the Entity_State__c from above
+                      key value pairs  Name:value__c,
+
+                      one key value pair for each Entity_State_Data_Point__c record
+
+                      JSON Object 
+                      customDictionary {
+                        "definedKey1": "enteredValue1",
+                        "definedKey2": "enteredValue2"
+                      }
+
+                      Salesfore mapping Example {
+                      "Entity_State_Data_Point__c1.Name": "Entity_State_Data_Point__c1.Value__c",
+                      "Entity_State_Data_Point__c2.Name": "Entity_State_Data_Point__c2.Value__c"
+
+                      }
+                    properties:
+                      definedKey1:
+                        type: string
+                        x-stoplight:
+                          id: qvjkuv4yfe8vl
+                        description: |-
+                          "definedKey1":"enteredValue1"
+
+                          IE   "LristName":"Bloch"
+                        example: enteredValue1
+                      definedKey2:
+                        type: string
+                        x-stoplight:
+                          id: x1qg22y40iptk
+                        example: enteredValue2
+                        description: |-
+                          "definedKey2":"enteredValue2"
+
+                          IE   "FristName":"Dave"
+                  agentContactInfo:
+                    $ref: '#/components/schemas/Contact'
       security:
         - OAuth Token: []
       servers:
@@ -18911,6 +18919,102 @@ components:
           tokenUrl: /services/oauth2/token
           scopes: {}
       description: ''
+  schemas:
+    Contact:
+      type: object
+      x-examples:
+        Example 1:
+          id: string
+          firstName: string
+          lastName: string
+          address:
+            street: string
+            street2: string
+            city: string
+            state: string
+            zip: string
+            country: string
+            phone: string
+            email: string
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleInitial:
+          type: string
+          x-stoplight:
+            id: zs53fl4p73bu4
+        SSN:
+          type: string
+          x-stoplight:
+            id: fvnpnem6n4zaj
+        birthdate:
+          type: string
+          x-stoplight:
+            id: vwkx430de08eu
+        contactAddress:
+          $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      x-examples:
+        Example 1:
+          street: string
+          street2: string
+          city: string
+          state: string
+          zip: string
+          country: string
+          phone: string
+          email: string
+      description: standard address format
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        stateAlpha2:
+          type: string
+          x-stoplight:
+            id: ssybs4turczez
+        zip:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+    Location:
+      title: Location
+      x-stoplight:
+        id: ninbodng6pjpl
+      type: object
+      properties:
+        locationId:
+          type: string
+          x-stoplight:
+            id: khku9zsas0ssw
+        name:
+          type: string
+          x-stoplight:
+            id: tubm005w8u0oj
+        isPayrollRecordsLocation:
+          type: string
+          x-stoplight:
+            id: uckvzr9n915hh
+        type:
+          type: string
+          x-stoplight:
+            id: j6xthznmk3ovf
+        locationAddress:
+          $ref: '#/components/schemas/Address'
 security:
   - OAuth Token: []
 tags:
