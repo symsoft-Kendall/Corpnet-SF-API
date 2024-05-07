@@ -220,6 +220,40 @@ paths:
         id: k98ccoe5v1gfx
     parameters:
       - $ref: '#/components/parameters/AccountId'
+  '/account/{AccountId}/entityMembers':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entityMembers:
+                    x-stoplight:
+                      id: kkyh49axrkvfr
+                    allOf:
+                      - items:
+                          $ref: '#/components/schemas/EntityMembers'
+                    description: The complete list of Entity_Member__c records belonging to every accessible Entity__c belonging to the Account.
+                    type: array
+                  entityAffiliations:
+                    x-stoplight:
+                      id: 6czqcpuf178kq
+                    allOf:
+                      - items:
+                          $ref: '#/components/schemas/EntityAffiliation'
+                    description: The complete list of Entity_Affiliation__c records belonging to every accessible Entity__c belonging to the Account.
+                    type: array
+      operationId: get-account-entityMembers
+      x-stoplight:
+        id: 38rzj2a7z0y82
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/user_id'
   '/entity/{EntityId}':
     get:
       summary: GET Entity
@@ -239,22 +273,6 @@ paths:
         - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/EntityId'
-  /glossary/entitytype:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-glossary-entitytype
-      x-stoplight:
-        id: e4d49zpuwopio
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                '':
-                  $ref: '#/components/schemas/GlossaryEntityType'
   '/order/{OrderId}':
     parameters:
       - schema:
@@ -591,7 +609,7 @@ components:
           type: array
           description: 'Entity_State__c Records where Entity__c = {EntityId}'
           items:
-            $ref: '#/components/schemas/entityStates'
+            $ref: '#/components/schemas/EntityState'
         entityMembers:
           type: array
           x-stoplight:
@@ -599,7 +617,13 @@ components:
           description: All entity members related to this entity.
           items:
             $ref: '#/components/schemas/EntityMembers'
-        taxRegistration:
+        entityAffiliations:
+          type: array
+          x-stoplight:
+            id: 7qwslu55i6xz6
+          items:
+            $ref: '#/components/schemas/EntityAffiliation'
+        taxRegistrations:
           type: array
           x-stoplight:
             id: znmannvyc81hx
@@ -858,6 +882,76 @@ components:
           allOf:
             - $ref: '#/components/schemas/Address'
           description: "Entity_Member__c\r\n    .Member_Address_1__c\r\n    .Member_Address_2__c\r\n    .Member_City__c\r\n    .Member_State__c\r\n    .Member_Zip_Code__c\r\n    .Member_Country__c\r\n    .Email__c\r\n    .Phone__c"
+        responsiblePartyIn:
+          type: array
+          x-stoplight:
+            id: 7qwxroayg3d0y
+          description: List of states in which the Entity_Member__c is linked to a Responsible_Party__c record.
+          items:
+            x-stoplight:
+              id: wjvq4o2frvm32
+            type: object
+            properties:
+              stateName:
+                type: string
+                x-stoplight:
+                  id: swb9y2qv1sxbb
+                description: Responsible_Party__c.State__c
+              entityStateId:
+                type: string
+                x-stoplight:
+                  id: ajiqu755cg794
+                description: Responsible_Party__c.Entity_State__c.Id
+    EntityAffiliation:
+      title: EntityAffiliation
+      x-stoplight:
+        id: xk8js3aged1sb
+      type: object
+      description: Entity_Affiliation__c
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 7dwvyudg9y57o
+          description: Entity_Affiliation__c.Id
+        affiliatedEntity:
+          type: string
+          x-stoplight:
+            id: us8vif3ccu9dz
+          description: Entity_Affiliation__c.Affiliated_Entity__c.Id
+        ownershipPercentage:
+          type: number
+          x-stoplight:
+            id: e1l8km3ips37h
+        entity:
+          x-stoplight:
+            id: 2w3amerm3i6dc
+          description: Entity_Affiliation__c.Entity__c
+          allOf:
+            - $ref: '#/components/schemas/Entity'
+        address:
+          x-stoplight:
+            id: 7m991jkb7zjkf
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          description: "Entity_Affiliation__c\r\n    .Street_1__c\r\n    .Street_2__c\r\n    .City__c\r\n    .State__c\r\n    .Zip__c\r\n    .Email__c\r\n    .Phone__c"
+        responsiblePartyIn:
+          type: array
+          x-stoplight:
+            id: m63qmtd6mvy1y
+          items:
+            x-stoplight:
+              id: 3tralmov97hq8
+            type: object
+            properties:
+              stateName:
+                type: string
+                x-stoplight:
+                  id: ps0yumtu5c3zt
+              entityStateId:
+                type: string
+                x-stoplight:
+                  id: dnbwdhnivlc9z
     DBA:
       title: DBA
       x-stoplight:
@@ -931,7 +1025,7 @@ components:
           description: Registered_Agent__c.Name
         agentAddress:
           $ref: '#/components/schemas/Address'
-    entityStates:
+    EntityState:
       title: Entity State
       x-stoplight:
         id: hdvnxd7ugkq61
@@ -1470,39 +1564,6 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
-    EntityAffiliation:
-      title: EntityAffiliation
-      x-stoplight:
-        id: xk8js3aged1sb
-      type: object
-      description: Entity_Affiliation__c
-      properties:
-        id:
-          type: string
-          x-stoplight:
-            id: 7dwvyudg9y57o
-          description: Entity_Affiliation__c.Id
-        affiliatedEntity:
-          type: string
-          x-stoplight:
-            id: us8vif3ccu9dz
-          description: Entity_Affiliation__c.Affiliated_Entity__c.Id
-        ownershipPercentage:
-          type: number
-          x-stoplight:
-            id: e1l8km3ips37h
-        entity:
-          x-stoplight:
-            id: 2w3amerm3i6dc
-          description: Entity_Affiliation__c.Entity__c
-          allOf:
-            - $ref: '#/components/schemas/Entity'
-        address:
-          x-stoplight:
-            id: 7m991jkb7zjkf
-          allOf:
-            - $ref: '#/components/schemas/Address'
-          description: "Entity_Affiliation__c\r\n    .Street_1__c\r\n    .Street_2__c\r\n    .City__c\r\n    .State__c\r\n    .Zip__c\r\n    .Email__c\r\n    .Phone__c"
   securitySchemes:
     OAuth Token:
       type: oauth2
