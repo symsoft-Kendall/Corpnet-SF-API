@@ -445,16 +445,6 @@ components:
       description: |-
         All core entity data for a single entity
 
-        For businessAddress
-        Entity__c.Business_Address_1__c
-        Entity__c.Business_Address_2__c
-        Entity__c.City__c
-        Entity__c.State__c
-        Entity__c.Zip_Code__c
-        Entity__c.Country__c
-        Entity__c.County__c
-        Ignore Phone & Email
-
         Access Definition:  Based on user_id param  (if null 403 restricted access) 
         user_id is a Salesforce contact id.  
 
@@ -534,7 +524,9 @@ components:
             id: o0x66uwkm1b08
           description: Entity__c.Website_URL__c
         businessAddress:
-          $ref: '#/components/schemas/Address'
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          description: "Entity__c.Business_Address_1__c\r\nEntity__c.Business_Address_2__c\r\nEntity__c.City__c\r\nEntity__c.State__c\r\nEntity__c.Zip_Code__c\r\nEntity__c.Country__c\r\nEntity__c.County__c\r\nIgnore Phone & Email"
         accessLevel:
           type: string
           x-stoplight:
@@ -560,16 +552,6 @@ components:
       description: |-
         All core entity data for a single entity.  Id =  {EntityId} provided as Param 
 
-        for entity buisness address  
-        Entity__c.Business_Address_1__c
-        Entity__c.Business_Address_2__c
-        Entity__c.City__c
-        Entity__c.State__c
-        Entity__c.Zip_Code__c
-        Entity__c.Country__c
-        Entity__c.County__c
-        Ignore Phone & Email
-
         Access Definition:  Based on user_id param  (if null 403 restricted access) 
         user_id is a Salesforce contact id.  
 
@@ -588,55 +570,64 @@ components:
           Type: string
       properties:
         entityBasic:
-          $ref: '#/components/schemas/Entity'
+          allOf:
+            - $ref: '#/components/schemas/Entity'
         complianceAlerts:
-          type: array
           x-stoplight:
             id: fty9rmuid3og8
-          description: 'Request for Information Records Where Entity= entity id provided.  {EntityId}'
-          items:
-            $ref: '#/components/schemas/Opportunity'
-        orders:
+          description: 'Opportunity Records Where type is "Compliance Alert", and Entity= entity id provided.  {EntityId}'
+          allOf:
+            - items:
+                $ref: '#/components/schemas/Opportunity'
           type: array
+        orders:
           x-stoplight:
             id: ue4371jqwxo69
           description: 'Order Records where Entity__c = {EntityId}'
-          items:
-            $ref: '#/components/schemas/Order'
+          allOf:
+            - items:
+                $ref: '#/components/schemas/Order'
+          type: array
         states:
           x-stoplight:
             id: 6nmuashjaxca1
-          type: array
           description: 'Entity_State__c Records where Entity__c = {EntityId}'
-          items:
-            $ref: '#/components/schemas/EntityState'
-        entityMembers:
+          allOf:
+            - items:
+                $ref: '#/components/schemas/EntityState'
           type: array
+        entityMembers:
           x-stoplight:
             id: 9fl3bnkq4r9na
           description: All entity members related to this entity.
-          items:
-            $ref: '#/components/schemas/EntityMembers'
-        entityAffiliations:
+          allOf:
+            - items:
+                $ref: '#/components/schemas/EntityMembers'
           type: array
+        entityAffiliations:
           x-stoplight:
             id: 7qwslu55i6xz6
-          items:
-            $ref: '#/components/schemas/EntityAffiliation'
-        taxRegistrations:
+          allOf:
+            - items:
+                $ref: '#/components/schemas/EntityAffiliation'
+          description: All Entity_Affiliation__c records related to this Entity__c
           type: array
+        taxRegistrations:
           x-stoplight:
             id: znmannvyc81hx
           description: Entity_State_Account__c records related to this Entity  via Entity__c lookup field
-          items:
-            $ref: '#/components/schemas/taxRegistration'
-        tasks:
+          allOf:
+            - items:
+                $ref: '#/components/schemas/taxRegistration'
           type: array
+        tasks:
           x-stoplight:
             id: 4y9l52hy5m4gm
           description: Request for Information realted to this entity.
-          items:
-            $ref: '#/components/schemas/Tasks'
+          allOf:
+            - items:
+                $ref: '#/components/schemas/Tasks'
+          type: array
     Entity-Access:
       type: object
       title: Entity-Access
