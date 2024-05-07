@@ -768,7 +768,7 @@ components:
         id: 5yiwx1fxvk3qk
       type: object
       description: |-
-        Query of Request_for_information__c based on the account 
+        Query of Request_for_information__c (RFI) based on the account 
         GET Request_for_information__c WHERE Status != Completed
 
         Access definition
@@ -819,6 +819,24 @@ components:
           x-stoplight:
             id: mzwh8vwtbs4fq
           description: Request_for_information__c.Case__c.Entity__c.id
+        jsonSummary:
+          type: string
+          x-stoplight:
+            id: tq3cxa1xafvbs
+          description: Request_for_information__c.JSON_Summary__c
+        response:
+          type: string
+          x-stoplight:
+            id: xvefv3i8v7z82
+          description: Request_for_information__c.Response__c
+        requestForms:
+          x-stoplight:
+            id: wbthkdsu5i7ks
+          allOf:
+            - items:
+                $ref: '#/components/schemas/requestForm'
+          description: All request forms realted to this RFI
+          type: array
     EntityMembers:
       title: Entity Member
       x-stoplight:
@@ -1464,6 +1482,38 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    requestForm:
+      title: requestForm
+      x-stoplight:
+        id: s6x7pk65minrf
+      type: object
+      properties:
+        formId:
+          type: string
+          x-stoplight:
+            id: dk2pcr45mrvnx
+          description: Form_Name_FormIoId__c
+        object:
+          type: string
+          x-stoplight:
+            id: 56jz4butg8ooo
+          description: |-
+            Object__c
+
+            object API Name from Salesforce
+        objectSFID:
+          type: string
+          x-stoplight:
+            id: 9fbvkd0gkh9yr
+          description: |-
+            Object_SFID__c
+            Leave blank to indicate this is an insert vs an update
+        rfiId:
+          type: string
+          x-stoplight:
+            id: rlulcqd9e62eo
+          description: Request_for_Information__c
+      description: This will be an array of request form related to a Request for Infomation__c
   securitySchemes:
     OAuth Token:
       type: oauth2
