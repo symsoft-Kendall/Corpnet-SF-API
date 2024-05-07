@@ -829,6 +829,14 @@ components:
           x-stoplight:
             id: xvefv3i8v7z82
           description: Request_for_information__c.Response__c
+        documentPreviewUrl:
+          type: string
+          x-stoplight:
+            id: ryrb9561psj1g
+        documentDownloadUrl:
+          type: string
+          x-stoplight:
+            id: bjfldl9fcg1ex
         requestForms:
           x-stoplight:
             id: wbthkdsu5i7ks
