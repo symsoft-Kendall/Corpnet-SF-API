@@ -299,6 +299,26 @@ paths:
         Access to the order will be determined by the existence of Entity Access for the Contact to the Entity related to the specifc order. 
       parameters:
         - $ref: '#/components/parameters/user_id'
+  '/account/{AccountId}/entities':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: All entities belonging to the account and accessible to the user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entity'
+      operationId: get-account-AccountId
+      x-stoplight:
+        id: 2mt6zbzdks4d3
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
 components:
   parameters:
     id:
@@ -544,6 +564,55 @@ components:
             If not found return "Read"
 
             If found Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
+        entityAffiliations:
+          type: array
+          x-stoplight:
+            id: ztz1ov2rrmv3p
+          description: All Entity_Affiliation__c records in which Entity_Affiliation__c.Entity__c is the concerned Entity
+          items:
+            x-stoplight:
+              id: 2j0012lhz0y64
+            type: object
+            properties:
+              entityId:
+                type: string
+                x-stoplight:
+                  id: uvejjf1rkas8q
+                description: Entity_Affiliation__c.Affiliated_Entity__c.Id
+              affiliationId:
+                type: string
+                x-stoplight:
+                  id: ugmizc3jrkksz
+                description: Entity_Affiliation__c.Id
+              entityName:
+                type: string
+                x-stoplight:
+                  id: lo6zx6t6cqwf7
+                description: Entity_Affiliation__c.Affiliated_Entity__c.Name
+              ownershipPercentage:
+                type: number
+                x-stoplight:
+                  id: 1qa03wgn0q991
+              responsiblePartyIn:
+                type: array
+                x-stoplight:
+                  id: 2vtp3gh0yndds
+                description: All Entity_State__c records in which the Entity_Affiliation__c is linked to a Responsible_Party__c record
+                items:
+                  x-stoplight:
+                    id: fhkopt0mdx3if
+                  type: object
+                  properties:
+                    stateName:
+                      type: string
+                      x-stoplight:
+                        id: a20oo19tg1tp0
+                      description: Entity_State__c.State__c
+                    entityStateId:
+                      type: string
+                      x-stoplight:
+                        id: yae0mzmxi8pkh
+                      description: Entity_State__c.Id
     Entity-Expanded:
       type: object
       x-stoplight:
