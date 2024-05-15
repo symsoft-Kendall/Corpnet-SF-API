@@ -613,6 +613,10 @@ components:
                       x-stoplight:
                         id: yae0mzmxi8pkh
                       description: Entity_State__c.Id
+                    responsiblePartyId:
+                      type: string
+                      x-stoplight:
+                        id: xo0jgtbzr6gq8
     Entity-Expanded:
       type: object
       x-stoplight:
@@ -962,6 +966,10 @@ components:
                 x-stoplight:
                   id: ajiqu755cg794
                 description: Responsible_Party__c.Entity_State__c.Id
+              responsiblePartyId:
+                type: string
+                x-stoplight:
+                  id: 4modpwetb1qcv
     EntityAffiliation:
       title: EntityAffiliation
       x-stoplight:
