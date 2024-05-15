@@ -833,10 +833,12 @@ components:
           type: string
           x-stoplight:
             id: ryrb9561psj1g
+          description: Document_Preview_URL__c
         documentDownloadUrl:
           type: string
           x-stoplight:
             id: bjfldl9fcg1ex
+          description: "\tDocument_Download_URL__c"
         requestForms:
           x-stoplight:
             id: wbthkdsu5i7ks
