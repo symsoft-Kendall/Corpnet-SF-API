@@ -839,6 +839,16 @@ components:
           x-stoplight:
             id: bjfldl9fcg1ex
           description: "\tDocument_Download_URL__c"
+        feeOrderId:
+          type: string
+          x-stoplight:
+            id: a6n5ve2fgzkt5
+          description: Request_for_information__c.Fee_Order_Id__c
+        memberRequirements:
+          type: string
+          x-stoplight:
+            id: ybd6y2493d4h6
+          description: Request_for_information__c.Member_Requirements__c
         requestForms:
           x-stoplight:
             id: wbthkdsu5i7ks
