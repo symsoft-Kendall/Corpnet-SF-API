@@ -848,7 +848,9 @@ components:
           type: string
           x-stoplight:
             id: ybd6y2493d4h6
-          description: Request_for_information__c.Member_Requirements__c
+          description: |-
+            Request_for_information__c.Member_Requirements__c
+            (multiselect picklist ; delimited)
         requestForms:
           x-stoplight:
             id: wbthkdsu5i7ks
