@@ -799,16 +799,16 @@ components:
           x-stoplight:
             id: 31y6k0gs46lj0
           description: Request_for_information__c.Type__c
-        caseId:
-          type: string
-          x-stoplight:
-            id: xkvjqueozpfy4
-          description: Request_for_information__c.Case__c.Id
         orderId:
           type: string
           x-stoplight:
             id: 2z0lizjytmn0j
           description: Request_for_information__c.Order__c.Id
+        caseId:
+          type: string
+          x-stoplight:
+            id: xkvjqueozpfy4
+          description: Request_for_information__c.Case__c.Id
         customerEmail:
           type: string
           x-stoplight:
@@ -857,7 +857,7 @@ components:
           allOf:
             - items:
                 $ref: '#/components/schemas/requestForm'
-          description: All request forms realted to this RFI
+          description: All Request_Form__c records realted to this RFI via Request_for_Information__c field
           type: array
     EntityMembers:
       title: Entity Member
