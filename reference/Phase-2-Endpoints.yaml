@@ -222,7 +222,7 @@ paths:
       - $ref: '#/components/parameters/AccountId'
   '/account/{AccountId}/entityMembers':
     get:
-      summary: Your GET endpoint
+      summary: Get Account Entity Members
       tags: []
       responses:
         '200':
@@ -301,7 +301,7 @@ paths:
         - $ref: '#/components/parameters/user_id'
   '/account/{AccountId}/entities':
     get:
-      summary: Your GET endpoint
+      summary: Get Account Entities
       tags: []
       responses:
         '200':
