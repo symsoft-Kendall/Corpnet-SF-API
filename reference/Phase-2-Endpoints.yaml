@@ -300,7 +300,7 @@ paths:
       operationId: get-user-UserId-notifications
       x-stoplight:
         id: 0n8iwlhq60aqi
-      description: Return all notifications for a single user based on their Contact Id provided as UserId parameter.
+      description: Return all notifications for a single Account filtering based on the UserId/ContactId to dertermine access.
 components:
   parameters:
     id:
