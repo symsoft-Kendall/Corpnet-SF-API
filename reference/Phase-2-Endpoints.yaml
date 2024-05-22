@@ -281,13 +281,10 @@ paths:
         Access to the order will be determined by the existence of Entity Access for the Contact to the Entity related to the specifc order. 
       parameters:
         - $ref: '#/components/parameters/user_id'
-  '/user/{UserId}/notifications':
+  '/account/{AccountId}/notifications':
     parameters:
-      - schema:
-          type: string
-        name: UserId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/user_id'
     get:
       summary: Get User Notifications
       tags: []
