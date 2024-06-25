@@ -893,6 +893,25 @@ components:
                 x-stoplight:
                   id: ajiqu755cg794
                 description: Responsible_Party__c.Entity_State__c.Id
+        taxMemberContact:
+          type: array
+          x-stoplight:
+            id: av3bf3k522byp
+          description: |
+            Query Entity State Records where Entity Member is listed as the Tax Member Contact__c lookup field
+          items:
+            x-stoplight:
+              id: 4tve8qe98ga2e
+            type: object
+            properties:
+              stateName:
+                type: string
+                x-stoplight:
+                  id: vw1f67g8io7p5
+              entityStateId:
+                type: string
+                x-stoplight:
+                  id: 4dvnlna4xtljo
     EntityAffiliation:
       title: EntityAffiliation
       x-stoplight:
