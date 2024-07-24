@@ -923,27 +923,27 @@ components:
           type: boolean
           x-stoplight:
             id: rgxofs2dbk6jz
-          description: Entity_Member__c.
+          description: Entity_Member__c.PresidentCEO__c
         vicePresident:
           type: boolean
           x-stoplight:
             id: aiqtlofasceoq
-          description: Entity_Member__c.
+          description: Entity_Member__c.Vice_President__c
         treasurer:
           type: boolean
           x-stoplight:
             id: in12q3ho8sosb
-          description: Entity_Member__c.
-        secrectary:
+          description: Entity_Member__c.Treasurer__c
+        secretary:
           type: boolean
           x-stoplight:
             id: wsa130s29cqbs
-          description: Entity_Member__c.
+          description: Entity_Member__c.Secretary__c
         director:
           type: boolean
           x-stoplight:
             id: uqkiridsg7hsk
-          description: Entity_Member__c.
+          description: Entity_Member__c.Director__c
         irsContact:
           type: boolean
           x-stoplight:
@@ -958,7 +958,7 @@ components:
           type: boolean
           x-stoplight:
             id: 7t6wdgs7t6ehb
-          description: Entity_Member__c.
+          description: Entity_Member__c.Shareholder__c
         owner:
           type: boolean
           x-stoplight:
@@ -968,7 +968,12 @@ components:
           type: boolean
           x-stoplight:
             id: zv71rt5euyqrw
-          description: Entity_Member__c.
+          description: Entity_Member__c.Partner__c
+        chairperson:
+          type: string
+          x-stoplight:
+            id: 20ivbhxok9faf
+          description: Entity_Member__c.Chairperson__c
     EntityAffiliation:
       title: EntityAffiliation
       x-stoplight:
