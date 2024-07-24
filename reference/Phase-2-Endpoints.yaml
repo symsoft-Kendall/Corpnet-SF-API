@@ -299,6 +299,26 @@ paths:
         Access to the order will be determined by the existence of Entity Access for the Contact to the Entity related to the specifc order. 
       parameters:
         - $ref: '#/components/parameters/user_id'
+  '/account/{AccountId}/entities':
+    get:
+      summary: Get Account Entities
+      tags: []
+      responses:
+        '200':
+          description: All entities belonging to the account and accessible to the user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entity'
+      operationId: get-account-AccountId
+      x-stoplight:
+        id: 2mt6zbzdks4d3
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
 components:
   parameters:
     id:
@@ -974,6 +994,10 @@ components:
           x-stoplight:
             id: 20ivbhxok9faf
           description: Entity_Member__c.Chairperson__c
+              responsiblePartyId:
+                type: string
+                x-stoplight:
+                  id: 4modpwetb1qcv
     EntityAffiliation:
       title: EntityAffiliation
       x-stoplight:
