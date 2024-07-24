@@ -855,11 +855,11 @@ components:
           x-stoplight:
             id: q3f3z3epvxqoy
           description: Entity_Member__c.Entity__c.Id
-        role:
+        title:
           type: string
           x-stoplight:
             id: 6doqvq5v2ey8b
-          description: Entity_member__c.Role__c
+          description: Entity_member__c.title__c
         ownershipPercentage:
           type: number
           x-stoplight:
@@ -893,6 +893,10 @@ components:
                 x-stoplight:
                   id: ajiqu755cg794
                 description: Responsible_Party__c.Entity_State__c.Id
+              signitory:
+                type: boolean
+                x-stoplight:
+                  id: c8xnsnkdtb19t
         taxMemberContact:
           type: array
           x-stoplight:
@@ -912,6 +916,48 @@ components:
                 type: string
                 x-stoplight:
                   id: 4dvnlna4xtljo
+        president:
+          type: boolean
+          x-stoplight:
+            id: rgxofs2dbk6jz
+        vicePresident:
+          type: boolean
+          x-stoplight:
+            id: aiqtlofasceoq
+        treasurer:
+          type: boolean
+          x-stoplight:
+            id: in12q3ho8sosb
+        secrectary:
+          type: boolean
+          x-stoplight:
+            id: wsa130s29cqbs
+        director:
+          type: boolean
+          x-stoplight:
+            id: uqkiridsg7hsk
+        irsContact:
+          type: boolean
+          x-stoplight:
+            id: k99c6c205rqs4
+        memberType:
+          type: string
+          x-stoplight:
+            id: 96ppdilqan7b4
+          description: Entity_Member__c.LLC_Member_Type__c
+        shareholder:
+          type: boolean
+          x-stoplight:
+            id: 7t6wdgs7t6ehb
+        owner:
+          type: boolean
+          x-stoplight:
+            id: af83olsbju1t5
+          description: Owner__c
+        partner:
+          type: boolean
+          x-stoplight:
+            id: zv71rt5euyqrw
     EntityAffiliation:
       title: EntityAffiliation
       x-stoplight:
