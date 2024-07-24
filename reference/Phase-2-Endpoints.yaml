@@ -897,12 +897,13 @@ components:
                 type: boolean
                 x-stoplight:
                   id: c8xnsnkdtb19t
+                description: Responsible_Party__c.Signatory__c
         taxMemberContact:
           type: array
           x-stoplight:
             id: av3bf3k522byp
           description: |
-            Query Entity State Records where Entity Member is listed as the Tax Member Contact__c lookup field
+            Query Entity State Records where Entity Member is listed as the Tax Member Contact__c lookup field. The field is a lookup to entity Member.
           items:
             x-stoplight:
               id: 4tve8qe98ga2e
@@ -912,34 +913,42 @@ components:
                 type: string
                 x-stoplight:
                   id: vw1f67g8io7p5
+                description: Entity_State__c.state
               entityStateId:
                 type: string
                 x-stoplight:
                   id: 4dvnlna4xtljo
+                description: Entity_State__c.id
         president:
           type: boolean
           x-stoplight:
             id: rgxofs2dbk6jz
+          description: Entity_Member__c.
         vicePresident:
           type: boolean
           x-stoplight:
             id: aiqtlofasceoq
+          description: Entity_Member__c.
         treasurer:
           type: boolean
           x-stoplight:
             id: in12q3ho8sosb
+          description: Entity_Member__c.
         secrectary:
           type: boolean
           x-stoplight:
             id: wsa130s29cqbs
+          description: Entity_Member__c.
         director:
           type: boolean
           x-stoplight:
             id: uqkiridsg7hsk
+          description: Entity_Member__c.
         irsContact:
           type: boolean
           x-stoplight:
             id: k99c6c205rqs4
+          description: Entity_Member__c.
         memberType:
           type: string
           x-stoplight:
@@ -949,15 +958,17 @@ components:
           type: boolean
           x-stoplight:
             id: 7t6wdgs7t6ehb
+          description: Entity_Member__c.
         owner:
           type: boolean
           x-stoplight:
             id: af83olsbju1t5
-          description: Owner__c
+          description: Entity_Member__c.Owner__c
         partner:
           type: boolean
           x-stoplight:
             id: zv71rt5euyqrw
+          description: Entity_Member__c.
     EntityAffiliation:
       title: EntityAffiliation
       x-stoplight:
