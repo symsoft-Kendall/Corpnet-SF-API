@@ -994,10 +994,6 @@ components:
           x-stoplight:
             id: 20ivbhxok9faf
           description: Entity_Member__c.Chairperson__c
-              responsiblePartyId:
-                type: string
-                x-stoplight:
-                  id: 4modpwetb1qcv
     EntityAffiliation:
       title: EntityAffiliation
       x-stoplight:
