@@ -374,22 +374,6 @@ components:
       type: object
       title: Contact
       description: Whenever a contact is returned these are the fields to include. See specific endpoint description to determine what specific contact to reference...
-      properties:
-        id:
-          type: string
-          description: Id
-        firstName:
-          type: string
-          description: Contact.FirstName
-          x-stoplight:
-            id: jayomjbtzq97y
-        lastName:
-          type: string
-          description: Contact.LastName
-          x-stoplight:
-            id: z84f6hrk5ke9f
-        address:
-          $ref: '#/components/schemas/Address'
       x-examples:
         Example 1:
           id: string
@@ -404,6 +388,27 @@ components:
             country: string
             phone: string
             email: string
+      properties:
+        id:
+          type: string
+          description: Id
+        firstName:
+          type: string
+          description: Contact.FirstName
+          x-stoplight:
+            id: jayomjbtzq97y
+        lastName:
+          type: string
+          description: Contact.LastName
+          x-stoplight:
+            id: z84f6hrk5ke9f
+        birthdate:
+          type: string
+          x-stoplight:
+            id: qqo7baq0ppftl
+          description: Contact.Birthdate
+        address:
+          $ref: '#/components/schemas/Address'
     Account-access:
       type: object
       title: Account-access
