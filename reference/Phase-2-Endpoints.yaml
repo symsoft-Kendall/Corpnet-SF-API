@@ -802,6 +802,20 @@ components:
             id: znn3z6fpjrudh
           description: |
             Opportunity.Entity__c.Id
+        opportunityProducts:
+          type: array
+          x-stoplight:
+            id: j568m1nudkrl7
+          items:
+            $ref: '#/components/schemas/product'
+        formIds:
+          type: array
+          x-stoplight:
+            id: 2o7sd0zrrbaia
+          items:
+            x-stoplight:
+              id: rg91obcbp58nx
+            type: string
     Tasks:
       title: Tasks
       x-stoplight:
