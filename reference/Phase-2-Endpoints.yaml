@@ -1613,6 +1613,40 @@ components:
           x-stoplight:
             id: 967ib73lethgs
           description: OrderItem.Product2Id.Family
+    product_copy:
+      title: OppProduct
+      x-stoplight:
+        id: wgrjykkay718f
+      type: object
+      description: OrderItem
+      properties:
+        id:
+          type: string
+          description: OpportunityLineItem.Id
+        price:
+          type: string
+          description: OpportunityLineItem.TotalPrice
+        productName:
+          type: string
+          description: OpportunityLineItem.Product_Name__c
+        listPrice:
+          type: string
+          description: OpportunityLineItem.ListPrice
+        UnitePrice:
+          type: string
+          description: OpportunityLineItem.UnitPrice
+        dicountAmount:
+          type: string
+          description: OpportunityLineItem.Discount_Amount__c
+        quantity:
+          type: string
+          description: OpportunityLineItem.Quantity
+        state:
+          type: string
+          description: OpportunityLineItem.Product_State__c
+        productFamily:
+          type: string
+          description: OpportunityLineItem.Product2Id.Family
     transaction:
       title: transaction
       x-stoplight:
