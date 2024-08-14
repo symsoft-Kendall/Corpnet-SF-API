@@ -1632,9 +1632,11 @@ components:
         listPrice:
           type: string
           description: OpportunityLineItem.ListPrice
-        UnitePrice:
+        unitPrice:
           type: string
           description: OpportunityLineItem.UnitPrice
+          x-stoplight:
+            id: rq4kgdaiiq6eq
         dicountAmount:
           type: string
           description: OpportunityLineItem.Discount_Amount__c
