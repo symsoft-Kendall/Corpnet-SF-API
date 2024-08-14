@@ -1618,7 +1618,7 @@ components:
       x-stoplight:
         id: wgrjykkay718f
       type: object
-      description: OrderItem
+      description: OpportunityLineItem
       properties:
         id:
           type: string
