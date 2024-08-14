@@ -1588,7 +1588,7 @@ components:
           x-stoplight:
             id: jbgf6vuyz9wav
           description: OrderItem.ListPrice
-        UnitePrice:
+        unitPrice:
           type: string
           x-stoplight:
             id: e9o4fqvu732h4
