@@ -807,7 +807,7 @@ components:
           x-stoplight:
             id: j568m1nudkrl7
           items:
-            $ref: '#/components/schemas/product'
+            $ref: '#/components/schemas/product_copy'
         formIds:
           type: array
           x-stoplight:
