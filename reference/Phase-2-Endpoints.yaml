@@ -748,6 +748,8 @@ components:
         Opportunities form Salesforce are Tasks in the CCC.  potental sales based on upcoming deadlines etc...
         Get Opportunites WHERE "type__c" = "Compliance Alert"
 
+        Only return Opportunity records where isClosed = FALSE
+
         Access definition
         Opportinity record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the opportunity is nested under.
       properties:
@@ -1613,7 +1615,7 @@ components:
           x-stoplight:
             id: 967ib73lethgs
           description: OrderItem.Product2Id.Family
-    product_copy:
+    OppProduct:
       title: OppProduct
       x-stoplight:
         id: wgrjykkay718f
