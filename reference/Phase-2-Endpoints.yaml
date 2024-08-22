@@ -1648,6 +1648,21 @@ components:
         productFamily:
           type: string
           description: OpportunityLineItem.Product2Id.Family
+        formioId:
+          type: string
+          x-stoplight:
+            id: zz87y44bd50g9
+          description: opportunityLineItem.formIoId__c
+        productDisplayType:
+          type: string
+          x-stoplight:
+            id: r538f162k0xoe
+          description: |-
+            OpportunityLineItem.product_display_type__c
+
+            Optional
+            Required
+            Selected
     transaction:
       title: transaction
       x-stoplight:
