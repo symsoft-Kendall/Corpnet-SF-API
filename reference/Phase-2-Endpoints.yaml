@@ -1521,11 +1521,6 @@ components:
           x-stoplight:
             id: 8v1k0r133k1bl
           description: CCC_User_Notification__c.CCC_Notification__r.Parent_Notification__c
-        orderId:
-          type: string
-          x-stoplight:
-            id: 9dz5hw9s84fmk
-          description: CCC_User_Notification__c.CCC_Notification__r.Order__c
         status:
           type: string
           x-stoplight:
@@ -1536,16 +1531,26 @@ components:
           x-stoplight:
             id: tmwq6cuw2zh4g
           description: CCC_User_Notification__c.CCC_Notification__r.type__c
-        createdDate:
+        orderId:
           type: string
           x-stoplight:
-            id: oczwee1ra7p3c
-          description: CCC_User_Notification__c.CreatedDate
+            id: 9dz5hw9s84fmk
+          description: CCC_User_Notification__c.CCC_Notification__r.Order__c
         rfiId:
           type: string
           x-stoplight:
             id: czyijyh3dkiwy
           description: CCC_User_Notification__c.CCC_Notification__r.RFI__c
+        opportunityId:
+          type: string
+          x-stoplight:
+            id: f5qmjy21l2pxv
+          description: "\tCCC_User_Notification__c.CCC_Notification__r.Opportunity__c"
+        createdDate:
+          type: string
+          x-stoplight:
+            id: oczwee1ra7p3c
+          description: CCC_User_Notification__c.CreatedDate
   securitySchemes:
     OAuth Token:
       type: oauth2
