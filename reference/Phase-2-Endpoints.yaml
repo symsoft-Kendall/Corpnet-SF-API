@@ -319,6 +319,35 @@ paths:
         - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/AccountId'
+  '/account/{AccountId}/subscriptions':
+    get:
+      summary: Get Account Subscriptions
+      tags: []
+      responses:
+        '200':
+          description: |-
+            All subscriptions belonging to the account and accessible to the user via entity access.
+
+            Only return the most recent subscription plan of particular type for that entity.
+            based on a uniquely concatenated formula 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/subscription'
+      operationId: get-subscriptions-AccountId
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+      x-stoplight:
+        id: 03my8nbigvo7u
+    parameters:
+      - name: AccountId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: 'Salesforce Account Id '
 components:
   parameters:
     id:
@@ -1661,6 +1690,68 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    subscription:
+      title: subscription
+      x-stoplight:
+        id: 0q4g2l1g77ry0
+      type: object
+      description: |
+        Subscription_Plan__c
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 4ikx1pd3m1i90
+          description: Subscription_Plan__c.id
+        duration:
+          type: string
+          x-stoplight:
+            id: 1d8x3cnq7utdk
+          description: |-
+            Subscription_Plan__c.Duration__c
+            In Months
+        endDate:
+          type: string
+          x-stoplight:
+            id: 9rwq1ykwmtcfg
+          description: End_date__c
+        startDate:
+          type: string
+          x-stoplight:
+            id: lubxvleucq72e
+        entityId:
+          type: string
+          x-stoplight:
+            id: 4ck7oirbv269j
+          description: Entity__c
+        entityState:
+          type: string
+          x-stoplight:
+            id: tgredrl4s27jy
+          description: Entity_State__c
+        opportunity:
+          type: string
+          x-stoplight:
+            id: mst948fs9qy8m
+          description: |-
+            Opportunity__c
+            Compliance Alert
+        order:
+          type: string
+          x-stoplight:
+            id: o25cgpi0c0bw2
+        registeredAgent:
+          type: string
+          x-stoplight:
+            id: mtzefbyfm1k6l
+        productSubscription:
+          type: string
+          x-stoplight:
+            id: tur0xqc283lbh
+        name:
+          type: string
+          x-stoplight:
+            id: t7m8ifgpxrkst
   securitySchemes:
     OAuth Token:
       type: oauth2
