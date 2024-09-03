@@ -1144,6 +1144,11 @@ components:
           x-stoplight:
             id: u20j7v53a3bq7
           description: Registered_Agent__c.Entity_State__c.id
+        type:
+          type: string
+          x-stoplight:
+            id: w63e48a63x3se
+          description: Registered_agent__c.type__c
         fullName:
           type: string
           x-stoplight:
@@ -1161,11 +1166,6 @@ components:
           x-stoplight:
             id: q2tw0a1o46ek2
           description: Registered_agent__c.renewal_Opportunity__r.closeDate
-        type:
-          type: string
-          x-stoplight:
-            id: w63e48a63x3se
-          description: Registered_agent__c.type__c
     EntityState:
       title: Entity State
       x-stoplight:
@@ -1729,45 +1729,61 @@ components:
           type: string
           x-stoplight:
             id: 9rwq1ykwmtcfg
-          description: End_date__c
+          description: Subscription_Plan__c.End_date__c
         startDate:
           type: string
           x-stoplight:
             id: lubxvleucq72e
+          description: Subscription_Plan__c.Start_Date__c
         entityId:
           type: string
           x-stoplight:
             id: 4ck7oirbv269j
-          description: Entity__c
+          description: Subscription_Plan__c.Entity__c
         entityState:
           type: string
           x-stoplight:
             id: tgredrl4s27jy
-          description: Entity_State__c
+          description: Subscription_Plan__c.Entity_State__c
         opportunity:
           type: string
           x-stoplight:
             id: mst948fs9qy8m
           description: |-
-            Opportunity__c
+            Subscription_Plan__c.Opportunity__c
 
             Renewal Opportunity/Compliance Alert Id 
         order:
           type: string
           x-stoplight:
             id: o25cgpi0c0bw2
+          description: Subscription_Plan__c.Order__c
         registeredAgent:
           type: string
           x-stoplight:
             id: mtzefbyfm1k6l
+          description: |
+            Subscription_Plan__c.Registered_Agent__c
         productSubscription:
           type: string
           x-stoplight:
             id: tur0xqc283lbh
+          description: Subscription_Plan__c.Product_Subscription__c
         name:
           type: string
           x-stoplight:
             id: t7m8ifgpxrkst
+          description: Subscription_Plan__c.name
+        status:
+          type: string
+          x-stoplight:
+            id: ins7pw9tdfizx
+          description: Subscription_Plan__c.status__c
+        state:
+          type: string
+          x-stoplight:
+            id: om120fjfsxrf0
+          description: Subscription_Plan__c.state__c
   securitySchemes:
     OAuth Token:
       type: oauth2
