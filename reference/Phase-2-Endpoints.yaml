@@ -739,6 +739,12 @@ components:
           description: array of Order_Filing_State__c records where Order__c = id of this Order_Filing_State__c
           items:
             $ref: '#/components/schemas/Filing-State'
+        products:
+          type: array
+          x-stoplight:
+            id: ihidu0dx07iln
+          items:
+            $ref: '#/components/schemas/product'
     Opportunity:
       title: Opportunity
       x-stoplight:
@@ -1299,13 +1305,6 @@ components:
           description: 'Cases related to this order   '
           items:
             $ref: '#/components/schemas/Case'
-        products:
-          type: array
-          x-stoplight:
-            id: qbfxqe9vi0vy6
-          description: OrderItems related to this order
-          items:
-            $ref: '#/components/schemas/product'
         tansactions:
           type: array
           x-stoplight:
