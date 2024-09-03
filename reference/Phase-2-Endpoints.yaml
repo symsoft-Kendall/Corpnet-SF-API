@@ -1784,6 +1784,11 @@ components:
           x-stoplight:
             id: om120fjfsxrf0
           description: Subscription_Plan__c.state__c
+        renewalType:
+          type: string
+          x-stoplight:
+            id: obkoedjr71qnq
+          description: Subscription_Plan__c.Renewal_Type__c
   securitySchemes:
     OAuth Token:
       type: oauth2
