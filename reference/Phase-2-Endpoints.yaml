@@ -1151,6 +1151,21 @@ components:
           description: Registered_Agent__c.Name
         agentAddress:
           $ref: '#/components/schemas/Address'
+        renewalOpportunityld:
+          type: string
+          x-stoplight:
+            id: 8uxe3aovdugoy
+          description: Registered_agent__c.renewal_Opportunity__c
+        renewalOpportunityDueDate:
+          type: string
+          x-stoplight:
+            id: q2tw0a1o46ek2
+          description: Registered_agent__c.renewal_Opportunity__r.closeDate
+        type:
+          type: string
+          x-stoplight:
+            id: w63e48a63x3se
+          description: Registered_agent__c.type__c
     EntityState:
       title: Entity State
       x-stoplight:
@@ -1735,7 +1750,8 @@ components:
             id: mst948fs9qy8m
           description: |-
             Opportunity__c
-            Compliance Alert
+
+            Renewal Opportunity/Compliance Alert Id 
         order:
           type: string
           x-stoplight:
