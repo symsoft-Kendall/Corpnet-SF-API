@@ -1666,6 +1666,7 @@ components:
       x-stoplight:
         id: 8rxizrm994mwl
       type: object
+      description: User_Identity__c
       properties:
         id:
           type: string
@@ -1681,22 +1682,27 @@ components:
           type: string
           x-stoplight:
             id: 6ylhnm488iwuv
+          description: User_Identity__c.question_2__c
         answer1:
           type: string
           x-stoplight:
             id: 4emzeadlds1f6
+          description: User_Identity__c.answer_1__c
         question2:
           type: string
           x-stoplight:
             id: lliqsj9btl5s8
+          description: User_Identity__c.question_2__c
         answer2:
           type: string
           x-stoplight:
             id: 0terszayzrjb1
+          description: User_Identity__c.answer_2__c
         pin:
           type: string
           x-stoplight:
             id: bsfuwl48mccju
+          description: User_Identity__c.pin__c
   securitySchemes:
     OAuth Token:
       type: oauth2
