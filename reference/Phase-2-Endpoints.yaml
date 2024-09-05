@@ -69,13 +69,8 @@ paths:
                         BillingAddress: null
                         AccountReferralId: '0'
                 properties:
-                  authId:
-                    type: string
-                    x-stoplight:
-                      id: 1xu763dw8d4fm
-                    description: |-
-                      The Auth_Id__c parameter passed with the call should find a User_Identity__c record with a matching Auth_Id__c
-                      The Contact__c of that record will be the one returned in the Contact section. As well as returning the Account acccesses related to that contact.
+                  authUser:
+                    $ref: '#/components/schemas/auth'
                   contact:
                     $ref: '#/components/schemas/Contact'
                   accountAccesses:
