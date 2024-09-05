@@ -1661,6 +1661,42 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    auth:
+      title: auth
+      x-stoplight:
+        id: 8rxizrm994mwl
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: ebbh15kzeovki
+          description: User_Identity__c.Id
+        authId:
+          type: string
+          x-stoplight:
+            id: n9ohvs3d08hjf
+          description: User_Identity__c.auth_id__c
+        question1:
+          type: string
+          x-stoplight:
+            id: 6ylhnm488iwuv
+        answer1:
+          type: string
+          x-stoplight:
+            id: 4emzeadlds1f6
+        question2:
+          type: string
+          x-stoplight:
+            id: lliqsj9btl5s8
+        answer2:
+          type: string
+          x-stoplight:
+            id: 0terszayzrjb1
+        pin:
+          type: string
+          x-stoplight:
+            id: bsfuwl48mccju
   securitySchemes:
     OAuth Token:
       type: oauth2
