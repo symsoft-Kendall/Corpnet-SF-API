@@ -464,6 +464,11 @@ components:
           x-stoplight:
             id: rg2c34ggojudd
           description: Account.Price_Book__c
+        brainTreeProfileId:
+          type: string
+          x-stoplight:
+            id: bl7qitdba42ul
+          description: Account.BrainTreeProfile_Id__c
     Entity:
       type: object
       title: Entity
