@@ -759,6 +759,8 @@ components:
         Opportunities form Salesforce are Tasks in the CCC.  potental sales based on upcoming deadlines etc...
         Get Opportunites WHERE "type__c" = "Compliance Alert"
 
+        Only return Opportunity records where isClosed = FALSE
+
         Access definition
         Opportinity record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the opportunity is nested under.
       properties:
@@ -813,6 +815,17 @@ components:
             id: znn3z6fpjrudh
           description: |
             Opportunity.Entity__c.Id
+        productPackageId:
+          type: string
+          x-stoplight:
+            id: s4mhlc8jmrkks
+          description: Opportunity.Product_Package_Id__c
+        opportunityProducts:
+          type: array
+          x-stoplight:
+            id: j568m1nudkrl7
+          items:
+            $ref: '#/components/schemas/product_copy'
     Tasks:
       title: Tasks
       x-stoplight:
@@ -1578,7 +1591,7 @@ components:
           x-stoplight:
             id: jbgf6vuyz9wav
           description: OrderItem.ListPrice
-        UnitePrice:
+        unitPrice:
           type: string
           x-stoplight:
             id: e9o4fqvu732h4
@@ -1603,6 +1616,57 @@ components:
           x-stoplight:
             id: 967ib73lethgs
           description: OrderItem.Product2Id.Family
+    OppProduct:
+      title: OppProduct
+      x-stoplight:
+        id: wgrjykkay718f
+      type: object
+      description: OpportunityLineItem
+      properties:
+        id:
+          type: string
+          description: OpportunityLineItem.Id
+        price:
+          type: string
+          description: OpportunityLineItem.TotalPrice
+        productName:
+          type: string
+          description: OpportunityLineItem.Product_Name__c
+        listPrice:
+          type: string
+          description: OpportunityLineItem.ListPrice
+        unitPrice:
+          type: string
+          description: OpportunityLineItem.UnitPrice
+          x-stoplight:
+            id: rq4kgdaiiq6eq
+        dicountAmount:
+          type: string
+          description: OpportunityLineItem.Discount_Amount__c
+        quantity:
+          type: string
+          description: OpportunityLineItem.Quantity
+        state:
+          type: string
+          description: OpportunityLineItem.Product_State__c
+        productFamily:
+          type: string
+          description: OpportunityLineItem.Product2Id.Family
+        formioId:
+          type: string
+          x-stoplight:
+            id: zz87y44bd50g9
+          description: opportunityLineItem.formIoId__c
+        productDisplayType:
+          type: string
+          x-stoplight:
+            id: r538f162k0xoe
+          description: |-
+            OpportunityLineItem.product_display_type__c
+
+            Optional
+            Required
+            Selected
     transaction:
       title: transaction
       x-stoplight:
