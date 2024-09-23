@@ -314,6 +314,219 @@ paths:
         - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/AccountId'
+  '/partner-user/{UserEmail}':
+    get:
+      summary: Get User Access Info
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    ClientsInfo:
+                      - UID: 5a6ff6f5-9a72-459b-a26d-f1980d8f6407
+                        ShippingAddress: null
+                        PID: null
+                        Name: Kendall Testy Helms
+                        LogoURL: null
+                        Id: 0018D00000Mykg9QAB
+                        Discount: null
+                        Contacts:
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0053h0000030ekPAAQ
+                            Name: Reginald Quaint
+                            Id: 0038D00000I071GQAR
+                            Email: existingacct@test.texas
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: null
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Kendall Testy Helms
+                            Id: 0038D00000Fo4FhQAJ
+                            Email: kendalltesty.h@symsoftsolutions.com
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Peter Party
+                            Id: 0038D00000IAfSzQAL
+                            Email: peterparty@texas.test
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Mundungus Fletcher
+                            Id: 0038D00000J0QwmQAF
+                            Email: dungy.fletch@ww.hp
+                            AccountId: 0018D00000Mykg9QAB
+                        BrainTreeProfileId: '49897021653'
+                        BillingAddress: null
+                        AccountReferralId: '0'
+                properties:
+                  authUser:
+                    $ref: '#/components/schemas/auth'
+                  contact:
+                    $ref: '#/components/schemas/Contact'
+                  accountAccesses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account-access'
+              examples: {}
+      security:
+        - OAuth Token: []
+      servers:
+        - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
+        - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
+          description: ''
+      operationId: U2
+      description: |-
+        This call  will be used connect a specific auth id to a single contact in Salesforce returning all the access information for that contact to view or edit accounts and entities. 
+
+        Access flow chart diagram in figma:  https://www.figma.com/file/F0GJB0XB7dLJkwTV5QNCG5/Corpnet-CCC---Determining-User-Access-to-Accounts-and-Related-Entities?type=whiteboard&t=zYLzYVgfGSnh156s-0
+      x-stoplight:
+        id: 5wnmil6e62fw7
+    parameters:
+      - schema:
+          type: string
+        name: UserEmail
+        in: path
+        required: true
+  '/partner-entity/{PCID}':
+    get:
+      summary: GET Entity
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity-Expanded'
+      operationId: get-entity
+      description: This call is used to get data for a comprehensive view of all the data relateing to a single entity.
+      parameters: []
+      x-stoplight:
+        id: nozf9zigdtnqw
+    parameters:
+      - schema:
+          type: string
+        name: PCID
+        in: path
+        required: true
+  '/partnerEntity/{PCID}/account':
+    get:
+      summary: Get Account Info
+      tags: []
+      responses:
+        '200':
+          description: |
+            OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountInfo:
+                    $ref: '#/components/schemas/Account'
+                  orders:
+                    type: array
+                    description: |-
+                      Where Order.AccountId = AccountId
+
+                      20 most recent
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  complianceAlerts:
+                    type: array
+                    description: Opportunities Where Account.Id = AccountId
+                    items:
+                      $ref: '#/components/schemas/Opportunity'
+                  tasks:
+                    type: array
+                    description: Request_for_Information__c Where Case.AccountId = AccountId
+                    items:
+                      $ref: '#/components/schemas/Tasks'
+                  entities:
+                    type: array
+                    description: |-
+                      Entity__c records where Account__c = the AccountId Param
+
+                      AND   Where the Contact has Entity_access__c to the Entity
+
+                      For businessAddress
+                      Entity__c.Business_Address_1__c
+                      Entity__c.Business_Address_2__c
+                      Entity__c.City__c
+                      Entity__c.State__c
+                      Entity__c.Zip_Code__c
+                      Entity__c.Country__c
+                      Entity__c.County__c
+                      Ignore Phone & Email
+                    items:
+                      $ref: '#/components/schemas/Entity'
+                  numberofOrders:
+                    type: integer
+                    description: Count of all orders realated to the AccountId
+                  pendingOrders:
+                    type: integer
+                    description: |
+                      Count of all orders realated to the AccountId
+                      where Order_Phase__c != completed
+                  totalCompanies:
+                    type: integer
+                    description: count of Entities where Account__c = Count of all orders realated to the AccountId
+                  totalClients:
+                    type: integer
+                    description: |-
+                      Partner_Role__c Where Partner_Account__c = AccountId
+
+                      Type??
+                      operationId: get-getaccountinfo
+                      x-stoplight:
+                        id: 5yfcoc6qmiv8h
+                    nullable: true
+                  accountAccesses:
+                    type: array
+                    description: |
+                      This returns a list of the users who have access to this account. 
+                      Access Definition
+                      if the user has an admin (primary or delegated) level access to this parent account return all Access_Account__c records.
+                    items:
+                      type: object
+                      properties:
+                        accessAccount:
+                          $ref: '#/components/schemas/Account-access'
+                        userContact:
+                          $ref: '#/components/schemas/Contact'
+      requestBody:
+        content: {}
+        description: ''
+      parameters: []
+      operationId: U3
+      description: |-
+        Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
+
+        The Contact Id (UserId) provided is used to determine access level to the Account and Entities returned in the call.
+
+        User Access Flow diagram - https://www.figma.com/file/F0GJB0XB7dLJkwTV5QNCG5/Corpnet-CCC---Determining-User-Access-to-Accounts-and-Related-Entities?type=whiteboard&node-id=0%3A1&t=rYcp9ulNsdte3Z94-1
+      x-stoplight:
+        id: bq5v3foc0pb7k
+    parameters:
+      - schema:
+          type: string
+        name: PCID
+        in: path
+        required: true
 components:
   parameters:
     id:
@@ -830,7 +1043,7 @@ components:
           x-stoplight:
             id: j568m1nudkrl7
           items:
-            $ref: '#/components/schemas/product_copy'
+            $ref: '#/components/schemas/OppProduct'
     Tasks:
       title: Tasks
       x-stoplight:
