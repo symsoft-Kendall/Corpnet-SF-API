@@ -69,13 +69,8 @@ paths:
                         BillingAddress: null
                         AccountReferralId: '0'
                 properties:
-                  authId:
-                    type: string
-                    x-stoplight:
-                      id: 1xu763dw8d4fm
-                    description: |-
-                      The Auth_Id__c parameter passed with the call should find a User_Identity__c record with a matching Auth_Id__c
-                      The Contact__c of that record will be the one returned in the Contact section. As well as returning the Account acccesses related to that contact.
+                  authUser:
+                    $ref: '#/components/schemas/auth'
                   contact:
                     $ref: '#/components/schemas/Contact'
                   accountAccesses:
@@ -1671,6 +1666,48 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    auth:
+      title: auth
+      x-stoplight:
+        id: 8rxizrm994mwl
+      type: object
+      description: User_Identity__c
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: ebbh15kzeovki
+          description: User_Identity__c.Id
+        authId:
+          type: string
+          x-stoplight:
+            id: n9ohvs3d08hjf
+          description: User_Identity__c.auth_id__c
+        question1:
+          type: string
+          x-stoplight:
+            id: 6ylhnm488iwuv
+          description: User_Identity__c.question_2__c
+        answer1:
+          type: string
+          x-stoplight:
+            id: 4emzeadlds1f6
+          description: User_Identity__c.answer_1__c
+        question2:
+          type: string
+          x-stoplight:
+            id: lliqsj9btl5s8
+          description: User_Identity__c.question_2__c
+        answer2:
+          type: string
+          x-stoplight:
+            id: 0terszayzrjb1
+          description: User_Identity__c.answer_2__c
+        pin:
+          type: string
+          x-stoplight:
+            id: bsfuwl48mccju
+          description: User_Identity__c.pin__c
   securitySchemes:
     OAuth Token:
       type: oauth2
