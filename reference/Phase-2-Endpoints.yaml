@@ -569,6 +569,11 @@ components:
             If not found return "Read"
 
             If found Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
+        companyManagment:
+          type: string
+          x-stoplight:
+            id: zhyladbmgu7fo
+          description: Entity__c.CompanyManagement__c
         preferredCardId:
           type: string
           x-stoplight:
