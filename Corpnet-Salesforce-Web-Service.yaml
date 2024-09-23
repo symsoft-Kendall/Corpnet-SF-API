@@ -17951,6 +17951,12 @@ paths:
                         type: string
                       EntityStateId:
                         type: string
+                      approximateAmount:
+                        type: number
+                        x-stoplight:
+                          id: bgoof4mfnj1gt
+                        description: Amount of first payroll
+                        nullable: true
                   Entity:
                     type: object
                     properties:
@@ -17959,7 +17965,7 @@ paths:
                       BusinessCategory:
                         type: string
                       FilingNumber:
-                        nullable: true
+                        type: string
                       FormationDate:
                         type: string
                       HomeState_A2:
@@ -17980,6 +17986,11 @@ paths:
                           id: mr6eq1pes5f93
                         description: |
                           Entity__c.NAICS_code__c
+                      llcTaxType:
+                        type: string
+                        x-stoplight:
+                          id: ors1iwykxmxfl
+                        description: 'If business is LLC, what it''s taxed as'
                   OrderContact:
                     $ref: '#/components/schemas/Contact'
                   Order:
@@ -18991,6 +19002,10 @@ components:
           type: string
         email:
           type: string
+        county:
+          type: string
+          x-stoplight:
+            id: zjzvuhalnhzws
     Location:
       title: Location
       x-stoplight:
@@ -19015,6 +19030,21 @@ components:
             id: j6xthznmk3ovf
         locationAddress:
           $ref: '#/components/schemas/Address'
+        buildingType:
+          type: string
+          x-stoplight:
+            id: kepslabasbj88
+          description: Location.Building_Type__c
+        isPrimary:
+          type: boolean
+          x-stoplight:
+            id: gqvhsrwb56pdj
+          description: Location.Is_Primary__c
+        numberOfEmployees:
+          type: integer
+          x-stoplight:
+            id: 8g9h81phanx9f
+          description: Location.Number_Of_Employees__c
 security:
   - OAuth Token: []
 tags:

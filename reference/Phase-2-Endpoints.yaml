@@ -69,13 +69,8 @@ paths:
                         BillingAddress: null
                         AccountReferralId: '0'
                 properties:
-                  authId:
-                    type: string
-                    x-stoplight:
-                      id: 1xu763dw8d4fm
-                    description: |-
-                      The Auth_Id__c parameter passed with the call should find a User_Identity__c record with a matching Auth_Id__c
-                      The Contact__c of that record will be the one returned in the Contact section. As well as returning the Account acccesses related to that contact.
+                  authUser:
+                    $ref: '#/components/schemas/auth'
                   contact:
                     $ref: '#/components/schemas/Contact'
                   accountAccesses:
@@ -299,6 +294,26 @@ paths:
         Access to the order will be determined by the existence of Entity Access for the Contact to the Entity related to the specifc order. 
       parameters:
         - $ref: '#/components/parameters/user_id'
+  '/account/{AccountId}/entities':
+    get:
+      summary: Get Account Entities
+      tags: []
+      responses:
+        '200':
+          description: All entities belonging to the account and accessible to the user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entity'
+      operationId: get-account-AccountId
+      x-stoplight:
+        id: 2mt6zbzdks4d3
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
 components:
   parameters:
     id:
@@ -354,22 +369,6 @@ components:
       type: object
       title: Contact
       description: Whenever a contact is returned these are the fields to include. See specific endpoint description to determine what specific contact to reference...
-      properties:
-        id:
-          type: string
-          description: Id
-        firstName:
-          type: string
-          description: Contact.FirstName
-          x-stoplight:
-            id: jayomjbtzq97y
-        lastName:
-          type: string
-          description: Contact.LastName
-          x-stoplight:
-            id: z84f6hrk5ke9f
-        address:
-          $ref: '#/components/schemas/Address'
       x-examples:
         Example 1:
           id: string
@@ -384,6 +383,27 @@ components:
             country: string
             phone: string
             email: string
+      properties:
+        id:
+          type: string
+          description: Id
+        firstName:
+          type: string
+          description: Contact.FirstName
+          x-stoplight:
+            id: jayomjbtzq97y
+        lastName:
+          type: string
+          description: Contact.LastName
+          x-stoplight:
+            id: z84f6hrk5ke9f
+        birthdate:
+          type: string
+          x-stoplight:
+            id: qqo7baq0ppftl
+          description: Contact.Birthdate
+        address:
+          $ref: '#/components/schemas/Address'
     Account-access:
       type: object
       title: Account-access
@@ -439,6 +459,11 @@ components:
           x-stoplight:
             id: rg2c34ggojudd
           description: Account.Price_Book__c
+        brainTreeProfileId:
+          type: string
+          x-stoplight:
+            id: bl7qitdba42ul
+          description: Account.BrainTreeProfile_Id__c
     Entity:
       type: object
       title: Entity
@@ -549,6 +574,11 @@ components:
           x-stoplight:
             id: zhyladbmgu7fo
           description: Entity__c.CompanyManagement__c
+        preferredCardId:
+          type: string
+          x-stoplight:
+            id: ox1nthgx7buj4
+          description: Entity__c.Preferred_Card_Braintree_Id__c
     Entity-Expanded:
       type: object
       x-stoplight:
@@ -719,6 +749,12 @@ components:
           description: array of Order_Filing_State__c records where Order__c = id of this Order_Filing_State__c
           items:
             $ref: '#/components/schemas/Filing-State'
+        products:
+          type: array
+          x-stoplight:
+            id: ihidu0dx07iln
+          items:
+            $ref: '#/components/schemas/product'
     Opportunity:
       title: Opportunity
       x-stoplight:
@@ -727,6 +763,8 @@ components:
       description: |-
         Opportunities form Salesforce are Tasks in the CCC.  potental sales based on upcoming deadlines etc...
         Get Opportunites WHERE "type__c" = "Compliance Alert"
+
+        Only return Opportunity records where isClosed = FALSE
 
         Access definition
         Opportinity record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the opportunity is nested under.
@@ -782,6 +820,17 @@ components:
             id: znn3z6fpjrudh
           description: |
             Opportunity.Entity__c.Id
+        productPackageId:
+          type: string
+          x-stoplight:
+            id: s4mhlc8jmrkks
+          description: Opportunity.Product_Package_Id__c
+        opportunityProducts:
+          type: array
+          x-stoplight:
+            id: j568m1nudkrl7
+          items:
+            $ref: '#/components/schemas/product_copy'
     Tasks:
       title: Tasks
       x-stoplight:
@@ -1279,13 +1328,6 @@ components:
           description: 'Cases related to this order   '
           items:
             $ref: '#/components/schemas/Case'
-        products:
-          type: array
-          x-stoplight:
-            id: qbfxqe9vi0vy6
-          description: OrderItems related to this order
-          items:
-            $ref: '#/components/schemas/product'
         tansactions:
           type: array
           x-stoplight:
@@ -1554,7 +1596,7 @@ components:
           x-stoplight:
             id: jbgf6vuyz9wav
           description: OrderItem.ListPrice
-        UnitePrice:
+        unitPrice:
           type: string
           x-stoplight:
             id: e9o4fqvu732h4
@@ -1579,6 +1621,57 @@ components:
           x-stoplight:
             id: 967ib73lethgs
           description: OrderItem.Product2Id.Family
+    OppProduct:
+      title: OppProduct
+      x-stoplight:
+        id: wgrjykkay718f
+      type: object
+      description: OpportunityLineItem
+      properties:
+        id:
+          type: string
+          description: OpportunityLineItem.Id
+        price:
+          type: string
+          description: OpportunityLineItem.TotalPrice
+        productName:
+          type: string
+          description: OpportunityLineItem.Product_Name__c
+        listPrice:
+          type: string
+          description: OpportunityLineItem.ListPrice
+        unitPrice:
+          type: string
+          description: OpportunityLineItem.UnitPrice
+          x-stoplight:
+            id: rq4kgdaiiq6eq
+        dicountAmount:
+          type: string
+          description: OpportunityLineItem.Discount_Amount__c
+        quantity:
+          type: string
+          description: OpportunityLineItem.Quantity
+        state:
+          type: string
+          description: OpportunityLineItem.Product_State__c
+        productFamily:
+          type: string
+          description: OpportunityLineItem.Product2Id.Family
+        formioId:
+          type: string
+          x-stoplight:
+            id: zz87y44bd50g9
+          description: opportunityLineItem.formIoId__c
+        productDisplayType:
+          type: string
+          x-stoplight:
+            id: r538f162k0xoe
+          description: |-
+            OpportunityLineItem.product_display_type__c
+
+            Optional
+            Required
+            Selected
     transaction:
       title: transaction
       x-stoplight:
@@ -1641,6 +1734,48 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    auth:
+      title: auth
+      x-stoplight:
+        id: 8rxizrm994mwl
+      type: object
+      description: User_Identity__c
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: ebbh15kzeovki
+          description: User_Identity__c.Id
+        authId:
+          type: string
+          x-stoplight:
+            id: n9ohvs3d08hjf
+          description: User_Identity__c.auth_id__c
+        question1:
+          type: string
+          x-stoplight:
+            id: 6ylhnm488iwuv
+          description: User_Identity__c.question_2__c
+        answer1:
+          type: string
+          x-stoplight:
+            id: 4emzeadlds1f6
+          description: User_Identity__c.answer_1__c
+        question2:
+          type: string
+          x-stoplight:
+            id: lliqsj9btl5s8
+          description: User_Identity__c.question_2__c
+        answer2:
+          type: string
+          x-stoplight:
+            id: 0terszayzrjb1
+          description: User_Identity__c.answer_2__c
+        pin:
+          type: string
+          x-stoplight:
+            id: bsfuwl48mccju
+          description: User_Identity__c.pin__c
   securitySchemes:
     OAuth Token:
       type: oauth2
