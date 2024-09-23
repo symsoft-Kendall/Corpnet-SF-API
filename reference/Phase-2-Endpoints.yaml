@@ -464,6 +464,11 @@ components:
           x-stoplight:
             id: rg2c34ggojudd
           description: Account.Price_Book__c
+        brainTreeProfileId:
+          type: string
+          x-stoplight:
+            id: bl7qitdba42ul
+          description: Account.BrainTreeProfile_Id__c
     Entity:
       type: object
       title: Entity
@@ -569,6 +574,11 @@ components:
             If not found return "Read"
 
             If found Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
+        preferredCardId:
+          type: string
+          x-stoplight:
+            id: ox1nthgx7buj4
+          description: Entity__c.Preferred_Card_Braintree_Id__c
     Entity-Expanded:
       type: object
       x-stoplight:
