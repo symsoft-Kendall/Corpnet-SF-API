@@ -837,7 +837,7 @@ components:
         id: 5yiwx1fxvk3qk
       type: object
       description: |-
-        Query of Request_for_information__c based on the account 
+        Query of Request_for_information__c (RFI) based on the account 
         GET Request_for_information__c WHERE Status != Completed
 
         Access definition
@@ -868,16 +868,16 @@ components:
           x-stoplight:
             id: 31y6k0gs46lj0
           description: Request_for_information__c.Type__c
-        caseId:
-          type: string
-          x-stoplight:
-            id: xkvjqueozpfy4
-          description: Request_for_information__c.Case__c.Id
         orderId:
           type: string
           x-stoplight:
             id: 2z0lizjytmn0j
           description: Request_for_information__c.Order__c.Id
+        caseId:
+          type: string
+          x-stoplight:
+            id: xkvjqueozpfy4
+          description: Request_for_information__c.Case__c.Id
         customerEmail:
           type: string
           x-stoplight:
@@ -888,6 +888,46 @@ components:
           x-stoplight:
             id: mzwh8vwtbs4fq
           description: Request_for_information__c.Case__c.Entity__c.id
+        jsonSummary:
+          type: string
+          x-stoplight:
+            id: tq3cxa1xafvbs
+          description: Request_for_information__c.JSON_Summary__c
+        response:
+          type: string
+          x-stoplight:
+            id: xvefv3i8v7z82
+          description: Request_for_information__c.Response__c
+        documentPreviewUrl:
+          type: string
+          x-stoplight:
+            id: ryrb9561psj1g
+          description: Request_for_information__c.Document_Preview_URL__c
+        documentDownloadUrl:
+          type: string
+          x-stoplight:
+            id: bjfldl9fcg1ex
+          description: Request_for_information__c.Document_Download_URL__c
+        feeOrderId:
+          type: string
+          x-stoplight:
+            id: a6n5ve2fgzkt5
+          description: Request_for_information__c.Fee_Order_Id__c
+        memberRequirements:
+          type: string
+          x-stoplight:
+            id: ybd6y2493d4h6
+          description: |-
+            Request_for_information__c.Member_Requirements__c
+            (multiselect picklist ; delimited)
+        requestForms:
+          x-stoplight:
+            id: wbthkdsu5i7ks
+          allOf:
+            - items:
+                $ref: '#/components/schemas/requestForm'
+          description: All Request_Form__c records realted to this RFI via Request_for_Information__c field
+          type: array
     EntityMembers:
       title: Entity Member
       x-stoplight:
@@ -1734,6 +1774,38 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    requestForm:
+      title: requestForm
+      x-stoplight:
+        id: s6x7pk65minrf
+      type: object
+      properties:
+        formId:
+          type: string
+          x-stoplight:
+            id: dk2pcr45mrvnx
+          description: Form_Name_FormIoId__c
+        object:
+          type: string
+          x-stoplight:
+            id: 56jz4butg8ooo
+          description: |-
+            Object__c
+
+            object API Name from Salesforce
+        objectSFID:
+          type: string
+          x-stoplight:
+            id: 9fbvkd0gkh9yr
+          description: |-
+            Object_SFID__c
+            Leave blank to indicate this is an insert vs an update
+        rfiId:
+          type: string
+          x-stoplight:
+            id: rlulcqd9e62eo
+          description: Request_for_Information__c
+      description: This will be an array of request form related to a Request for Infomation__c
     auth:
       title: auth
       x-stoplight:
