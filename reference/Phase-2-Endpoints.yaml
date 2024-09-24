@@ -316,7 +316,7 @@ paths:
       - $ref: '#/components/parameters/AccountId'
   '/partner-user/{UserEmail}':
     get:
-      summary: Get User Access Info
+      summary: Get Partner User Access Info
       parameters: []
       responses:
         '200':
@@ -402,7 +402,7 @@ paths:
         required: true
   '/partner-entity/{PCID}':
     get:
-      summary: GET Entity
+      summary: GET Partner Entity
       tags: []
       responses:
         '200':
@@ -424,7 +424,7 @@ paths:
         required: true
   '/partnerEntity/{PCID}/account':
     get:
-      summary: Get Account Info
+      summary: Get Partner User Account Info
       tags: []
       responses:
         '200':
