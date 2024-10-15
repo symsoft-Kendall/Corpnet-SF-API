@@ -69,13 +69,8 @@ paths:
                         BillingAddress: null
                         AccountReferralId: '0'
                 properties:
-                  authId:
-                    type: string
-                    x-stoplight:
-                      id: 1xu763dw8d4fm
-                    description: |-
-                      The Auth_Id__c parameter passed with the call should find a User_Identity__c record with a matching Auth_Id__c
-                      The Contact__c of that record will be the one returned in the Contact section. As well as returning the Account acccesses related to that contact.
+                  authUser:
+                    $ref: '#/components/schemas/auth'
                   contact:
                     $ref: '#/components/schemas/Contact'
                   accountAccesses:
@@ -220,6 +215,40 @@ paths:
         id: k98ccoe5v1gfx
     parameters:
       - $ref: '#/components/parameters/AccountId'
+  '/account/{AccountId}/entityMembers':
+    get:
+      summary: Get Account Entity Members
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entityMembers:
+                    x-stoplight:
+                      id: kkyh49axrkvfr
+                    allOf:
+                      - items:
+                          $ref: '#/components/schemas/EntityMembers'
+                    description: The complete list of Entity_Member__c records belonging to every accessible Entity__c belonging to the Account.
+                    type: array
+                  entityAffiliations:
+                    x-stoplight:
+                      id: 6czqcpuf178kq
+                    allOf:
+                      - items:
+                          $ref: '#/components/schemas/EntityAffiliation'
+                    description: The complete list of Entity_Affiliation__c records belonging to every accessible Entity__c belonging to the Account.
+                    type: array
+      operationId: get-account-entityMembers
+      x-stoplight:
+        id: 38rzj2a7z0y82
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/user_id'
   '/entity/{EntityId}':
     get:
       summary: GET Entity
@@ -239,22 +268,6 @@ paths:
         - $ref: '#/components/parameters/user_id'
     parameters:
       - $ref: '#/components/parameters/EntityId'
-  /glossary/entitytype:
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses: {}
-      operationId: get-glossary-entitytype
-      x-stoplight:
-        id: e4d49zpuwopio
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                '':
-                  $ref: '#/components/schemas/GlossaryEntityType'
   '/order/{OrderId}':
     parameters:
       - schema:
@@ -287,6 +300,115 @@ paths:
       - $ref: '#/components/parameters/user_id'
     get:
       summary: Get User Notifications
+  '/account/{AccountId}/entities':
+    get:
+      summary: Get Account Entities
+      tags: []
+      responses:
+        '200':
+          description: All entities belonging to the account and accessible to the user.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entity'
+      operationId: get-account-AccountId
+      x-stoplight:
+        id: 2mt6zbzdks4d3
+      parameters:
+        - $ref: '#/components/parameters/user_id'
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+  '/partner-user/{UserEmail}':
+    get:
+      summary: Get Partner User Access Info
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    ClientsInfo:
+                      - UID: 5a6ff6f5-9a72-459b-a26d-f1980d8f6407
+                        ShippingAddress: null
+                        PID: null
+                        Name: Kendall Testy Helms
+                        LogoURL: null
+                        Id: 0018D00000Mykg9QAB
+                        Discount: null
+                        Contacts:
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0053h0000030ekPAAQ
+                            Name: Reginald Quaint
+                            Id: 0038D00000I071GQAR
+                            Email: existingacct@test.texas
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: null
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Kendall Testy Helms
+                            Id: 0038D00000Fo4FhQAJ
+                            Email: kendalltesty.h@symsoftsolutions.com
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Peter Party
+                            Id: 0038D00000IAfSzQAL
+                            Email: peterparty@texas.test
+                            AccountId: 0018D00000Mykg9QAB
+                          - UID: null
+                            Title: null
+                            Phone: (111) 111-1111
+                            OwnerId: 0058D000000QCgRQAW
+                            Name: Mundungus Fletcher
+                            Id: 0038D00000J0QwmQAF
+                            Email: dungy.fletch@ww.hp
+                            AccountId: 0018D00000Mykg9QAB
+                        BrainTreeProfileId: '49897021653'
+                        BillingAddress: null
+                        AccountReferralId: '0'
+                properties:
+                  authUser:
+                    $ref: '#/components/schemas/auth'
+                  contact:
+                    $ref: '#/components/schemas/Contact'
+                  accountAccesses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account-access'
+              examples: {}
+      security:
+        - OAuth Token: []
+      servers:
+        - url: 'https://corpnet--build.sandbox.my.salesforce.com/services/apexrest/service'
+        - url: 'https://corpnet.my.salesforce.com/services/apexrest/service'
+          description: ''
+      operationId: U2
+      description: |-
+        This call  will be used connect a specific auth id to a single contact in Salesforce returning all the access information for that contact to view or edit accounts and entities. 
+
+        Access flow chart diagram in figma:  https://www.figma.com/file/F0GJB0XB7dLJkwTV5QNCG5/Corpnet-CCC---Determining-User-Access-to-Accounts-and-Related-Entities?type=whiteboard&t=zYLzYVgfGSnh156s-0
+      x-stoplight:
+        id: 5wnmil6e62fw7
+    parameters:
+      - schema:
+          type: string
+        name: UserEmail
+        in: path
+        required: true
+  '/partner-entity/{PCID}':
+    get:
+      summary: GET Partner Entity
       tags: []
       responses:
         '200':
@@ -300,7 +422,124 @@ paths:
       operationId: get-user-UserId-notifications
       x-stoplight:
         id: 0n8iwlhq60aqi
-      description: Return all notifications for a single Account filtering based on the UserId/ContactId to dertermine access.
+      description: Return all notifications for a single Account filtering based on the UserId/ContactId to dertermine access
+                $ref: '#/components/schemas/Entity-Expanded'
+      operationId: get-entity
+      description: This call is used to get data for a comprehensive view of all the data relateing to a single entity.
+      parameters: []
+      x-stoplight:
+        id: nozf9zigdtnqw
+    parameters:
+      - schema:
+          type: string
+        name: PCID
+        in: path
+        required: true
+  '/partnerEntity/{PCID}/account':
+    get:
+      summary: Get Partner User Account Info
+      tags: []
+      responses:
+        '200':
+          description: |
+            OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accountInfo:
+                    $ref: '#/components/schemas/Account'
+                  orders:
+                    type: array
+                    description: |-
+                      Where Order.AccountId = AccountId
+
+                      20 most recent
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  complianceAlerts:
+                    type: array
+                    description: Opportunities Where Account.Id = AccountId
+                    items:
+                      $ref: '#/components/schemas/Opportunity'
+                  tasks:
+                    type: array
+                    description: Request_for_Information__c Where Case.AccountId = AccountId
+                    items:
+                      $ref: '#/components/schemas/Tasks'
+                  entities:
+                    type: array
+                    description: |-
+                      Entity__c records where Account__c = the AccountId Param
+
+                      AND   Where the Contact has Entity_access__c to the Entity
+
+                      For businessAddress
+                      Entity__c.Business_Address_1__c
+                      Entity__c.Business_Address_2__c
+                      Entity__c.City__c
+                      Entity__c.State__c
+                      Entity__c.Zip_Code__c
+                      Entity__c.Country__c
+                      Entity__c.County__c
+                      Ignore Phone & Email
+                    items:
+                      $ref: '#/components/schemas/Entity'
+                  numberofOrders:
+                    type: integer
+                    description: Count of all orders realated to the AccountId
+                  pendingOrders:
+                    type: integer
+                    description: |
+                      Count of all orders realated to the AccountId
+                      where Order_Phase__c != completed
+                  totalCompanies:
+                    type: integer
+                    description: count of Entities where Account__c = Count of all orders realated to the AccountId
+                  totalClients:
+                    type: integer
+                    description: |-
+                      Partner_Role__c Where Partner_Account__c = AccountId
+
+                      Type??
+                      operationId: get-getaccountinfo
+                      x-stoplight:
+                        id: 5yfcoc6qmiv8h
+                    nullable: true
+                  accountAccesses:
+                    type: array
+                    description: |
+                      This returns a list of the users who have access to this account. 
+                      Access Definition
+                      if the user has an admin (primary or delegated) level access to this parent account return all Access_Account__c records.
+                    items:
+                      type: object
+                      properties:
+                        accessAccount:
+                          $ref: '#/components/schemas/Account-access'
+                        userContact:
+                          $ref: '#/components/schemas/Contact'
+      requestBody:
+        content: {}
+        description: ''
+      parameters: []
+      operationId: U3
+      description: |-
+        Information for the account Id provided in the AccountId Param.  For the orders node lets bring the last 10 orders
+
+        The Contact Id (UserId) provided is used to determine access level to the Account and Entities returned in the call.
+
+        User Access Flow diagram - https://www.figma.com/file/F0GJB0XB7dLJkwTV5QNCG5/Corpnet-CCC---Determining-User-Access-to-Accounts-and-Related-Entities?type=whiteboard&node-id=0%3A1&t=rYcp9ulNsdte3Z94-1
+      x-stoplight:
+        id: bq5v3foc0pb7k
+    parameters:
+      - schema:
+          type: string
+        name: PCID
+        in: path
+        required: true
 components:
   parameters:
     id:
@@ -356,22 +595,6 @@ components:
       type: object
       title: Contact
       description: Whenever a contact is returned these are the fields to include. See specific endpoint description to determine what specific contact to reference...
-      properties:
-        id:
-          type: string
-          description: Id
-        firstName:
-          type: string
-          description: Contact.FirstName
-          x-stoplight:
-            id: jayomjbtzq97y
-        lastName:
-          type: string
-          description: Contact.LastName
-          x-stoplight:
-            id: z84f6hrk5ke9f
-        address:
-          $ref: '#/components/schemas/Address'
       x-examples:
         Example 1:
           id: string
@@ -386,6 +609,27 @@ components:
             country: string
             phone: string
             email: string
+      properties:
+        id:
+          type: string
+          description: Id
+        firstName:
+          type: string
+          description: Contact.FirstName
+          x-stoplight:
+            id: jayomjbtzq97y
+        lastName:
+          type: string
+          description: Contact.LastName
+          x-stoplight:
+            id: z84f6hrk5ke9f
+        birthdate:
+          type: string
+          x-stoplight:
+            id: qqo7baq0ppftl
+          description: Contact.Birthdate
+        address:
+          $ref: '#/components/schemas/Address'
     Account-access:
       type: object
       title: Account-access
@@ -441,21 +685,16 @@ components:
           x-stoplight:
             id: rg2c34ggojudd
           description: Account.Price_Book__c
+        brainTreeProfileId:
+          type: string
+          x-stoplight:
+            id: bl7qitdba42ul
+          description: Account.BrainTreeProfile_Id__c
     Entity:
       type: object
       title: Entity
       description: |-
         All core entity data for a single entity
-
-        For businessAddress
-        Entity__c.Business_Address_1__c
-        Entity__c.Business_Address_2__c
-        Entity__c.City__c
-        Entity__c.State__c
-        Entity__c.Zip_Code__c
-        Entity__c.Country__c
-        Entity__c.County__c
-        Ignore Phone & Email
 
         Access Definition:  Based on user_id param  (if null 403 restricted access) 
         user_id is a Salesforce contact id.  
@@ -536,7 +775,9 @@ components:
             id: o0x66uwkm1b08
           description: Entity__c.Website_URL__c
         businessAddress:
-          $ref: '#/components/schemas/Address'
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          description: "Entity__c.Business_Address_1__c\r\nEntity__c.Business_Address_2__c\r\nEntity__c.City__c\r\nEntity__c.State__c\r\nEntity__c.Zip_Code__c\r\nEntity__c.Country__c\r\nEntity__c.County__c\r\nIgnore Phone & Email"
         accessLevel:
           type: string
           x-stoplight:
@@ -554,6 +795,16 @@ components:
             If not found return "Read"
 
             If found Determine Access_Entity__c.Level__c   if Read Write  return "Write" if Read Only return "Read"
+        companyManagment:
+          type: string
+          x-stoplight:
+            id: zhyladbmgu7fo
+          description: Entity__c.CompanyManagement__c
+        preferredCardId:
+          type: string
+          x-stoplight:
+            id: ox1nthgx7buj4
+          description: Entity__c.Preferred_Card_Braintree_Id__c
     Entity-Expanded:
       type: object
       x-stoplight:
@@ -561,16 +812,6 @@ components:
       title: Entity Expanded
       description: |-
         All core entity data for a single entity.  Id =  {EntityId} provided as Param 
-
-        for entity buisness address  
-        Entity__c.Business_Address_1__c
-        Entity__c.Business_Address_2__c
-        Entity__c.City__c
-        Entity__c.State__c
-        Entity__c.Zip_Code__c
-        Entity__c.Country__c
-        Entity__c.County__c
-        Ignore Phone & Email
 
         Access Definition:  Based on user_id param  (if null 403 restricted access) 
         user_id is a Salesforce contact id.  
@@ -590,49 +831,64 @@ components:
           Type: string
       properties:
         entityBasic:
-          $ref: '#/components/schemas/Entity'
+          allOf:
+            - $ref: '#/components/schemas/Entity'
         complianceAlerts:
-          type: array
           x-stoplight:
             id: fty9rmuid3og8
-          description: 'Request for Information Records Where Entity= entity id provided.  {EntityId}'
-          items:
-            $ref: '#/components/schemas/Opportunity'
-        orders:
+          description: 'Opportunity Records Where type is "Compliance Alert", and Entity= entity id provided.  {EntityId}'
+          allOf:
+            - items:
+                $ref: '#/components/schemas/Opportunity'
           type: array
+        orders:
           x-stoplight:
             id: ue4371jqwxo69
           description: 'Order Records where Entity__c = {EntityId}'
-          items:
-            $ref: '#/components/schemas/Order'
+          allOf:
+            - items:
+                $ref: '#/components/schemas/Order'
+          type: array
         states:
           x-stoplight:
             id: 6nmuashjaxca1
-          type: array
           description: 'Entity_State__c Records where Entity__c = {EntityId}'
-          items:
-            $ref: '#/components/schemas/entityStates'
-        entityMembers:
+          allOf:
+            - items:
+                $ref: '#/components/schemas/EntityState'
           type: array
+        entityMembers:
           x-stoplight:
             id: 9fl3bnkq4r9na
           description: All entity members related to this entity.
-          items:
-            $ref: '#/components/schemas/EntityMembers'
-        taxRegistration:
+          allOf:
+            - items:
+                $ref: '#/components/schemas/EntityMembers'
           type: array
+        entityAffiliations:
+          x-stoplight:
+            id: 7qwslu55i6xz6
+          allOf:
+            - items:
+                $ref: '#/components/schemas/EntityAffiliation'
+          description: All Entity_Affiliation__c records related to this Entity__c
+          type: array
+        taxRegistrations:
           x-stoplight:
             id: znmannvyc81hx
           description: Entity_State_Account__c records related to this Entity  via Entity__c lookup field
-          items:
-            $ref: '#/components/schemas/taxRegistration'
-        tasks:
+          allOf:
+            - items:
+                $ref: '#/components/schemas/taxRegistration'
           type: array
+        tasks:
           x-stoplight:
             id: 4y9l52hy5m4gm
           description: Request for Information realted to this entity.
-          items:
-            $ref: '#/components/schemas/Tasks'
+          allOf:
+            - items:
+                $ref: '#/components/schemas/Tasks'
+          type: array
     Entity-Access:
       type: object
       title: Entity-Access
@@ -719,6 +975,12 @@ components:
           description: array of Order_Filing_State__c records where Order__c = id of this Order_Filing_State__c
           items:
             $ref: '#/components/schemas/Filing-State'
+        products:
+          type: array
+          x-stoplight:
+            id: ihidu0dx07iln
+          items:
+            $ref: '#/components/schemas/product'
     Opportunity:
       title: Opportunity
       x-stoplight:
@@ -727,6 +989,8 @@ components:
       description: |-
         Opportunities form Salesforce are Tasks in the CCC.  potental sales based on upcoming deadlines etc...
         Get Opportunites WHERE "type__c" = "Compliance Alert"
+
+        Only return Opportunity records where isClosed = FALSE
 
         Access definition
         Opportinity record should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the opportunity is nested under.
@@ -782,13 +1046,24 @@ components:
             id: znn3z6fpjrudh
           description: |
             Opportunity.Entity__c.Id
+        productPackageId:
+          type: string
+          x-stoplight:
+            id: s4mhlc8jmrkks
+          description: Opportunity.Product_Package_Id__c
+        opportunityProducts:
+          type: array
+          x-stoplight:
+            id: j568m1nudkrl7
+          items:
+            $ref: '#/components/schemas/OppProduct'
     Tasks:
       title: Tasks
       x-stoplight:
         id: 5yiwx1fxvk3qk
       type: object
       description: |-
-        Query of Request_for_information__c based on the account 
+        Query of Request_for_information__c (RFI) based on the account 
         GET Request_for_information__c WHERE Status != Completed
 
         Access definition
@@ -819,16 +1094,16 @@ components:
           x-stoplight:
             id: 31y6k0gs46lj0
           description: Request_for_information__c.Type__c
-        caseId:
-          type: string
-          x-stoplight:
-            id: xkvjqueozpfy4
-          description: Request_for_information__c.Case__c.Id
         orderId:
           type: string
           x-stoplight:
             id: 2z0lizjytmn0j
           description: Request_for_information__c.Order__c.Id
+        caseId:
+          type: string
+          x-stoplight:
+            id: xkvjqueozpfy4
+          description: Request_for_information__c.Case__c.Id
         customerEmail:
           type: string
           x-stoplight:
@@ -839,6 +1114,46 @@ components:
           x-stoplight:
             id: mzwh8vwtbs4fq
           description: Request_for_information__c.Case__c.Entity__c.id
+        jsonSummary:
+          type: string
+          x-stoplight:
+            id: tq3cxa1xafvbs
+          description: Request_for_information__c.JSON_Summary__c
+        response:
+          type: string
+          x-stoplight:
+            id: xvefv3i8v7z82
+          description: Request_for_information__c.Response__c
+        documentPreviewUrl:
+          type: string
+          x-stoplight:
+            id: ryrb9561psj1g
+          description: Request_for_information__c.Document_Preview_URL__c
+        documentDownloadUrl:
+          type: string
+          x-stoplight:
+            id: bjfldl9fcg1ex
+          description: Request_for_information__c.Document_Download_URL__c
+        feeOrderId:
+          type: string
+          x-stoplight:
+            id: a6n5ve2fgzkt5
+          description: Request_for_information__c.Fee_Order_Id__c
+        memberRequirements:
+          type: string
+          x-stoplight:
+            id: ybd6y2493d4h6
+          description: |-
+            Request_for_information__c.Member_Requirements__c
+            (multiselect picklist ; delimited)
+        requestForms:
+          x-stoplight:
+            id: wbthkdsu5i7ks
+          allOf:
+            - items:
+                $ref: '#/components/schemas/requestForm'
+          description: All Request_Form__c records realted to this RFI via Request_for_Information__c field
+          type: array
     EntityMembers:
       title: Entity Member
       x-stoplight:
@@ -849,29 +1164,186 @@ components:
 
         Access definition
         Entity_Member__c records should only be returned if the user id has access to the Entity (based on Entity or Entity-Expanded models) that the Entity_Member__c is related to in the Entity__r field.
-
-        memberAddress Mapping Entity_Member__c.
-        Member_Address_1__c
-        Member_Address_2__c
-        Member_City__c
-        Member_State__c
-        Member_Zip_Code__c
-        Member_Country__c
       properties:
         id:
           type: string
           x-stoplight:
             id: tba48q87kwb03
           description: 'Id of Entity_Member__c record '
-        contact:
-          $ref: '#/components/schemas/Contact'
-        role:
+        entityId:
+          type: string
+          x-stoplight:
+            id: q3f3z3epvxqoy
+          description: Entity_Member__c.Entity__c.Id
+        title:
           type: string
           x-stoplight:
             id: 6doqvq5v2ey8b
-          description: Entity_member__c.Role__c
+          description: Entity_member__c.title__c
+        ownershipPercentage:
+          type: number
+          x-stoplight:
+            id: 02z2f0int4uv6
+          description: Entity_Member__c.Ownership_Percentage__c
+        contact:
+          allOf:
+            - $ref: '#/components/schemas/Contact'
+          description: Entity_Member__c.Contact__c
         memberAddress:
-          $ref: '#/components/schemas/Address'
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          description: "Entity_Member__c\r\n    .Member_Address_1__c\r\n    .Member_Address_2__c\r\n    .Member_City__c\r\n    .Member_State__c\r\n    .Member_Zip_Code__c\r\n    .Member_Country__c\r\n    .Email__c\r\n    .Phone__c"
+        responsiblePartyIn:
+          type: array
+          x-stoplight:
+            id: 7qwxroayg3d0y
+          description: List of states in which the Entity_Member__c is linked to a Responsible_Party__c record.
+          items:
+            x-stoplight:
+              id: wjvq4o2frvm32
+            type: object
+            properties:
+              stateName:
+                type: string
+                x-stoplight:
+                  id: swb9y2qv1sxbb
+                description: Responsible_Party__c.State__c
+              entityStateId:
+                type: string
+                x-stoplight:
+                  id: ajiqu755cg794
+                description: Responsible_Party__c.Entity_State__c.Id
+              signitory:
+                type: boolean
+                x-stoplight:
+                  id: c8xnsnkdtb19t
+                description: Responsible_Party__c.Signatory__c
+        taxMemberContact:
+          type: array
+          x-stoplight:
+            id: av3bf3k522byp
+          description: |
+            Query Entity State Records where Entity Member is listed as the Tax Member Contact__c lookup field. The field is a lookup to entity Member.
+          items:
+            x-stoplight:
+              id: 4tve8qe98ga2e
+            type: object
+            properties:
+              stateName:
+                type: string
+                x-stoplight:
+                  id: vw1f67g8io7p5
+                description: Entity_State__c.state
+              entityStateId:
+                type: string
+                x-stoplight:
+                  id: 4dvnlna4xtljo
+                description: Entity_State__c.id
+        president:
+          type: boolean
+          x-stoplight:
+            id: rgxofs2dbk6jz
+          description: Entity_Member__c.PresidentCEO__c
+        vicePresident:
+          type: boolean
+          x-stoplight:
+            id: aiqtlofasceoq
+          description: Entity_Member__c.Vice_President__c
+        treasurer:
+          type: boolean
+          x-stoplight:
+            id: in12q3ho8sosb
+          description: Entity_Member__c.Treasurer__c
+        secretary:
+          type: boolean
+          x-stoplight:
+            id: wsa130s29cqbs
+          description: Entity_Member__c.Secretary__c
+        director:
+          type: boolean
+          x-stoplight:
+            id: uqkiridsg7hsk
+          description: Entity_Member__c.Director__c
+        irsContact:
+          type: boolean
+          x-stoplight:
+            id: k99c6c205rqs4
+          description: Entity_Member__c.
+        memberType:
+          type: string
+          x-stoplight:
+            id: 96ppdilqan7b4
+          description: Entity_Member__c.LLC_Member_Type__c
+        shareholder:
+          type: boolean
+          x-stoplight:
+            id: 7t6wdgs7t6ehb
+          description: Entity_Member__c.Shareholder__c
+        owner:
+          type: boolean
+          x-stoplight:
+            id: af83olsbju1t5
+          description: Entity_Member__c.Owner__c
+        partner:
+          type: boolean
+          x-stoplight:
+            id: zv71rt5euyqrw
+          description: Entity_Member__c.Partner__c
+        chairperson:
+          type: string
+          x-stoplight:
+            id: 20ivbhxok9faf
+          description: Entity_Member__c.Chairperson__c
+    EntityAffiliation:
+      title: EntityAffiliation
+      x-stoplight:
+        id: xk8js3aged1sb
+      type: object
+      description: Entity_Affiliation__c
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 7dwvyudg9y57o
+          description: Entity_Affiliation__c.Id
+        affiliatedEntity:
+          type: string
+          x-stoplight:
+            id: us8vif3ccu9dz
+          description: Entity_Affiliation__c.Affiliated_Entity__c.Id
+        ownershipPercentage:
+          type: number
+          x-stoplight:
+            id: e1l8km3ips37h
+        entity:
+          x-stoplight:
+            id: 2w3amerm3i6dc
+          description: Entity_Affiliation__c.Entity__c
+          allOf:
+            - $ref: '#/components/schemas/Entity'
+        address:
+          x-stoplight:
+            id: 7m991jkb7zjkf
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          description: "Entity_Affiliation__c\r\n    .Street_1__c\r\n    .Street_2__c\r\n    .City__c\r\n    .State__c\r\n    .Zip__c\r\n    .Email__c\r\n    .Phone__c"
+        responsiblePartyIn:
+          type: array
+          x-stoplight:
+            id: m63qmtd6mvy1y
+          items:
+            x-stoplight:
+              id: 3tralmov97hq8
+            type: object
+            properties:
+              stateName:
+                type: string
+                x-stoplight:
+                  id: ps0yumtu5c3zt
+              entityStateId:
+                type: string
+                x-stoplight:
+                  id: dnbwdhnivlc9z
     DBA:
       title: DBA
       x-stoplight:
@@ -945,7 +1417,7 @@ components:
           description: Registered_Agent__c.Name
         agentAddress:
           $ref: '#/components/schemas/Address'
-    entityStates:
+    EntityState:
       title: Entity State
       x-stoplight:
         id: hdvnxd7ugkq61
@@ -1122,13 +1594,6 @@ components:
           description: 'Cases related to this order   '
           items:
             $ref: '#/components/schemas/Case'
-        products:
-          type: array
-          x-stoplight:
-            id: qbfxqe9vi0vy6
-          description: OrderItems related to this order
-          items:
-            $ref: '#/components/schemas/product'
         tansactions:
           type: array
           x-stoplight:
@@ -1397,7 +1862,7 @@ components:
           x-stoplight:
             id: jbgf6vuyz9wav
           description: OrderItem.ListPrice
-        UnitePrice:
+        unitPrice:
           type: string
           x-stoplight:
             id: e9o4fqvu732h4
@@ -1422,6 +1887,57 @@ components:
           x-stoplight:
             id: 967ib73lethgs
           description: OrderItem.Product2Id.Family
+    OppProduct:
+      title: OppProduct
+      x-stoplight:
+        id: wgrjykkay718f
+      type: object
+      description: OpportunityLineItem
+      properties:
+        id:
+          type: string
+          description: OpportunityLineItem.Id
+        price:
+          type: string
+          description: OpportunityLineItem.TotalPrice
+        productName:
+          type: string
+          description: OpportunityLineItem.Product_Name__c
+        listPrice:
+          type: string
+          description: OpportunityLineItem.ListPrice
+        unitPrice:
+          type: string
+          description: OpportunityLineItem.UnitPrice
+          x-stoplight:
+            id: rq4kgdaiiq6eq
+        dicountAmount:
+          type: string
+          description: OpportunityLineItem.Discount_Amount__c
+        quantity:
+          type: string
+          description: OpportunityLineItem.Quantity
+        state:
+          type: string
+          description: OpportunityLineItem.Product_State__c
+        productFamily:
+          type: string
+          description: OpportunityLineItem.Product2Id.Family
+        formioId:
+          type: string
+          x-stoplight:
+            id: zz87y44bd50g9
+          description: opportunityLineItem.formIoId__c
+        productDisplayType:
+          type: string
+          x-stoplight:
+            id: r538f162k0xoe
+          description: |-
+            OpportunityLineItem.product_display_type__c
+
+            Optional
+            Required
+            Selected
     transaction:
       title: transaction
       x-stoplight:
@@ -1551,6 +2067,80 @@ components:
           x-stoplight:
             id: oczwee1ra7p3c
           description: CCC_User_Notification__c.CreatedDate
+    requestForm:
+      title: requestForm
+      x-stoplight:
+        id: s6x7pk65minrf
+      type: object
+      properties:
+        formId:
+          type: string
+          x-stoplight:
+            id: dk2pcr45mrvnx
+          description: Form_Name_FormIoId__c
+        object:
+          type: string
+          x-stoplight:
+            id: 56jz4butg8ooo
+          description: |-
+            Object__c
+
+            object API Name from Salesforce
+        objectSFID:
+          type: string
+          x-stoplight:
+            id: 9fbvkd0gkh9yr
+          description: |-
+            Object_SFID__c
+            Leave blank to indicate this is an insert vs an update
+        rfiId:
+          type: string
+          x-stoplight:
+            id: rlulcqd9e62eo
+          description: Request_for_Information__c
+      description: This will be an array of request form related to a Request for Infomation__c
+    auth:
+      title: auth
+      x-stoplight:
+        id: 8rxizrm994mwl
+      type: object
+      description: User_Identity__c
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: ebbh15kzeovki
+          description: User_Identity__c.Id
+        authId:
+          type: string
+          x-stoplight:
+            id: n9ohvs3d08hjf
+          description: User_Identity__c.auth_id__c
+        question1:
+          type: string
+          x-stoplight:
+            id: 6ylhnm488iwuv
+          description: User_Identity__c.question_2__c
+        answer1:
+          type: string
+          x-stoplight:
+            id: 4emzeadlds1f6
+          description: User_Identity__c.answer_1__c
+        question2:
+          type: string
+          x-stoplight:
+            id: lliqsj9btl5s8
+          description: User_Identity__c.question_2__c
+        answer2:
+          type: string
+          x-stoplight:
+            id: 0terszayzrjb1
+          description: User_Identity__c.answer_2__c
+        pin:
+          type: string
+          x-stoplight:
+            id: bsfuwl48mccju
+          description: User_Identity__c.pin__c
   securitySchemes:
     OAuth Token:
       type: oauth2
