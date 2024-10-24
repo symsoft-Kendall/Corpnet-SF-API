@@ -306,7 +306,7 @@ paths:
           description: OK
           content:
             application/json:
-              schema:              
+              schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Notification'
@@ -697,6 +697,12 @@ components:
           x-stoplight:
             id: bl7qitdba42ul
           description: Account.BrainTreeProfile_Id__c
+        billingAddress:
+          x-stoplight:
+            id: wrk7gj2s2j2n6
+          allOf:
+            - $ref: '#/components/schemas/Address'
+          type: object
     Entity:
       type: object
       title: Entity
