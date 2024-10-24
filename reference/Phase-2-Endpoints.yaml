@@ -294,6 +294,26 @@ paths:
         Access to the order will be determined by the existence of Entity Access for the Contact to the Entity related to the specifc order. 
       parameters:
         - $ref: '#/components/parameters/user_id'
+  '/account/{AccountId}/notifications':
+    parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/user_id'
+    get:
+      summary: Get User Notifications
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:              
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+      operationId: get-user-UserId-notifications
+      x-stoplight:
+        id: 0n8iwlhq60aqi
+      description: Return all notifications for a single Account filtering based on the UserId/ContactId to dertermine access
   '/account/{AccountId}/entities':
     get:
       summary: Get Account Entities
@@ -1987,6 +2007,73 @@ components:
           description: Transaction_Detail__c.Transaction_Id__c
         billingAddress:
           $ref: '#/components/schemas/Address'
+    Notification:
+      title: Notification
+      x-stoplight:
+        id: 3zeihph8s1cgh
+      type: object
+      description: 'CCC_User_Notification__c  '
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 4tz1t0n6lc0tw
+          description: CCC_User_Notification__c.id
+        accountId:
+          type: string
+          x-stoplight:
+            id: rmjjvu9r73j7m
+          description: CCC_User_Notification__c.CCC_Notification__r.Account__c
+        channel:
+          type: string
+          x-stoplight:
+            id: odwlj9dgmku7t
+          description: CCC_User_Notification__c.CCC_Notification__r.channel__c
+        link:
+          type: string
+          x-stoplight:
+            id: y2bbzrhvq4lir
+          description: CCC_User_Notification__c.CCC_Notification__r.link__c
+        message:
+          type: string
+          x-stoplight:
+            id: 60xq6qy33cqa2
+          description: CCC_User_Notification__c.CCC_Notification__r.message__c
+        parentNotification:
+          type: string
+          x-stoplight:
+            id: 8v1k0r133k1bl
+          description: CCC_User_Notification__c.CCC_Notification__r.Parent_Notification__c
+        status:
+          type: string
+          x-stoplight:
+            id: kq2qprzfsyq03
+          description: CCC_User_Notification__c.Status__c
+        type:
+          type: string
+          x-stoplight:
+            id: tmwq6cuw2zh4g
+          description: CCC_User_Notification__c.CCC_Notification__r.type__c
+        orderId:
+          type: string
+          x-stoplight:
+            id: 9dz5hw9s84fmk
+          description: CCC_User_Notification__c.CCC_Notification__r.Order__c
+        rfiId:
+          type: string
+          x-stoplight:
+            id: czyijyh3dkiwy
+          description: CCC_User_Notification__c.CCC_Notification__r.RFI__c
+        opportunityId:
+          type: string
+          x-stoplight:
+            id: f5qmjy21l2pxv
+          description: "\tCCC_User_Notification__c.CCC_Notification__r.Opportunity__c"
+        createdDate:
+          type: string
+          x-stoplight:
+            id: oczwee1ra7p3c
+          description: CCC_User_Notification__c.CreatedDate
     requestForm:
       title: requestForm
       x-stoplight:
